@@ -5,6 +5,11 @@ var bot = new Discord.Client();
 // Important config vars
 var ownerId = put your user id here
 var loginId = "Insert login key here"
+var modRoleId = 215663941928353792
+
+
+// Not-so-important config vars
+var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
 
 
 // Other stuff
@@ -23,13 +28,10 @@ var deleteAll = false
 
 var ttsActive = false
 
-var mood = "neutral";  // proud, happy, neutral, angry, confused
-
 var sayUser = new Array(0);
 var sayMember = new Array(0);
 var sayMessage = new Array(0);
 
-var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
 
 
 // Set up regexp stuff
@@ -119,7 +121,7 @@ bot.on("message", msg => {
 				console.log("[unknown] said: "+msg.cleanContent);
 
 			// Authority check
-			var authorized = (msg.author.id == ownerId  ||  msg.member.roles.has(msg.guild.roles.find("name", "mods").id))
+			var authorized = (msg.author.id == ownerId  ||  msg.member.roles.has(modRoleId))
 
 			// direct commands
 			if (msg.cleanContent.startsWith("/knux "))
