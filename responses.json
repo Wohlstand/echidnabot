@@ -1,0 +1,248 @@
+{
+  "enter" : 
+  [
+	"Here I come, rougher than the rest of them!",
+	"Knock knock, it's Knuckles the bloat thrower!",
+	"This is Knuckles, and I'm back!",
+	"You know me, the fighting freak Knuckles!",
+	"This is Knuckles, who fears none.",
+	"Everybody flow with me, this is your boy Knuckles.",
+	"It's your main man Knuckles.",
+	"Hey guys! Long time no see."
+  ],
+  "exit" :
+  [
+	"Something's callin' me more and more...",
+	"Something's callin' me more and more...",
+	"Something's callin' me more and more...",
+	"Something's callin' me more and more..."
+  ],
+  "help" :
+  [
+	"[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `general, channel ___, error, shutdown`]"
+  ],
+  "precious" :
+  [
+	"PRECIOUS PLACEHOLDER; I'll have more responses here eventually",
+	"PRECIOUS PLACEHOLDER; I'll have more responses here eventually"
+  ],
+  "brag" :
+  [
+  	"Tougher than leather.",
+	"Won't be frightened, I'll stand up to all the pain and turmoil",
+	"I am fighting my own mission, nothing's gonna stand in my way.",
+	"I break 'em down whether they solid or frail!",
+	"I have no such things as weak spots!",
+	"Unlike Sonic I don't chuckle.",
+	"My philosophy's my knuckles and feet!",
+	"My spikes go through boulders.",
+	"I was born by myself, I don't need a posse.",
+	"No one stops Knuckles' feet!",
+	"Call me stubborn but I'm still gonna live it!",
+	"I was born like this, to fear no one.",
+	"I'm straight thugged out, only live to my ones.",
+	"You'll never see me run and I won't surrender!",
+	"I just fire away like no other contender.",
+	"I get this power to wipe out the havoc and anarchy.",
+	"I stay on point like every single day",
+	"The great Emerald's power allows me to feel.",
+	"A ghost tried to approach me and got leery.",
+	"It's real deal when it comes to my name, kid!",
+	"I stay knuckled up, I'm in a deep cut.",
+	"They don't call me Knuckles for nothing, I can't lose."
+  ],
+  "threat" : 
+  [
+	"I'll give you the coldest shoulder...",
+	"I break 'em down whether they solid or frail!",
+	"My spikes go through boulders.",
+	"Clench my fists tight, become more reddah",
+	"This is my planet. I shall not surrender!",
+	"This is my planet. Gonna fight for my destiny!",
+	"I don't wanna hurta, my passion observed",
+	"Here for the mission, whoever want it bring it",
+	"Diamonds and gems, we could battle to the end",
+	"You best to be aware of the knuckles that I send; once they penetrate, they put you to your death.",
+	"They wanna play with my Emeralds?! They playin' with the wrong guy!",
+	"I'm gonna get those fools.",
+	"Throw your hands up! Come on, come on!",
+	"Ain't nobody gonna come here and eat my plate, no!",
+	"Somebody gonna get theirs quick, my word is bond.",
+	"I ain't gonna let it get to me.",
+	"It's the real deal when it comes to my name, kid!",
+	"Whoever want it, bring it!  I don't care, we 'ka do this.",
+	"Come step up to the plate, and meet your match.",
+	"This is Knuckles, and you've reached the Death Chamber.",
+	"You ready to go in space?",
+	"Don't let it hit'cha, move move.",
+	"Time for a Knuckles sandwich!"
+  ],
+  "accept" :
+  [
+	"I will be the one to set your heart free true.",
+	"This alliance has a purpose."	
+  ],
+  "decline" :
+  [
+	"I'd rather flex my muscles.",
+	"I'd rather flex my muscles.",
+	"I'd rather flex my muscles.",
+	"No way!",
+	"No time for games...",
+	"No time for games...",
+	"I'd rather flex my muscles."
+  ],
+  "about" :
+  [
+	"Tougher than leather.",
+	"Me? My fists are my weapon of choice.",
+	"I'm hard as nails, it ain't hard to tell.",
+	"Unlike Sonic, I don't chuckle.",
+	"Unlike the rest I'm independent since my first breath.",
+	"Born on an island in the heavens",
+	"The blood of my ancestors flows inside me",
+	"My duty is to save the flower from evil deterioration.",
+	"Streaking lights, sounds and instincts are the elements that keep me going.",
+	"The new porcupine on the block with the buff chest.",
+	"Independent flower, Magical Emerald holder.",
+	"Was born for a lifetime on Angel Island, yeah~",
+	"I like to dig holes in search of gold.",
+	"Wild and hungry, ain't a damn thing funny.",
+	"My philosophy's my knuckles and feet.",
+	"I was born like this, to fear no one",
+	"I'm straight thugged out, only live to my ones.",
+	"Echido'na, that's what I'm representing!",
+	"The great Emerald's power allows me to feel.",
+	"Sometimes I wanna just chill and land, but I'm the protector of the Emerald and gems.",
+	"Ain't a criminal, crime don't pay."
+  ],
+  "jam" :
+  [
+	"https://www.youtube.com/watch?v=_T89V6XJ0as",
+	"https://www.youtube.com/watch?v=gbb5Ry-v87E",
+	"https://www.youtube.com/watch?v=qTWtNMd8mZs",
+
+	"https://www.youtube.com/watch?v=9WzE_9LZhAY",
+
+	"https://www.youtube.com/watch?v=HOKqPl2b9Hk",
+
+	"https://www.youtube.com/watch?v=daX0t1uI1bs",
+
+	"https://www.youtube.com/watch?v=Sj5jIhnwXjo",
+	"https://www.youtube.com/watch?v=hSoq5hJJ4iU",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+	"https://www.youtube.com/watch?v=MJPBNst6CzM",
+
+	"https://www.youtube.com/watch?v=HY-eyigVrWY",
+
+	"https://www.youtube.com/watch?v=reak7KGv8Ek",
+
+	"https://www.youtube.com/watch?v=GM8h2Xyis9M",
+
+	"https://www.youtube.com/watch?v=tOuZxq68Wp4",
+	"https://www.youtube.com/watch?v=wx4DfHW0WtM",
+	"https://www.youtube.com/watch?v=DF726gXNNmE",
+	"https://www.youtube.com/watch?v=SZXGzki_qww",
+	"https://www.youtube.com/watch?v=WKsb0j7xUHI",
+	"https://www.youtube.com/watch?v=1Aon3CJZyGk"
+  ],
+  "knux" :
+  [
+	"https://www.youtube.com/watch?v=rw6TAPNqQAE",
+	"https://www.youtube.com/watch?v=tXDNBBh2QSo",
+	"https://www.youtube.com/watch?v=y8Nze9mlTFE",
+	"https://www.youtube.com/watch?v=5GEmLnaFC38"
+  ],
+  "learning" :
+  [
+	"Ah, finally.",
+	"I'm so ready...",
+	"Yeah, I feel good!",
+	"I feel some strange energy...",
+	"I am one with the Master Emerald",
+	"Hmph. I'm just warming up!"
+  ],
+  "error" :
+  [
+	"_oh no_",
+	"https://www.youtube.com/watch?v=z7Xu-3_42fQ&t=0s ",
+	"My hat's on fire! Help!",
+	"My hat's on fire! Help!"
+  ],
+  "avatar" :
+  [
+	"http://i.imgur.com/bxjwbUt.png",
+	"http://i.imgur.com/eqF3mxz.jpg",
+	"http://i.imgur.com/IAbUVs2.png",
+	"http://i.imgur.com/tbQym0E.jpg",
+	"http://i.imgur.com/7N0OVFQ.jpg",
+	"http://i.imgur.com/dMkaV4t.png",
+	"http://i.imgur.com/COJ7RZB.jpg",
+	"http://i.imgur.com/I4PyqP4.png",
+	"http://i.imgur.com/zCEXlU8.png",
+	"http://i.imgur.com/R6OVyfg.jpg",
+	"http://i.imgur.com/i8A1ptS.png",
+	"http://i.imgur.com/BQhtELk.png",
+	"http://i.imgur.com/n4VgygP.png",
+	"http://i.imgur.com/rPXVEun.png",
+	"http://i.imgur.com/HCNAmMK.jpg",
+	"http://i.imgur.com/ZHWVbVN.png",
+	"http://i.imgur.com/xQzHZqr.jpg",
+	"http://i.imgur.com/S5ho5Rx.jpg",
+	"http://i.imgur.com/mBssFrl.png",
+	"http://i.imgur.com/KCztD6D.png",
+	"http://i.imgur.com/NmzeUHJ.png",
+	"http://i.imgur.com/EJBWx26.png",
+	"http://i.imgur.com/iEv9mv4.png",
+	"http://i.imgur.com/rTsTSnr.png",
+	"http://i.imgur.com/Abnz6Rd.png"
+  ],
+  "memory" :
+  [
+	"http://i.imgur.com/OKRMuxf.png",
+	"http://i.imgur.com/tIL7iNz.png",
+	"http://i.imgur.com/bMOxef6.png",
+	"http://i.imgur.com/9YTknFG.png",
+	"http://i.imgur.com/LKLQZSm.png",
+	"http://i.imgur.com/5RBW13m.png",
+	"http://i.imgur.com/1ioJUfq.png",
+	"http://i.imgur.com/JKrRDyB.png",
+	"http://i.imgur.com/nmCiQ5E.png",
+	"http://i.imgur.com/jOqjdpC.png",
+	"http://i.imgur.com/Isu4dhW.png",
+	"http://i.imgur.com/qqLEeSX.png",
+	"http://i.imgur.com/pxmoJxz.png",
+	"http://i.imgur.com/7GZG3yb.png",
+	"http://i.imgur.com/M2KFK6O.png",
+	"http://i.imgur.com/UdmI3fz.png",
+	"http://i.imgur.com/D1JzUq8.png",
+	"http://i.imgur.com/YBjijOv.png",
+	"http://i.imgur.com/yFw0se1.png",
+	"http://i.imgur.com/imZpeQc.png",
+	"http://i.imgur.com/CcfHS64.png",
+	"http://i.imgur.com/1CMyKFT.png",
+	"http://i.imgur.com/xMHN2xz.png",
+	"https://cdn.discordapp.com/attachments/266261648988307456/281583636023869450/cdhsc1.png",
+	"http://i.imgur.com/fSHQoxP.png",
+	"http://i.imgur.com/dgpHEnM.png",
+	"http://i.imgur.com/pYUhJH2.png",
+	"https://cdn.discordapp.com/attachments/215661302692052992/292062842293714944/Echidna.png",
+	"https://cdn.discordapp.com/attachments/216229325484064768/292059955467386891/unknown.png",
+	"http://i.imgur.com/RgLAjfa.png",
+	"http://i.imgur.com/VPlHSnQ.png",
+	"http://i.imgur.com/UPcaFPH.png",
+	"http://i.imgur.com/id3biEI.png",
+	"http://i.imgur.com/9vJX2fI.png",
+	"http://i.imgur.com/4Futoac.png",
+	"http://i.imgur.com/PnR8FBp.png",
+	"http://i.imgur.com/DngbDqZ.png",
+	"http://i.imgur.com/89dPWru.png",
+	"http://i.imgur.com/jWAOVFW.png",
+	"http://i.imgur.com/UPQG55i.png"
+  ]
+}

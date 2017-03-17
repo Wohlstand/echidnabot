@@ -1,0 +1,14 @@
+{
+  "name": "echidnabot",
+  "version": "1.0.0",
+  "description": "echidnabot for discord",
+  "main": "knux.js",
+  "scripts": {
+    "test": "testknux"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.0.0"
+  }
+}
