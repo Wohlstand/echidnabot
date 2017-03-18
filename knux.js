@@ -1,19 +1,22 @@
 var Discord = require("discord.js");
 var bot = new Discord.Client();
+const fs = require("fs");
 
+// ==== Auth URL ====
+//https://discordapp.com/oauth2/authorize?client_id={Put%20your%20ID%20here}&scope=bot&permissions=67169280
 
 // Important config vars
-var ownerId = put your user id here
-var loginId = "Insert login key here"
-var modRoleId = 215663941928353792
+var mconfig = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
+var ownerId   = mconfig.ownerId;
+var loginId   = mconfig.loginId;
+var modRoleId = mconfig.modRoleId;
 
 // Not-so-important config vars
-var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
+var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "tongue:252400986352517120", "wacko:252403181743505408", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "foxfacesniper:263390166163521536", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
 
 
 // Other stuff
-const fs = require("fs");
 var responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
 var keywords = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
 
@@ -62,14 +65,14 @@ function reactFromArray (message, array)
 }
 
 
-function getResponse(category) 
+function getResponse(category)
 {
     var randString = "";
 	var array = responses[category];
 	if  (array == null)
 	{
 		array = responses["error"];
-		
+
 		randString = array[Math.floor(Math.random() * (array.length))] + "```Could not find response category: "+category+"```";
 	}
 	else
@@ -165,7 +168,7 @@ bot.on("message", msg => {
 						ttsMessage(msg.channel, "Regular expression for "+setStr+": ```"+keywordRegex[setStr].toString()+"```")
 					}
 				}
-				
+
 				else if (msg.cleanContent.startsWith("/knux setgame"))
 				{
 					var setStr = msg.cleanContent.substring(14);
@@ -184,18 +187,18 @@ bot.on("message", msg => {
 					}
 				}
 
-				
+
 				else if (msg.cleanContent.startsWith("/knux say"))
 				{
 					// Get substring to say
 					var setStr = msg.cleanContent.substring(10);
-					
+
 					// Replace phrase tags with the corresponding phrase
 					setStr = setStr.replace(/\^[^\^]*\^/gi, function myFunction(x){
 							var noCarrots = x.substring(1,x.length-1);
 							return getResponse(noCarrots);
 						});
-					
+
 					var thisChannel = msg.channel;
 					sayMember.splice(0, 0, msg.member);
 					sayUser.splice(0, 0, msg.member.user);
@@ -204,13 +207,13 @@ bot.on("message", msg => {
 
 					ttsMessage(thisChannel, setStr)
 				}
-				
+
 				else if (msg.cleanContent.startsWith("/knux ping"))
 				{
 					var setStr = "Pong! `\n"+(Date.now() - msg.createdTimestamp + 37300).toString()+" ms`";
 					ttsMessage(msg.channel, setStr)
 				}
-				
+
 				else if (msg.cleanContent.startsWith("/knux reveal"))
 				{
 					if  (sayMember.length > 0)
@@ -224,7 +227,7 @@ bot.on("message", msg => {
 					else
 						ttsMessage(msg.channel, "```[No say commands since I last logged in.]```");
 				}
-				
+
 				else if (msg.cleanContent.startsWith("/knux learn"))
 				{
 					responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
@@ -232,7 +235,7 @@ bot.on("message", msg => {
 					updateRegex();
 					ttsMessage(msg.channel, getResponse("learning"));
 				}
-				
+
 				else if (msg.cleanContent.startsWith("/knux avatar"))
 				{
 					var newAvatar = getResponse("avatar");
@@ -306,7 +309,7 @@ bot.on("message", msg => {
 						bot.user.setStatus("invisible")
 						ttsMessage(msg.channel, getResponse("exit"));
 						console.log("Shutting down");
-						
+
 						bot.setTimeout(function(){
 							process.exit(1);
 						}, 100);
@@ -326,7 +329,7 @@ bot.on("message", msg => {
 						console.log("Tried to call a category that doesn't exist");
 					}
 				}
-				
+
 				if  (deleteAll == true  &&  msg != null)
 					msg.delete(0);
 			}
@@ -340,15 +343,15 @@ bot.on("message", msg => {
 				var messageStr = msg.cleanContent.toLowerCase();
 				var words = msg.cleanContent.toLowerCase().split(" ");
 				var detectedTypes = {}
-				
+
 				// Remove every /knux from the string
 				messageStr = messageStr.replace(/\/knux/g, "");
-				
+
 				// Count matches
 				for (var k in keywords)
 				{
 					detectedTypes[k] = 0;
-					
+
 					var matches = messageStr.match(keywordRegex[k])
 					if  (matches != null)
 					{
@@ -399,12 +402,12 @@ bot.on("message", msg => {
 
 				// Check if the message is directed at or about the bot
 				aboutMe = (msg.isMentioned(bot.user) == true  ||  detectedTypes.bot > 0  ||  (prevAuthor == bot.user && detectedTypes.indirect > 0));
-				
+
 				// If at or about the bot...
 				if (aboutMe)
 				{
 					console.log("Ooh, this message is about me!");
-					
+
 					// Initialize sentiment analysis vars
 					var tone = "neutral";  // neutral, insult, challenge, question, praise, request
 
@@ -423,7 +426,7 @@ bot.on("message", msg => {
 				else
 				{
 					// React to precious keyword with gem
-					if (Math.random() > 0.8  &&  highestRandString != "threat"  &&  emoteReacts[highestRandString] != null)  
+					if (Math.random() > 0.8  &&  highestRandString != "threat"  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
 						reactFromArray(msg, emoteCategory);
@@ -445,7 +448,7 @@ bot.on("message", msg => {
 							console.log("Time since last and: " + timeSinceLastAnd.toString());
 					}
 				}
-			}	
+			}
 		}
 		console.log(" ");
 		prevAuthor = msg.author;
