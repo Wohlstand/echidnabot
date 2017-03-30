@@ -1,0 +1,6 @@
+{
+    "ownerId" : "<put here your user ID>",
+    "loginId" : "<put here your bot tocken>",
+    "modRoleId" : "<put here role ID of server moderators>"
+}
+
