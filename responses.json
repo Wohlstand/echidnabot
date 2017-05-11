@@ -19,8 +19,34 @@
   ],
   "help" :
   [
-	"[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `general, channel ___, error, shutdown`]"
+	"[To perform a command, prefix it with `/knux ` (for example, `/knux jam`)]\n[Prefix it with `/knux help ` to get info on the command (type just `/knux help` to display this post.)]\n[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `channel ___, error, authorize ___, shutdown`]"
   ],
+  "helpcmd" :
+  {
+	"knux" :      "[`/knux knux`:]\n[Discover the true meaning of life.]",
+	"enter" :     "[`/knux brag`:]\n[Listen to some of my world-famous greetings.]",
+	"brag" :      "[`/knux brag`:]\n[True facts about how great I am.]",
+	"threat" :    "[`/knux threat`:]\n[you wanna go pal, you want some of this]",
+	"accept" :    "[`/knux accept`:]\n[Take the illusion of free will and smash it with a hammer.]",
+	"decline" :   "[`/knux decline`:]\n[I refuse to tell you what this command does.]",
+	"about" :     "[`/knux about`:]\n[Now this is a story all about how my life got flipped turned upside down and I'd like to take a minute just sit right there and I'll tell you how friggin' awesome I am]",
+	"memory" :    "[`/knux memory`:]\n[Causes me to revisit some fond memories.]",
+	"jam" :       "[`/knux jam`:]\n[check out my mixtape bro]",
+	"and" :       "& Knuckles",
+	"avatar" :    "[`/knux avatar`:]\n[Time for a makeover.]",
+	"ping" :      "[`/knux ping`:]\n[PONG.]",
+	"react" :     "[`/knux react`:]\n[Gives me the okay to vandalize your post with gestures of varying politeness.]",
+	"learn" :     "[`/knux learn`:]\n[Refreshes my responses from the host's local JSON data.]",
+	"setgame" :   "[`/knux setgame ___`:]\n[Changes my 'Playing _' message.]",
+	"say" :       "[`/knux say ___`:]\n[Forces me to say stuff.  Use common sense with this command.]",
+	"reveal" :    "[`/knux reveal`:]\n[Reveals the name of the last person to use my say command.]",
+	"tts" :       "[`/knux tts`:]\n[Toggles whether my posts can be read by Discord's text to speech.]",
+	"delcmd" :    "[`/knux delcmd`:]\n[Toggles whether I delete every message with a valid command.]",
+	"channel" :   "[`/knux channel ___`:]\n[Toggles whether I can post in a given channel.  You must specify a valid channel name.]",
+	"error" :     "[`/knux error`:]\n[Triggers an error message.]",
+	"authorize" : "[`/knux authorize ___`:]\n[Gives a user permission to use my mod-only commands.  You must specify a valid username of someone on the server.]",
+	"shutdown" :  "[`/knux shutdown`:]\n[Shuts me down.]"
+  },
   "precious" :
   [
 	"PRECIOUS PLACEHOLDER; I'll have more responses here eventually",
@@ -244,6 +270,9 @@
 	"http://i.imgur.com/DngbDqZ.png",
 	"http://i.imgur.com/89dPWru.png",
 	"http://i.imgur.com/jWAOVFW.png",
-	"http://i.imgur.com/UPQG55i.png"
+	"http://i.imgur.com/UPQG55i.png",
+	"http://i.imgur.com/P1sl1t9.png",
+	"http://i.imgur.com/LJYusbI.png",
+	"http://i.imgur.com/F4CnZQY.png"
   ]
 }

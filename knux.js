@@ -8,17 +8,18 @@ const fs = require("fs");
 // Important config vars
 var mconfig = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-var ownerId   = mconfig.ownerId;
-var loginId   = mconfig.loginId;
-var modRoleId = mconfig.modRoleId;
+var ownerId     = mconfig.ownerId;
+var loginId     = mconfig.loginId;
+var modRoleId   = mconfig.modRoleId;
 
 // Not-so-important config vars
 var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "tongue:252400986352517120", "wacko:252403181743505408", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "foxfacesniper:263390166163521536", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
 
 
 // Other stuff
-var responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
-var keywords = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
+var responses   = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
+var keywords    = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
+var userdata    = JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
 
 var prevAuthor = null;
 
@@ -26,7 +27,7 @@ var lastAndTime = -5000
 var andCount = Math.floor((Math.random() * 3) + 3);
 
 var canPostInGeneral = false
-var channelsAllowed = {["beep-boop"]:true}
+var channelsAllowed = {["beep-boop"]:true, ["dank"]:true}
 var deleteAll = false
 
 var ttsActive = false
@@ -82,6 +83,12 @@ function getResponse(category)
 }
 
 
+function updateJson(data, name)
+{
+	localStorage.setItem(name, JSON.stringify(data))
+}
+
+
 function updateRegex()
 {
 	for (var k in keywords)
@@ -125,6 +132,12 @@ bot.on("message", msg => {
 
 			// Authority check
 			var authorized = (msg.author.id == ownerId  ||  msg.member.roles.has(modRoleId))
+			var authordata = userdata[msg.author.id.toString()]
+			if  (authordata != null)
+			{
+				if  (authordata["authorized"] == true)
+					authorized = true
+			}
 
 			// direct commands
 			if (msg.cleanContent.startsWith("/knux "))
@@ -143,6 +156,61 @@ bot.on("message", msg => {
 					{
 						deleteAll = false;
 						ttsMessage(msg.channel, "[Deleting all commands disabled]")
+					}
+				}
+
+				if (msg.cleanContent.startsWith("/knux authorize"))
+				{
+					if (authorized)
+					{
+						// Get username substring
+						var nameStr = msg.cleanContent.substring(16);
+
+						// Check if a valid user was specified
+						var targetUser = null
+
+						var gMembers = msg.guild.members
+						for (var m in gMembers)
+						{
+							var mUser = m.user
+							var mUsername = m.user.username
+							if  (mUsername == nameStr)
+							{
+								ttsMessage(msg.channel, "["+mUsername+" (A.K.A. "+m.displayName+") is now authorized to use mod commands]")
+								targetUser = mUser
+								break;
+							}
+						}
+
+						if  (targetUser != null)
+						{
+							var userKey = targetUser.id.toString()
+							if  (userdata[userKey] == null)
+								userdata[userKey] = {}
+							userdata[userKey].authorized = true
+							updateJson(userdata, 'userdata')
+						}
+						else
+						{
+							ttsMessage(msg.channel, "[User not found, please specify a valid username for a member of this server]")
+						}
+					}
+				}
+
+				if (msg.cleanContent.startsWith("/knux submit"))
+				{
+					var setStr = msg.cleanContent.substring(13);
+					
+					if  (setStr != null)
+					{
+						var userKey = msg.author.id.toString()
+						if  (userdata[userKey] == null)
+							userdata[userKey] = {}
+						if  (userdata[userKey].submissions == null)
+							userdata[userKey].submissions = []
+						userdata[userKey].submissions.push(setStr)
+						updateJson(userdata, 'userdata')
+						msg.channel.sendMessage("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
 					}
 				}
 
@@ -300,6 +368,34 @@ bot.on("message", msg => {
 					}
 					else
 						ttsMessage(msg.channel, getResponse("decline"));
+				}
+
+				else if (msg.cleanContent.startsWith("/knux help") || msg.cleanContent.startsWith("/knux cmd") || msg.cleanContent.startsWith("/knux command"))
+				{
+					var setStr = ""
+					var cleanMsg = msg.cleanContent
+					if       (cleanMsg.startsWith("/knux help"))
+					{
+						if  (cleanMsg.length > 10)
+							setStr = cleanMsg.substring(11);
+					}
+					else if  (cleanMsg.startsWith("/knux cmd"))
+					{
+						if  (cleanMsg.length > 9)
+							setStr = cleanMsg.substring(10);
+					}
+					else
+					{
+						if  (cleanMsg.length > 14)
+							setStr = cleanMsg.substring(15);
+					}
+
+					if  (setStr == null)
+						ttsMessage(msg.channel, getResponse("help"))
+					else
+					{
+						ttsMessage(msg.channel, getResponse("help "+setStr))
+					}
 				}
 
 				else if (msg.cleanContent.startsWith("/knux shutdown"))
