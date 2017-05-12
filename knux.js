@@ -132,7 +132,7 @@ bot.on("message", msg => {
 				console.log("[unknown] said: "+msg.cleanContent);
 
 			// Authority check
-			var authorized = (msg.author.id == ownerId  ||  msg.member.roles.has(modRoleId))
+			var authorized = ( (ownerId.indexOf(msg.author.id) != -1) || msg.member.roles.has(modRoleId))
 			var authordata = userdata[msg.author.id.toString()]
 			if  (authordata != null)
 			{

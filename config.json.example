@@ -1,5 +1,5 @@
 {
-    "ownerId" : "<put here your user ID>",
+    "ownerId" : ["<put here a list of user IDs who can control your bot>"],
     "loginId" : "<put here your bot tocken>",
     "modRoleId" : "<put here role ID of server moderators>"
 }
