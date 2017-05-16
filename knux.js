@@ -425,7 +425,10 @@ bot.on("message", msg => {
 							if(err == null)
 								ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
 							else
+							{
 								ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+								exec('git', ["merge", "--abort"], function(err, data){});
+							}
 						});
 					}
 					else
