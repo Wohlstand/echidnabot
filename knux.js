@@ -111,15 +111,16 @@ function ttsMessage (channel, message)
 
 function callHelp (msg)
 {
-	var helpEmbed = new Discord.RichEmbed()
-	helpEmbed.setTitle('echidnabot help')
-	helpEmbed.setColor(0xDD5555)
+	var newEmbed = responses["help"]
+	msg.channel.send({newEmbed});
+}
 
-	msg.channel.sendEmbed(
-	  helpEmbed,
-	  getResponse("help"),
-	  { disableEveryone: true }
-	);
+function callCmdHelp (msg, setStr)
+{
+	var newEmbed = responses["help cmd"]
+	newEmbed["embed"]["fields"][0]["name"] = "Command help: "+setStr
+	newEmbed["embed"]["fields"][0]["value"] = responses["help descriptions"][setStr]
+	msg.channel.send({newEmbed});
 }
 
 
@@ -411,7 +412,7 @@ bot.on("message", msg => {
 					else
 					{
 						if  (responses["helpcmd"][setStr] != null)
-							ttsMessage(msg.channel, responses["helpcmd"][setStr])
+							callCmdHelp(msg, setStr)
 						else
 							ttsMessage(msg.channel, getResponse("help missing"))
 					}
