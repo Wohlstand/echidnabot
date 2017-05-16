@@ -47,6 +47,13 @@
 	"authorize" : "[`/knux authorize ___`:]\n[Gives a user permission to use my mod-only commands.  You must specify a valid username of someone on the server.]",
 	"shutdown" :  "[`/knux shutdown`:]\n[Shuts me down.]"
   },
+  "fart" :
+  [
+	"/foxy fart",
+	"[toot]",
+	"[Maybe later...]",
+	"/luna butts"
+  ],
   "precious" :
   [
 	"PRECIOUS PLACEHOLDER; I'll have more responses here eventually",
