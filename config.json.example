@@ -1,6 +1,6 @@
 {
-    "ownerId" : ["<put here a list of user IDs who can control your bot>"],
-    "loginId" : "<put here your bot tocken>",
-    "modRoleId" : "<put here role ID of server moderators>"
+    "ownerId" : "<either a single user ID or an array of them>",
+    "loginId" : "<your bot token>",
+    "modRoleId" : "<the ID of the server's moderator role>"
 }
 
