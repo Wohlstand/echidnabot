@@ -395,8 +395,8 @@ bot.on("message", msg => {
 						ttsMessage(msg.channel, getResponse("help"))
 					else
 					{
-						if  (responses["help "+setStr] != null)
-							ttsMessage(msg.channel, getResponse("help "+setStr))
+						if  (responses["helpcmd"][setStr] != null)
+							ttsMessage(msg.channel, responses["helpcmd"][setStr])
 						else
 							ttsMessage(msg.channel, "[No info found for the command `"+setStr+"`]")
 					}
