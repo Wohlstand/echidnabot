@@ -75,7 +75,7 @@ function getResponse(category)
 	{
 		array = responses["error"];
 
-		randString = array[Math.floor(Math.random() * (array.length))] + "```Could not find response category: "+category+"```";
+		randString = array[Math.floor(Math.random() * (array.length))] + "```Could not find response category: '"+category+"'```";
 	}
 	else
 		randString = array[Math.floor(Math.random() * (array.length))];
@@ -375,7 +375,7 @@ bot.on("message", msg => {
 				{
 					var setStr = ""
 					var cleanMsg = msg.cleanContent
-					if	   (cleanMsg.startsWith("/knux help"))
+					if       (cleanMsg.startsWith("/knux help"))
 					{
 						if  (cleanMsg.length > 10)
 							setStr = cleanMsg.substring(11);
@@ -391,11 +391,14 @@ bot.on("message", msg => {
 							setStr = cleanMsg.substring(15);
 					}
 
-					if  (setStr == null)
+					if  (setStr == null  ||  setStr == "")
 						ttsMessage(msg.channel, getResponse("help"))
 					else
 					{
-						ttsMessage(msg.channel, getResponse("help "+setStr))
+						if  (responses["help "+setStr] != null)
+							ttsMessage(msg.channel, getResponse("help "+setStr))
+						else
+							ttsMessage(msg.channel, getResponse("help"))
 					}
 				}
 
