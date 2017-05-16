@@ -371,23 +371,23 @@ bot.on("message", msg => {
 						ttsMessage(msg.channel, getResponse("decline"));
 				}
 
-				else if (msg.cleanContent.startsWith("/knux help") || msg.cleanContent.startsWith("/knux cmd") || msg.cleanContent.startsWith("/knux command"))
+				else if (msg.cleanContent.startsWith("/knux help") || msg.cleanContent.startsWith("/knux info") || msg.cleanContent.startsWith("/knux cmd") || msg.cleanContent.startsWith("/knux command"))
 				{
 					var setStr = ""
 					var cleanMsg = msg.cleanContent
-					if       (cleanMsg.startsWith("/knux help"))
+					if       (cleanMsg.startsWith("/knux help ")  ||  cleanMsg.startsWith("/knux info "))
 					{
 						if  (cleanMsg.length > 10)
 							setStr = cleanMsg.substring(11);
 					}
-					else if  (cleanMsg.startsWith("/knux cmd"))
+					else if  (cleanMsg.startsWith("/knux cmd "))
 					{
 						if  (cleanMsg.length > 9)
 							setStr = cleanMsg.substring(10);
 					}
-					else
+					else if  (cleanMsg.startsWith("/knux command "))
 					{
-						if  (cleanMsg.length > 14)
+						if  (cleanMsg.length > 13)
 							setStr = cleanMsg.substring(14);
 					}
 
@@ -398,7 +398,7 @@ bot.on("message", msg => {
 						if  (responses["helpcmd"][setStr] != null)
 							ttsMessage(msg.channel, responses["helpcmd"][setStr])
 						else
-							ttsMessage(msg.channel, "[No info found for the command `"+setStr+"`]")
+							ttsMessage(msg.channel, getResponse("help missing"))
 					}
 				}
 

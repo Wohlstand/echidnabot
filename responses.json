@@ -21,6 +21,18 @@
   [
 	"[To perform a command, prefix it with `/knux ` (for example, `/knux jam`)]\n[Prefix it with `/knux help ` to get info on the command (type just `/knux help` to display this post.)]\n[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `channel ___, error, authorize ___, shutdown`]"
   ],
+  "help missing" :
+  [
+	"[Couldn't find any info for that command.]",
+	"[Sorry, but I think that command doesn't exist.]",
+	"[Don't ask me how to do the impossible.]",
+	"[I'm an echidna, Jim, not a miracle worker.]",
+	"[no imaginary verbs pls kthx]",
+	"[Try asking in a language I can understand.]",
+	"[Dunno what that is.  Did you make a typo?]",
+	"[I can't help if I don't know what you're asking.]",
+	"[Could you repeat that?]"
+  ],
   "helpcmd" :
   {
 	"knux" :      "[`/knux knux`:]\n[Discover the true meaning of life.]",
