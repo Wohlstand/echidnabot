@@ -19,7 +19,7 @@
   ],
   "help" :
   [
-	"[To perform a command, prefix it with `/knux ` (for example, `/knux jam`)]\n[Prefix it with `/knux help ` to get info on the command (type just `/knux help` to display this post.)]\n[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `channel ___, error, authorize ___, shutdown`]"
+	"[To perform a command, prefix it with `/knux ` (for example, `/knux jam`)]\n[Prefix it with `/knux help ` to get info on the command (type just `/knux help` to display this post.)]\n\n[**PHRASE COMMANDS:** `knux, enter, brag, threat, accept, decline, about, memory, jam`]\n[**OTHER COMMANDS:** `and, avatar, ping, react, learn, setgame ___, say ___, reveal, tts, delcmd`]\n[**MOD-ONLY COMMANDS:** `channel ___, error, authorize ___, shutdown`]"
   ],
   "help missing" :
   [
@@ -294,6 +294,7 @@
 	"http://i.imgur.com/LJYusbI.png",
 	"http://i.imgur.com/F4CnZQY.png",
 	"http://i.imgur.com/4e8KgHd.png",
-	"http://i.imgur.com/6A0s1Wx.png"
+	"http://i.imgur.com/6A0s1Wx.png",
+	"https://i.imgur.com/tnN2kWZ.png"
   ]
 }

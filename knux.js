@@ -109,6 +109,21 @@ function ttsMessage (channel, message)
 }
 
 
+function callHelp (msg)
+{
+	var helpEmbed = new Discord.RichEmbed()
+	helpEmbed.setTitle('echidnabot help')
+	helpEmbed.setColor(0xDD5555)
+
+	msg.channel.sendEmbed(
+	  helpEmbed,
+	  getResponse("help"),
+	  { disableEveryone: true }
+	);
+}
+
+
+
 
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
@@ -392,7 +407,7 @@ bot.on("message", msg => {
 					}
 
 					if  (setStr == null  ||  setStr == "")
-						ttsMessage(msg.channel, getResponse("help"))
+						callHelp(msg)
 					else
 					{
 						if  (responses["helpcmd"][setStr] != null)
