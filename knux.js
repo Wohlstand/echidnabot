@@ -1,6 +1,7 @@
 var Discord = require("discord.js");
 var bot = new Discord.Client();
 const fs = require("fs");
+var exec = require('child_process').execFile;
 
 // ==== Auth URL ====
 //https://discordapp.com/oauth2/authorize?client_id={Put%20your%20ID%20here}&scope=bot&permissions=67169280
@@ -8,8 +9,8 @@ const fs = require("fs");
 // Important config vars
 var mconfig = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-var ownerId     = mconfig.ownerId;
-var loginId     = mconfig.loginId;
+var ownerId	 = mconfig.ownerId;
+var loginId	 = mconfig.loginId;
 var modRoleId   = mconfig.modRoleId;
 
 // Not-so-important config vars
@@ -18,8 +19,8 @@ var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "g
 
 // Other stuff
 var responses   = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
-var keywords    = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
-var userdata    = JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
+var keywords	= JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
+var userdata	= JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
 
 var prevAuthor = null;
 
@@ -68,7 +69,7 @@ function reactFromArray (message, array)
 
 function getResponse(category)
 {
-    var randString = "";
+	var randString = "";
 	var array = responses[category];
 	if  (array == null)
 	{
@@ -131,7 +132,7 @@ bot.on("message", msg => {
 				console.log("[unknown] said: "+msg.cleanContent);
 
 			// Authority check
-			var authorized = (msg.author.id == ownerId  ||  msg.member.roles.has(modRoleId))
+			var authorized = ( (ownerId.indexOf(msg.author.id) != -1) || msg.member.roles.has(modRoleId))
 			var authordata = userdata[msg.author.id.toString()]
 			if  (authordata != null)
 			{
@@ -200,7 +201,7 @@ bot.on("message", msg => {
 				if (msg.cleanContent.startsWith("/knux submit"))
 				{
 					var setStr = msg.cleanContent.substring(13);
-					
+
 					if  (setStr != null)
 					{
 						var userKey = msg.author.id.toString()
@@ -374,7 +375,7 @@ bot.on("message", msg => {
 				{
 					var setStr = ""
 					var cleanMsg = msg.cleanContent
-					if       (cleanMsg.startsWith("/knux help"))
+					if	   (cleanMsg.startsWith("/knux help"))
 					{
 						if  (cleanMsg.length > 10)
 							setStr = cleanMsg.substring(11);
@@ -409,6 +410,23 @@ bot.on("message", msg => {
 						bot.setTimeout(function(){
 							process.exit(1);
 						}, 100);
+					}
+					else
+						ttsMessage(msg.channel, getResponse("decline"));
+				}
+
+				else if (msg.cleanContent.startsWith("/knux gitpull"))
+				{
+					if (authorized)
+					{
+						console.log("Pulling a git");
+						exec('git', ["pull", "origin", "master"], function(err, data)
+						{
+							if(err == null)
+								ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+							else
+								ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+						});
 					}
 					else
 						ttsMessage(msg.channel, getResponse("decline"));
