@@ -388,7 +388,7 @@ bot.on("message", msg => {
 					else
 					{
 						if  (cleanMsg.length > 14)
-							setStr = cleanMsg.substring(15);
+							setStr = cleanMsg.substring(14);
 					}
 
 					if  (setStr == null  ||  setStr == "")
