@@ -274,13 +274,13 @@ bot.on("message", msg => {
 				{
 					var props = commands[cmdStr]
 					var modOnly = (props["mod"] != null)
-					var functPtr = window["sendResponse"]
+					var functPtr = global["sendResponse"]
 					var functStr = ""
 
 					if  (props["function"] != null)
 					{
 						functStr = props["function"]
-						functPtr = window[functStr]
+						functPtr = global[functStr]
 					}
 
 					if  (!modOnly  ||  authorized)
