@@ -14,7 +14,7 @@ var loginId	 = mconfig.loginId;
 var modRoleId   = mconfig.modRoleId;
 
 // Not-so-important config vars
-var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "tongue:252400986352517120", "wacko:252403181743505408", "😡", "😠", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "foxfacesniper:263390166163521536", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
+var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "tongue:252400986352517120", "wacko:252403181743505408", "😡", "� ", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "foxfacesniper:263390166163521536", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
 
 
 // Other stuff
@@ -177,7 +177,7 @@ function callHelp (msg, cmdStr, argStr, props)
 			newEmbed["fields"] = [{
 			                       name: "Command info: "+cmdStr,
 			                       value: props.info
-			                      }
+			                      }]
 			sendHelp = true
 		}
 		else
@@ -189,13 +189,13 @@ function callHelp (msg, cmdStr, argStr, props)
 	// Show the general help post
 	else
 	{
-		newEmbed["fields"] = [{
-		                       name: "Echidnabot help",
-		                       value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
-		                      }
+		newEmbed["fields"] = {
+		                      name: "Echidnabot help",
+		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
+		                     }
 
 		var categories = {}
-		for each (var item in commands.keys())
+		for (var item in commands.keys())
 		{
 			var cmdProps = commands[item]
 			if  (cmdProps.category != null)
@@ -206,10 +206,10 @@ function callHelp (msg, cmdStr, argStr, props)
 				categories[cmdProps.category].push(item)
 			}
 		}
-		for each (var item in categories.keys())
+		for (var item in categories.keys())
 		{
 			var listStr = ""
-			for each (var item2 in categories[item])
+			for (var item2 in categories[item])
 			{
 				if (listStr != "")
 					listStr = listStr + ", "
