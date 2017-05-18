@@ -2,9 +2,9 @@
 	"_example" :
 	{
 		"category" : "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
-		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments."
+		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
 		"info"     : "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
-		"mod"      : "if this field has any value, the command can only be called by an owner or server moderator"
+		"mod"      : "if this field has any value, the command can only be called by an owner or server moderator",
 		"phrases"  :
 		[
 			"a table of possible responses",
@@ -165,7 +165,7 @@
 			"[Dunno what that is.  Did you make a typo?]",
 			"[I can't help if I don't know what you're asking.]",
 			"[Could you repeat that?]"
-		],
+		]
 	},
 
 	"decline" :
@@ -278,7 +278,7 @@
 	{
 		"category" : "other",
 		"info"     : "Refreshes my responses and commands from the host's local JSON data.",
-		"function" : "updateRegex"
+		"function" : "updateRegex",
 		"phrases"  :
 		[
 			"Ah, finally.",
@@ -315,7 +315,7 @@
 	{
 		"category" : "other",
 		"info"     : "Changes my 'Playing _' message.",
-		"function" : "setGame",
+		"function" : "setGame"
 	},
 
 	"say" :
@@ -444,7 +444,7 @@
 
 	"gitpull" :
 	{
-		"category" : "mod-only"
+		"category" : "mod-only",
 		"mod"      : "true",
 		"info"     : "Forces me to update my local files from the github repo.",
 		"function" : "gitPull"
@@ -452,7 +452,7 @@
 
 	"regex" :
 	{
-		"category" : "mod-only"
+		"category" : "mod-only",
 		"mod"      : "true",
 		"info"     : "Check the regex string for a specific category",
 		"function" : "getRegex"
@@ -472,5 +472,5 @@
 		"mod"      : "true",
 		"info"     : "Shuts me down.",
 		"function" : "shutDown"
-	},
+	}
 }
