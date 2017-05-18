@@ -123,7 +123,7 @@ function sendError (channel, str)
 	
 }
 
-function global.knux_sendResponse (msg, cmdStr, argStr, props)
+function sendResponse (msg, cmdStr, argStr, props)
 {
 	var randString = "";
 	var array = props["phrases"];
@@ -137,7 +137,7 @@ function global.knux_sendResponse (msg, cmdStr, argStr, props)
 	ttsMessage (msg.channel, randString);
 }
 
-function global.knux_gitPull (msg, cmdStr, argStr, props)
+function gitPull (msg, cmdStr, argStr, props)
 {
 	console.log("Pulling a git");
 	exec('git', ["pull", "origin", "master"], function(err, data)
@@ -152,7 +152,7 @@ function global.knux_gitPull (msg, cmdStr, argStr, props)
 	});
 }
 
-function global.knux_shutDown (msg, cmdStr, argStr, props)
+function shutDown (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
 	ttsMessage(msg.channel, getResponse("exit"));
@@ -163,7 +163,7 @@ function global.knux_shutDown (msg, cmdStr, argStr, props)
 		}, 100);
 }
 
-function global.knux_callHelp (msg, cmdStr, argStr, props)
+function callHelp (msg, cmdStr, argStr, props)
 {
 
 	var newEmbed = {"color": 16733525, "fields": []}
@@ -256,8 +256,49 @@ bot.on("message", msg => {
 					authorized = true
 			}
 
-			// Direct commands
-			if (msg.cleanContent.startsWith("/knux "))
+
+
+			// Temporarily brute-forcing old important commands
+			if (msg.cleanContent.startsWith("/knux shutdown"))
+			{
+				if (authorized)
+				{
+					bot.user.setStatus("invisible")
+					ttsMessage(msg.channel, getResponse("exit"));
+					console.log("Shutting down");
+
+					bot.setTimeout(function(){
+						process.exit(1);
+					}, 100);
+				}
+				else
+					ttsMessage(msg.channel, getResponse("decline"));
+			}
+
+			else if (msg.cleanContent.startsWith("/knux gitpull"))
+			{
+				if (authorized)
+				{
+					console.log("Pulling a git");
+					exec('git', ["pull", "origin", "master"], function(err, data)
+					{
+						if(err == null)
+							ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+						else
+						{
+							ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+							exec('git', ["merge", "--abort"], function(err, data){});
+						}
+					});
+				}
+				else
+					ttsMessage(msg.channel, getResponse("decline"));
+			}
+
+
+
+			// New direct commands
+			else if (msg.cleanContent.startsWith("/knux "))
 			{
 				var cleanMsg = msg.cleanContent
 				var inputStr = cleanMsg.substr (6)
@@ -279,7 +320,7 @@ bot.on("message", msg => {
 
 					if  (props["function"] != null)
 					{
-						functStr = "knux_"+props["function"]
+						functStr = props["function"]
 						functPtr = global[functStr]
 					}
 
