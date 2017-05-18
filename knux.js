@@ -123,7 +123,7 @@ function sendError (channel, str)
 	
 }
 
-function sendResponse (msg, cmdStr, argStr, props)
+function global.knux_sendResponse (msg, cmdStr, argStr, props)
 {
 	var randString = "";
 	var array = props["phrases"];
@@ -137,7 +137,7 @@ function sendResponse (msg, cmdStr, argStr, props)
 	ttsMessage (msg.channel, randString);
 }
 
-function gitPull (msg, cmdStr, argStr, props)
+function global.knux_gitPull (msg, cmdStr, argStr, props)
 {
 	console.log("Pulling a git");
 	exec('git', ["pull", "origin", "master"], function(err, data)
@@ -152,7 +152,7 @@ function gitPull (msg, cmdStr, argStr, props)
 	});
 }
 
-function shutDown (msg, cmdStr, argStr, props)
+function global.knux_shutDown (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
 	ttsMessage(msg.channel, getResponse("exit"));
@@ -163,7 +163,7 @@ function shutDown (msg, cmdStr, argStr, props)
 		}, 100);
 }
 
-function callHelp (msg, cmdStr, argStr, props)
+function global.knux_callHelp (msg, cmdStr, argStr, props)
 {
 
 	var newEmbed = {"color": 16733525, "fields": []}
@@ -279,7 +279,7 @@ bot.on("message", msg => {
 
 					if  (props["function"] != null)
 					{
-						functStr = props["function"]
+						functStr = "knux_"+props["function"]
 						functPtr = global[functStr]
 					}
 
