@@ -18,6 +18,9 @@ var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "g
 
 
 // Other stuff
+var commands    = JSON.parse(fs.readFileSync('commands.json', 'utf8'));
+delete commands["_example"]
+
 var responses   = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
 var keywords	= JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
 var userdata	= JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
@@ -109,20 +112,117 @@ function ttsMessage (channel, message)
 }
 
 
-function callHelp (msg)
+// ---------- NEW COMMAND SYSTEM FUNCTIONS ----------------
+function getArrayRandom (array)
 {
-	var newEmbed = responses["help"]
-	msg.channel.send({newEmbed});
+	return array[Math.floor(Math.random() * (array.length))];
 }
 
-function callCmdHelp (msg, setStr)
+function sendError (channel, str)
 {
-	var newEmbed = responses["help cmd"]
-	newEmbed["embed"]["fields"][0]["name"] = "Command help: "+setStr
-	newEmbed["embed"]["fields"][0]["value"] = responses["help descriptions"][setStr]
-	msg.channel.send({newEmbed});
+	
 }
 
+function sendResponse (msg, cmdStr, argStr, props)
+{
+	var randString = "";
+	var array = props["phrases"];
+	if  (array == null)
+	{
+		randString = "[Error: Could not find response category: `"+category+"`]";
+	}
+	else
+		randString = getArrayRandom(props.phrases);
+
+	ttsMessage (msg.channel, randString);
+}
+
+function gitPull (msg, cmdStr, argStr, props)
+{
+	console.log("Pulling a git");
+	exec('git', ["pull", "origin", "master"], function(err, data)
+	{
+		if(err == null)
+			ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+		else
+		{
+			ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+			exec('git', ["merge", "--abort"], function(err, data){});
+		}
+	});
+}
+
+function shutDown (msg, cmdStr, argStr, props)
+{
+	bot.user.setStatus("invisible")
+	ttsMessage(msg.channel, getResponse("exit"));
+	console.log("Shutting down");
+
+	bot.setTimeout(function(){
+			process.exit(1);
+		}, 100);
+}
+
+function callHelp (msg, cmdStr, argStr, props)
+{
+
+	var newEmbed = {"color": 16733525, "fields": []}
+	var sendHelp = false
+
+	// Show a specific command's help post
+	if  (argStr != "")
+	{
+		if  (props.info != null)
+		{
+			newEmbed["fields"] = [{
+			                       name: "Command info: "+cmdStr,
+			                       value: props.info
+			                      }
+			sendHelp = true
+		}
+		else
+		{
+			sendResponse(msg, "nocmd", "", commands["nocmd"])
+		}
+	}
+
+	// Show the general help post
+	else
+	{
+		newEmbed["fields"] = [{
+		                       name: "Echidnabot help",
+		                       value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
+		                      }
+
+		var categories = {}
+		for each (var item in commands.keys())
+		{
+			var cmdProps = commands[item]
+			if  (cmdProps.category != null)
+			{
+				if  (categories[cmdProps.category] == null)
+					categories[cmdProps.category] = []
+
+				categories[cmdProps.category].push(item)
+			}
+		}
+		for each (var item in categories.keys())
+		{
+			var listStr = ""
+			for each (var item2 in categories[item])
+			{
+				if (listStr != "")
+					listStr = listStr + ", "
+				listStr = listStr + "`" + item2 + "`"
+			}
+			newEmbed["fields"].push({name: item+" commands:", value: listStr})
+			sendHelp = true
+		}
+	}
+
+	if (sendHelp)
+		msg.channel.send({embed: newEmbed});
+}
 
 
 
@@ -156,9 +256,44 @@ bot.on("message", msg => {
 					authorized = true
 			}
 
-			// direct commands
+			// Direct commands
 			if (msg.cleanContent.startsWith("/knux "))
 			{
+				var cleanMsg = msg.cleanContent
+				var inputStr = cleanMsg.substr (6)
+
+				var cmdStr   = inputStr
+				var argStr   = ""
+				if (inputStr.indexOf(' ') != -1)
+				{
+					cmdStr = inputStr.substr (0, inputStr.indexOf(' '))
+					argStr = inputStr.substr (inputStr.indexOf(' ')+1)
+				}
+
+				if (commands[cmdStr] != null)
+				{
+					var props = commands[cmdStr]
+					var modOnly = (props["mod"] != null)
+					var functPtr = window["sendResponse"]
+					var functStr = ""
+
+					if  (props["function"] != null)
+					{
+						functStr = props["function"]
+						functPtr = window[functStr]
+					}
+
+					if  (!modOnly  ||  authorized)
+					{
+						if  (functPtr != null)
+							functPtr(msg, cmdStr, argStr, props)
+						else if (functStr != "")
+							ttsMessage(msg.channel, "[Command is broken.  Function not found: " + functStr + "]")
+					}
+					else
+						sendResponse(msg, "decline", "", props);
+				}
+				/*
 				if (msg.cleanContent.startsWith("/knux and"))
 					ttsMessage(msg.channel, "& Knuckles")
 
@@ -465,6 +600,7 @@ bot.on("message", msg => {
 						console.log("Tried to call a category that doesn't exist");
 					}
 				}
+				*/
 
 				if  (deleteAll == true  &&  msg != null)
 					msg.delete(0);

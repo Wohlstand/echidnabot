@@ -1,0 +1,476 @@
+{
+	"_example" :
+	{
+		"category" : "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
+		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments."
+		"info"     : "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
+		"mod"      : "if this field has any value, the command can only be called by an owner or server moderator"
+		"phrases"  :
+		[
+			"a table of possible responses",
+			"sendResponse will just choose one of these randomly and post it",
+			"other functions can make use of these as well."
+		]
+	},
+
+
+	"help" :
+	{
+		"function" : "callHelp",
+		"info" : "helps the help the help the help's help the help the help"
+	},
+	"info" :
+	{
+		"function" : "callHelp",
+		"info" : "helps the help the help the help's help the help the help"
+	},
+	"cmd" :
+	{
+		"function" : "callHelp",
+		"info" : "helps the help the help the help's help the help the help"
+	},
+	"command" :
+	{
+		"function" : "callHelp",
+		"info" : "helps the help the help the help's help the help the help"
+	},
+
+
+	"ping" :
+	{
+		"function" : "ping"
+	},
+
+	"enter" :
+	{
+		"phrases"  :
+		[
+			"Here I come, rougher than the rest of them!",
+			"Knock knock, it's Knuckles the bloat thrower!",
+			"This is Knuckles, and I'm back!",
+			"You know me, the fighting freak Knuckles!",
+			"This is Knuckles, who fears none.",
+			"Everybody flow with me, this is your boy Knuckles.",
+			"It's your main man Knuckles.",
+			"Hey guys! Long time no see."
+		]
+	},
+
+	"exit" :
+	{
+		"phrases"  :
+		[
+			"Something's callin' me more and more..."
+		]
+	},
+
+	"fart" :
+	{
+		"phrases"  :
+		[
+			"/foxy fart",
+			"[toot]",
+			"[Maybe later...]",
+			"/luna butts"
+		]
+	},
+
+	"precious" :
+	{
+		"phrases"  :
+		[
+			"PRECIOUS PLACEHOLDER; I'll have more responses here eventually",
+			"PRECIOUS PLACEHOLDER; I'll have more responses here eventually"
+		]
+	},
+
+	"brag" :
+	{
+		"phrases"  :
+		[
+			"Tougher than leather.",
+			"Won't be frightened, I'll stand up to all the pain and turmoil",
+			"I am fighting my own mission, nothing's gonna stand in my way.",
+			"I break 'em down whether they solid or frail!",
+			"I have no such things as weak spots!",
+			"Unlike Sonic I don't chuckle.",
+			"My philosophy's my knuckles and feet!",
+			"My spikes go through boulders.",
+			"I was born by myself, I don't need a posse.",
+			"No one stops Knuckles' feet!",
+			"Call me stubborn but I'm still gonna live it!",
+			"I was born like this, to fear no one.",
+			"I'm straight thugged out, only live to my ones.",
+			"You'll never see me run and I won't surrender!",
+			"I just fire away like no other contender.",
+			"I get this power to wipe out the havoc and anarchy.",
+			"I stay on point like every single day",
+			"The great Emerald's power allows me to feel.",
+			"A ghost tried to approach me and got leery.",
+			"It's real deal when it comes to my name, kid!",
+			"I stay knuckled up, I'm in a deep cut.",
+			"They don't call me Knuckles for nothing, I can't lose."
+		]
+	},
+
+	"threat" : 
+	{
+		"phrases"  :
+		[
+			"I'll give you the coldest shoulder...",
+			"I break 'em down whether they solid or frail!",
+			"My spikes go through boulders.",
+			"Clench my fists tight, become more reddah",
+			"This is my planet. I shall not surrender!",
+			"This is my planet. Gonna fight for my destiny!",
+			"I don't wanna hurta, my passion observed",
+			"Here for the mission, whoever want it bring it",
+			"Diamonds and gems, we could battle to the end",
+			"You best to be aware of the knuckles that I send; once they penetrate, they put you to your death.",
+			"They wanna play with my Emeralds?! They playin' with the wrong guy!",
+			"I'm gonna get those fools.",
+			"Throw your hands up! Come on, come on!",
+			"Ain't nobody gonna come here and eat my plate, no!",
+			"Somebody gonna get theirs quick, my word is bond.",
+			"I ain't gonna let it get to me.",
+			"It's the real deal when it comes to my name, kid!",
+			"Whoever want it, bring it!  I don't care, we 'ka do this.",
+			"Come step up to the plate, and meet your match.",
+			"This is Knuckles, and you've reached the Death Chamber.",
+			"You ready to go in space?",
+			"Don't let it hit'cha, move move.",
+			"Time for a Knuckles sandwich!"
+		]
+	},
+
+	"accept" :
+	{
+		"phrases"  :
+		[
+			"I will be the one to set your heart free true.",
+			"This alliance has a purpose."
+		]
+	},
+
+	"nocmd" :
+	{
+		"phrases"  :
+		[
+			"[Couldn't find any info for that command.]",
+			"[Sorry, but I think that command doesn't exist.]",
+			"[Don't ask me how to do the impossible.]",
+			"[I'm an echidna, Jim, not a miracle worker.]",
+			"[no imaginary verbs pls kthx]",
+			"[Try asking in a language I can understand.]",
+			"[Dunno what that is.  Did you make a typo?]",
+			"[I can't help if I don't know what you're asking.]",
+			"[Could you repeat that?]"
+		],
+	},
+
+	"decline" :
+	{
+		"phrases"  :
+		[
+			"I'd rather flex my muscles.",
+			"I'd rather flex my muscles.",
+			"I'd rather flex my muscles.",
+			"No way!",
+			"No time for games...",
+			"No time for games...",
+			"I'd rather flex my muscles."
+		]
+	},
+
+	"and" :
+	{
+		"phrases"  :
+		[
+			"& Knuckles"
+		]
+	},
+
+	"about" :
+	{
+		"phrases"  :
+		[
+			"Tougher than leather.",
+			"Me? My fists are my weapon of choice.",
+			"I'm hard as nails, it ain't hard to tell.",
+			"Unlike Sonic, I don't chuckle.",
+			"Unlike the rest I'm independent since my first breath.",
+			"Born on an island in the heavens",
+			"The blood of my ancestors flows inside me",
+			"My duty is to save the flower from evil deterioration.",
+			"Streaking lights, sounds and instincts are the elements that keep me going.",
+			"The new porcupine on the block with the buff chest.",
+			"Independent flower, Magical Emerald holder.",
+			"Was born for a lifetime on Angel Island, yeah~",
+			"I like to dig holes in search of gold.",
+			"Wild and hungry, ain't a damn thing funny.",
+			"My philosophy's my knuckles and feet.",
+			"I was born like this, to fear no one",
+			"I'm straight thugged out, only live to my ones.",
+			"Echido'na, that's what I'm representing!",
+			"The great Emerald's power allows me to feel.",
+			"Sometimes I wanna just chill and land, but I'm the protector of the Emerald and gems.",
+			"Ain't a criminal, crime don't pay."
+		]
+	},
+
+
+
+	"jam" :
+	{
+		"category" : "other",
+		"info"     : "check out my mixtape bro",
+		"phrases"  :
+		[
+			"https://www.youtube.com/watch?v=_T89V6XJ0as",
+			"https://www.youtube.com/watch?v=gbb5Ry-v87E",
+			"https://www.youtube.com/watch?v=qTWtNMd8mZs",
+
+			"https://www.youtube.com/watch?v=9WzE_9LZhAY",
+
+			"https://www.youtube.com/watch?v=HOKqPl2b9Hk",
+
+			"https://www.youtube.com/watch?v=daX0t1uI1bs",
+
+			"https://www.youtube.com/watch?v=Sj5jIhnwXjo",
+			"https://www.youtube.com/watch?v=hSoq5hJJ4iU",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+
+			"https://www.youtube.com/watch?v=HY-eyigVrWY",
+
+			"https://www.youtube.com/watch?v=reak7KGv8Ek",
+
+			"https://www.youtube.com/watch?v=GM8h2Xyis9M",
+
+			"https://www.youtube.com/watch?v=tOuZxq68Wp4",
+			"https://www.youtube.com/watch?v=wx4DfHW0WtM",
+			"https://www.youtube.com/watch?v=DF726gXNNmE",
+			"https://www.youtube.com/watch?v=SZXGzki_qww",
+			"https://www.youtube.com/watch?v=WKsb0j7xUHI",
+			"https://www.youtube.com/watch?v=1Aon3CJZyGk"
+		]
+	},
+
+	"knux" :
+	{
+		"category" : "other",
+		"info"     : "Discover the true meaning of life.",
+		"phrases"  :
+		[
+			"https://www.youtube.com/watch?v=rw6TAPNqQAE",
+			"https://www.youtube.com/watch?v=tXDNBBh2QSo",
+			"https://www.youtube.com/watch?v=y8Nze9mlTFE",
+			"https://www.youtube.com/watch?v=5GEmLnaFC38"
+		]
+	},
+
+	"learn" :
+	{
+		"category" : "other",
+		"info"     : "Refreshes my responses and commands from the host's local JSON data.",
+		"function" : "updateRegex"
+		"phrases"  :
+		[
+			"Ah, finally.",
+			"I'm so ready...",
+			"Yeah, I feel good!",
+			"I feel some strange energy...",
+			"I am one with the Master Emerald",
+			"Hmph. I'm just warming up!"
+		]
+	},
+
+	"error" :
+	{
+		"category" : "other",
+		"info"     : "Triggers an error.",
+		"function" : "forceError",
+		"phrases"  :
+		[
+			"_oh no_",
+			"https://www.youtube.com/watch?v=z7Xu-3_42fQ&t=0s ",
+			"My hat's on fire! Help!",
+			"My hat's on fire! Help!"
+		]
+	},
+
+	"react" :
+	{
+		"category" : "other",
+		"info"     : "Gives me the okay to vandalize your post with gestures of varying politeness.",
+		"function" : "reactionSpam"
+	},
+
+	"setgame" :
+	{
+		"category" : "other",
+		"info"     : "Changes my 'Playing _' message.",
+		"function" : "setGame",
+	},
+
+	"say" :
+	{
+		"category" : "other",
+		"info"     : "Forces me to say stuff.  Use common sense with this command.",
+		"function" : "forceSay"
+	},
+
+	"reveal" :
+	{
+		"category" : "other",
+		"info"     : "Reveals the name of the last person to use my say command.",
+		"function" : "revealSay"
+	},
+
+	"tts" :
+	{
+		"category" : "other",
+		"info"     : "Toggles whether my posts can be read by Discord's text to speech.",
+		"function" : "toggleTTS"
+	},
+
+	"delcmd" :
+	{
+		"category" : "other",
+		"info"     : "Toggles whether I delete every message with a valid command.",
+		"function" : "toggleDelCmd"
+	},
+
+	"avatar" :
+	{
+		"category" : "other",
+		"info"     : "Time for a makeover.",
+		"function" : "changeAvatar",
+		"phrases"  :
+		[
+			"http://i.imgur.com/bxjwbUt.png",
+			"http://i.imgur.com/eqF3mxz.jpg",
+			"http://i.imgur.com/IAbUVs2.png",
+			"http://i.imgur.com/tbQym0E.jpg",
+			"http://i.imgur.com/7N0OVFQ.jpg",
+			"http://i.imgur.com/dMkaV4t.png",
+			"http://i.imgur.com/COJ7RZB.jpg",
+			"http://i.imgur.com/I4PyqP4.png",
+			"http://i.imgur.com/zCEXlU8.png",
+			"http://i.imgur.com/R6OVyfg.jpg",
+			"http://i.imgur.com/i8A1ptS.png",
+			"http://i.imgur.com/BQhtELk.png",
+			"http://i.imgur.com/n4VgygP.png",
+			"http://i.imgur.com/rPXVEun.png",
+			"http://i.imgur.com/HCNAmMK.jpg",
+			"http://i.imgur.com/ZHWVbVN.png",
+			"http://i.imgur.com/xQzHZqr.jpg",
+			"http://i.imgur.com/S5ho5Rx.jpg",
+			"http://i.imgur.com/mBssFrl.png",
+			"http://i.imgur.com/KCztD6D.png",
+			"http://i.imgur.com/NmzeUHJ.png",
+			"http://i.imgur.com/EJBWx26.png",
+			"http://i.imgur.com/iEv9mv4.png",
+			"http://i.imgur.com/rTsTSnr.png",
+			"http://i.imgur.com/Abnz6Rd.png"
+		]
+	},
+
+	"memory" :
+	{
+		"category" : "other",
+		"info"     : "Causes me to revisit some fond memories",
+		"phrases"  :
+		[
+			"https://i.imgur.com/OKRMuxf.png",
+			"https://i.imgur.com/tIL7iNz.png",
+			"https://i.imgur.com/bMOxef6.png",
+			"https://i.imgur.com/9YTknFG.png",
+			"https://i.imgur.com/LKLQZSm.png",
+			"https://i.imgur.com/5RBW13m.png",
+			"https://i.imgur.com/1ioJUfq.png",
+			"https://i.imgur.com/JKrRDyB.png",
+			"https://i.imgur.com/nmCiQ5E.png",
+			"https://i.imgur.com/jOqjdpC.png",
+			"https://i.imgur.com/Isu4dhW.png",
+			"https://i.imgur.com/qqLEeSX.png",
+			"https://i.imgur.com/pxmoJxz.png",
+			"https://i.imgur.com/7GZG3yb.png",
+			"https://i.imgur.com/M2KFK6O.png",
+			"https://i.imgur.com/UdmI3fz.png",
+			"https://i.imgur.com/D1JzUq8.png",
+			"https://i.imgur.com/YBjijOv.png",
+			"https://i.imgur.com/yFw0se1.png",
+			"https://i.imgur.com/imZpeQc.png",
+			"https://i.imgur.com/CcfHS64.png",
+			"https://i.imgur.com/1CMyKFT.png",
+			"https://i.imgur.com/xMHN2xz.png",
+			"https://i.imgur.com/m0UDnLS.png",
+			"https://i.imgur.com/fSHQoxP.png",
+			"https://i.imgur.com/dgpHEnM.png",
+			"https://i.imgur.com/8FaYxeb.png",
+			"https://i.imgur.com/pYUhJH2.png",
+			"https://i.imgur.com/YT8qjIa.png",
+			"https://i.imgur.com/HhEP9Lr.png",
+			"https://i.imgur.com/RgLAjfa.png",
+			"https://i.imgur.com/VPlHSnQ.png",
+			"https://i.imgur.com/UPcaFPH.png",
+			"https://i.imgur.com/id3biEI.png",
+			"https://i.imgur.com/9vJX2fI.png",
+			"https://i.imgur.com/4Futoac.png",
+			"https://i.imgur.com/PnR8FBp.png",
+			"https://i.imgur.com/DngbDqZ.png",
+			"https://i.imgur.com/89dPWru.png",
+			"https://i.imgur.com/jWAOVFW.png",
+			"https://i.imgur.com/UPQG55i.png",
+			"https://i.imgur.com/P1sl1t9.png",
+			"https://i.imgur.com/LJYusbI.png",
+			"https://i.imgur.com/F4CnZQY.png",
+			"https://i.imgur.com/4e8KgHd.png",
+			"https://i.imgur.com/6A0s1Wx.png",
+			"https://i.imgur.com/tnN2kWZ.png",
+			"https://i.imgur.com/zRXSlkJ.png",
+			"https://i.imgur.com/RlqnWwx.png",
+			"https://i.imgur.com/nqwqe83.png"
+		]
+	},
+
+
+
+	"gitpull" :
+	{
+		"category" : "mod-only"
+		"mod"      : "true",
+		"info"     : "Forces me to update my local files from the github repo.",
+		"function" : "gitPull"
+	},
+
+	"regex" :
+	{
+		"category" : "mod-only"
+		"mod"      : "true",
+		"info"     : "Check the regex string for a specific category",
+		"function" : "getRegex"
+	},
+
+	"channel" :
+	{
+		"category" : "mod-only",
+		"mod"      : "true",
+		"info"     : "Toggles whether I can post in a given channel.  You must specify a valid channel name (for example, `/knux channel general`).",
+		"function" : "toggleChannel"
+	},
+
+	"shutdown" :
+	{
+		"category" : "mod-only",
+		"mod"      : "true",
+		"info"     : "Shuts me down.",
+		"function" : "shutDown"
+	},
+}
