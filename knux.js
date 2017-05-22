@@ -237,10 +237,10 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 	// Show the general help post
 	else
 	{
-		newEmbed["fields"] = {
+		newEmbed["fields"] = [{
 		                      name: "Echidnabot help",
 		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
-		                     }
+		                     }]
 
 		for (var item in helpCategories)
 		{
