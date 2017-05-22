@@ -123,6 +123,31 @@ function sendError (channel, str)
 	
 }
 
+
+
+var helpCategories = {}
+
+function buildHelpCategories ()
+{
+	helpCategories = {}
+	for (var item in commands.keys)
+	{
+		var cmdProps = commands[item]
+		if  (cmdProps.category != null)
+		{
+			if  (helpCategories[cmdProps.category] == null)
+			{
+				helpCategories[cmdProps.category] = []
+				console.log("ADDING CATEGORY " + cmdProps.category);
+			}
+
+			helpCategories[cmdProps.category].push(item)
+			console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
+		}
+	}
+}
+
+
 var cmdFuncts = {}
 cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 {
@@ -164,6 +189,19 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 		}, 100);
 }
 
+cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
+{
+	for (i = 0; i < 5; i++)
+	{
+		var emoteStr = "";
+		var emoteCategory = emoteReacts.threat;
+		if (Math.random() > 0.5)
+			emoteCategory = emoteReacts.brag;
+
+		reactFromArray(msg, emoteCategory);
+	}
+}
+
 cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 {
 
@@ -197,19 +235,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
 		                     }
 
-		var categories = {}
-		for (var item in commands.keys)
-		{
-			var cmdProps = commands[item]
-			if  (cmdProps.category != null)
-			{
-				if  (categories[cmdProps.category] == null)
-					categories[cmdProps.category] = []
-
-				categories[cmdProps.category].push(item)
-			}
-		}
-		for (var item in categories.keys)
+		for (var item in helpCategories.keys)
 		{
 			var listStr = ""
 			for (var item2 in categories[item])
@@ -784,6 +810,8 @@ bot.on('ready', () => {
 	var introString = getResponse("enter");
 	myChannel.sendMessage(introString);
 	//myChannelB.sendMessage(introString);
+
+	buildHelpCategories ()
 
 	console.log('READY; '+introString);
 	console.log(' ');
