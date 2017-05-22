@@ -207,7 +207,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 				categories[cmdProps.category].push(item)
 			}
 		}
-		for (var item in categories.keys())
+		for (var item in categories.keys)
 		{
 			var listStr = ""
 			for (var item2 in categories[item])
