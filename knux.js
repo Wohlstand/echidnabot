@@ -123,7 +123,8 @@ function sendError (channel, str)
 	
 }
 
-function sendResponse (msg, cmdStr, argStr, props)
+var cmdFuncts = {}
+cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 {
 	var randString = "";
 	var array = props["phrases"];
@@ -137,7 +138,7 @@ function sendResponse (msg, cmdStr, argStr, props)
 	ttsMessage (msg.channel, randString);
 }
 
-function gitPull (msg, cmdStr, argStr, props)
+cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 {
 	console.log("Pulling a git");
 	exec('git', ["pull", "origin", "master"], function(err, data)
@@ -152,7 +153,7 @@ function gitPull (msg, cmdStr, argStr, props)
 	});
 }
 
-function shutDown (msg, cmdStr, argStr, props)
+cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
 	ttsMessage(msg.channel, getResponse("exit"));
@@ -163,7 +164,7 @@ function shutDown (msg, cmdStr, argStr, props)
 		}, 100);
 }
 
-function callHelp (msg, cmdStr, argStr, props)
+cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 {
 
 	var newEmbed = {"color": 16733525, "fields": []}
@@ -223,8 +224,6 @@ function callHelp (msg, cmdStr, argStr, props)
 	if (sendHelp)
 		msg.channel.send({embed: newEmbed});
 }
-
-var commandFunctions = {}
 
 
 
@@ -316,13 +315,13 @@ bot.on("message", msg => {
 				{
 					var props = commands[cmdStr]
 					var modOnly = (props["mod"] != null)
-					var functPtr = commandFunctions["sendResponse"]
+					var functPtr = cmdFuncts["sendResponse"]
 					var functStr = ""
 
 					if  (props["function"] != null)
 					{
 						functStr = props["function"]
-						functPtr = commandFunctions[functStr]
+						functPtr = cmdFuncts[functStr]
 					}
 
 					if  (!modOnly  ||  authorized)
@@ -786,13 +785,6 @@ bot.on('ready', () => {
 
 	console.log('READY; '+introString);
 	console.log(' ');
-
-	for (var item in [sendResponse, gitPull, shutDown, callHelp])
-	{
-		var itemNameStr = item.name.toString()
-		commandFunctions[itemNameStr] = item
-		console.log("Loading function " + itemNameStr);
-	}
 });
 
 
