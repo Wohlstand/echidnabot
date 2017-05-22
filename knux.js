@@ -134,17 +134,22 @@ function buildHelpCategories ()
 	for (var item in Object.keys(commands))
 	{
 		var cmdProps = commands[item]
-		if  (cmdProps.category != null)
+		if (cmdProps != null)
 		{
-			if  (helpCategories[cmdProps.category] == null)
+			if  (cmdProps.category != null)
 			{
-				helpCategories[cmdProps.category] = []
-				console.log("ADDING CATEGORY " + cmdProps.category);
-			}
+				if  (helpCategories[cmdProps.category] == null)
+				{
+					helpCategories[cmdProps.category] = []
+					console.log("ADDING CATEGORY " + cmdProps.category);
+				}
 
-			helpCategories[cmdProps.category].push(item)
-			console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
+				helpCategories[cmdProps.category].push(item)
+				console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
+			}
 		}
+		else
+			console.log("UNABLE TO GET PROPERTIES FOR " + item);
 	}
 	console.log("DONE CREATING COMMAND LISTS");
 }
