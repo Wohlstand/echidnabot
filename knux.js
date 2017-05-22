@@ -245,7 +245,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		for (var item in helpCategories)
 		{
 			var listStr = ""
-			for (var item2 in categories[item])
+			for (var item2 in helpCategories[item])
 			{
 				if (listStr != "")
 					listStr = listStr + ", "
