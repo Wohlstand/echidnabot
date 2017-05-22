@@ -267,8 +267,11 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 					listStr = listStr + ", "
 
 				var cmdStr = helpCategories[item][item2]
+				var functName = commands[cmdStr]["function"]
+				if  (functName == null)
+					functName = "sendResponse"
 
-				if  (cmdFuncts[cmdStr] == null)
+				if  (cmdFuncts[functName] == null)
 					listStr = listStr + "~~`" + cmdStr + "`~~"
 				else
 					listStr = listStr + "`" + cmdStr + "`"
