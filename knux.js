@@ -249,7 +249,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 			{
 				if (listStr != "")
 					listStr = listStr + ", "
-				listStr = listStr + "`" + item2 + "`"
+				listStr = listStr + "`" + helpCategories[item][item2] + "`"
 			}
 			newEmbed["fields"].push({name: item+" commands:", value: listStr})
 			sendHelp = true
