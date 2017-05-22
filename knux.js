@@ -173,11 +173,13 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 	// Show a specific command's help post
 	if  (argStr != "")
 	{
-		if  (props.info != null)
+		var newProps = commands[argStr]
+
+		if  (newProps.info != null)
 		{
 			newEmbed["fields"] = [{
-			                       name: "Command info: "+cmdStr,
-			                       value: props.info
+			                       name: "Command info: "+argStr,
+			                       value: newProps.info
 			                      }]
 			sendHelp = true
 		}
