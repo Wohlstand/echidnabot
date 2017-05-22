@@ -196,7 +196,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		                     }
 
 		var categories = {}
-		for (var item in commands.keys())
+		for (var item in commands.keys)
 		{
 			var cmdProps = commands[item]
 			if  (cmdProps.category != null)
