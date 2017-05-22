@@ -131,7 +131,7 @@ function buildHelpCategories ()
 {
 	console.log("START CREATING COMMAND LISTS FOR HELP");
 	helpCategories = {}
-	for (var item in commands.keys)
+	for (var item in Object.keys(commands))
 	{
 		var cmdProps = commands[item]
 		if  (cmdProps.category != null)
@@ -237,7 +237,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
 		                     }
 
-		for (var item in helpCategories.keys)
+		for (var item in Object.keys(helpCategories))
 		{
 			var listStr = ""
 			for (var item2 in categories[item])
