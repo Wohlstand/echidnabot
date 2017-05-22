@@ -129,6 +129,7 @@ var helpCategories = {}
 
 function buildHelpCategories ()
 {
+	console.log("START CREATING COMMAND LISTS FOR HELP");
 	helpCategories = {}
 	for (var item in commands.keys)
 	{
@@ -145,6 +146,7 @@ function buildHelpCategories ()
 			console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
 		}
 	}
+	console.log("DONE CREATING COMMAND LISTS");
 }
 
 
