@@ -225,10 +225,6 @@ function callHelp (msg, cmdStr, argStr, props)
 }
 
 var commandFunctions = {}
-for (var item in [sendResponse, gitPull, shutDown, callHelp])
-{
-	commandFunctions[item.name] = item
-}
 
 
 
@@ -788,10 +784,14 @@ bot.on('ready', () => {
 	myChannel.sendMessage(introString);
 	//myChannelB.sendMessage(introString);
 
-
-
 	console.log('READY; '+introString);
 	console.log(' ');
+
+	for (var item in [sendResponse, gitPull, shutDown, callHelp])
+	{
+		commandFunctions[item.name] = item
+		console.log('READY; '+item.name);
+	}
 });
 
 
