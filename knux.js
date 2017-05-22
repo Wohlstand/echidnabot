@@ -224,6 +224,11 @@ function callHelp (msg, cmdStr, argStr, props)
 		msg.channel.send({embed: newEmbed});
 }
 
+var commandFunctions = {}
+for (var item in [sendResponse, gitPull, shutDown, callHelp])
+{
+	commandFunctions[item.name] = item
+}
 
 
 
@@ -315,13 +320,13 @@ bot.on("message", msg => {
 				{
 					var props = commands[cmdStr]
 					var modOnly = (props["mod"] != null)
-					var functPtr = global["sendResponse"]
+					var functPtr = commandFunctions["sendResponse"]
 					var functStr = ""
 
 					if  (props["function"] != null)
 					{
 						functStr = props["function"]
-						functPtr = global[functStr]
+						functPtr = commandFunctions[functStr]
 					}
 
 					if  (!modOnly  ||  authorized)

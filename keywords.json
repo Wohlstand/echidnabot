@@ -1,5 +1,5 @@
 {
-  "bot" : "kn[aeiouy]+(k|ck|x)|echidna|nyquil|linux|punchy mcgee",
+  "bot" : "(kn|n)[aeiouy]+(k|ck|x)|echidna|nyquil|linux|punchy mcgee",
   "indirect" : "you|shut up",
   "precious" : "emerald|jewel|gem|gold|treasure|booty|loot|swag|coin|money|artifact|artefact|relic",
   "threat" : "senile|old|geezer|suck|loser|dweeb|dork|weak|idiot|moron|jerk|jackass|butt|poser|nerd|worthless|coward|pathetic|cute|appetizing|delicious|tasty|adorable|harmless|lame|punk|twit|dumb|weird|scary|uninteresting|intimidating|ugly|gross|hideous|freaky|ew|slimy|disgusting|shut up|shut it|shaddup|horrifying|terrifying|egghead|laughable|second-rate|lazy|boring|odd|meh|worm|ass|dick|poop|crap|shit|fuck|blue|hedgehog|knucklehead|dolt|dunce|dimwit|daft|bookworm|worst|annoying|obnoxious",
