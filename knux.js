@@ -219,19 +219,23 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 	if  (argStr != "")
 	{
 		var newProps = commands[argStr]
+		var deny = true
 
 		if  (newProps != null)
 		{
-			newEmbed["fields"] = [{
-			                       name: "Command info: "+argStr,
-			                       value: newProps.info
-			                      }]
-			sendHelp = true
+			if  (newProps.category != null)
+			{
+				newEmbed["fields"] = [{
+				                       name: "Command info: "+argStr,
+				                       value: newProps.info
+				                      }]
+				sendHelp = true
+				deny = false
+			}
 		}
-		else
-		{
+
+		if  (deny)
 			cmdFuncts.sendResponse(msg, "nocmd", "", commands["nocmd"])
-		}
 	}
 
 	// Show the general help post
