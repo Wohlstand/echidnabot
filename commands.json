@@ -350,7 +350,7 @@
 	{
 		"category" : "other",
 		"info"     : "Time for a makeover.",
-		"function" : "changeAvatar",
+		"function" : "setAvatar",
 		"phrases"  :
 		[
 			"http://i.imgur.com/bxjwbUt.png",

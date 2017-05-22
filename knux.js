@@ -209,6 +209,18 @@ cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
 	}
 }
 
+cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
+{
+	bot.user.setGame(argStr);
+}
+
+cmdFuncts.setAvatar = function (msg, cmdStr, argStr, props)
+{
+	var newAvatar = getArrayRandom(props.phrases);
+	bot.user.setAvatar(newAvatar);
+	ttsMessage(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
+}
+
 cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 {
 
