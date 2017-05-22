@@ -175,7 +175,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 	{
 		var newProps = commands[argStr]
 
-		if  (newProps.info != null)
+		if  (newProps != null)
 		{
 			newEmbed["fields"] = [{
 			                       name: "Command info: "+argStr,
