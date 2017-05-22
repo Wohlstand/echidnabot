@@ -185,7 +185,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		}
 		else
 		{
-			sendResponse(msg, "nocmd", "", commands["nocmd"])
+			cmdFuncts.sendResponse(msg, "nocmd", "", commands["nocmd"])
 		}
 	}
 
@@ -334,7 +334,7 @@ bot.on("message", msg => {
 							ttsMessage(msg.channel, "[Command is broken.  Function not found: " + functStr + "]")
 					}
 					else
-						sendResponse(msg, "decline", "", props);
+						cmdFuncts.sendResponse(msg, "decline", "", props);
 				}
 				/*
 				if (msg.cleanContent.startsWith("/knux and"))
