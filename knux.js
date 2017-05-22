@@ -255,7 +255,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 	{
 		newEmbed["fields"] = [{
 		                      name: "Echidnabot help",
-		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\n"
+		                      value: "To perform a command, prefix it with `/knux ` (for example, `/knux jam`)\n\nTo get info on a command, prefix it with `/knux help ` (type just `/knux help` to display this post.)\n\nCrossed-out commands are currently broken."
 		                     }]
 
 		for (var item in helpCategories)
@@ -265,7 +265,13 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 			{
 				if (listStr != "")
 					listStr = listStr + ", "
-				listStr = listStr + "`" + helpCategories[item][item2] + "`"
+
+				var cmdStr = helpCategories[item][item2]
+
+				if  (cmdFuncts[cmdStr] == null)
+					listStr = listStr + "~~`" + cmdStr + "`~~"
+				else
+					listStr = listStr + "`" + cmdStr + "`"
 			}
 			newEmbed["fields"].push({name: item+" commands:", value: listStr})
 			sendHelp = true
