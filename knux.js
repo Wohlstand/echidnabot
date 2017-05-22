@@ -789,8 +789,9 @@ bot.on('ready', () => {
 
 	for (var item in [sendResponse, gitPull, shutDown, callHelp])
 	{
-		commandFunctions[item.name] = item
-		console.log('READY; '+item.name);
+		var itemNameStr = item.name.toString()
+		commandFunctions[itemNameStr] = item
+		console.log("Loading function " + itemNameStr);
 	}
 });
 
