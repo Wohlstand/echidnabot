@@ -214,7 +214,7 @@ cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
 	bot.user.setGame(argStr);
 }
 
-cmdFuncts.sayReveal = function (msg, cmdStr, argStr, props)
+cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 {
 	if  (sayMember.length > 0)
 	{
