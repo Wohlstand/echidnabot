@@ -214,6 +214,39 @@ cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
 	bot.user.setGame(argStr);
 }
 
+cmdFuncts.sayReveal = function (msg, cmdStr, argStr, props)
+{
+	if  (sayMember.length > 0)
+	{
+		var authorUser = sayUser[0];
+		var authorMember = sayMember[0];
+		var authorStr = authorUser.username + " (A.K.A. " + authorMember.displayName + ")";
+		var contentStr = sayMessage[0];
+		ttsMessage(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
+	}
+	else
+		ttsMessage(msg.channel, "```[No say commands since I last logged in.]```");
+}
+
+cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
+{
+	// Get substring to say
+	var setStr = argStr
+
+	// Replace phrase tags with the corresponding phrase
+	setStr = setStr.replace(/\^[^\^]*\^/gi, function myFunction(x){
+			var noCarrots = x.substring(1,x.length-1);
+			return getResponse(noCarrots);
+		});
+
+	sayMember.splice(0, 0, msg.member);
+	sayUser.splice(0, 0, msg.member.user);
+	sayMessage.splice(0, 0, setStr);
+	msg.delete(0);
+
+	ttsMessage(msg.channel, setStr)
+}
+
 cmdFuncts.setAvatar = function (msg, cmdStr, argStr, props)
 {
 	var newAvatar = getArrayRandom(props.phrases);

@@ -241,10 +241,6 @@
 			"https://www.youtube.com/watch?v=MJPBNst6CzM",
 			"https://www.youtube.com/watch?v=MJPBNst6CzM",
 			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
 
 			"https://www.youtube.com/watch?v=HY-eyigVrWY",
 
@@ -316,13 +312,6 @@
 		"category" : "other",
 		"info"     : "Changes my 'Playing _' message.",
 		"function" : "setGame"
-	},
-
-	"say" :
-	{
-		"category" : "other",
-		"info"     : "Forces me to say stuff.  Use common sense with this command.",
-		"function" : "forceSay"
 	},
 
 	"reveal" :
@@ -442,6 +431,13 @@
 	},
 
 
+	"say" :
+	{
+		"category" : "mod-only",
+		"mod"      : "true",
+		"info"     : "Forces me to say stuff.  Use common sense with this command.",
+		"function" : "forceSay"
+	},
 
 	"gitpull" :
 	{
