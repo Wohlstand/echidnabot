@@ -1,4 +1,4 @@
-var Discord = require("discord.js");
+﻿var Discord = require("discord.js");
 var bot = new Discord.Client();
 const fs = require("fs");
 var exec = require('child_process').execFile;
@@ -14,7 +14,9 @@ var loginId	 = mconfig.loginId;
 var modRoleId   = mconfig.modRoleId;
 
 // Not-so-important config vars
-var emoteReacts = {default: [":fist:"], threat: ["231283304958001154", "231283304958001154", "273610959094808576", "231273731132096513", ":rage:", ":angry:", ":fire:", ":smirk:", ":thumbsdown:", ":skull_crossbones:", ":crossed_swords:"], brag: ["231283305272705024", ":sunglasses:", ":thumbsup:", ":first_place:", ":ok_hand:", ":metal:", ":crown:"], precious: [":gem:", ":moneybag:", ":dollar:", ":heavy_dollar_sign:"]};
+var emoteReacts = {default: ["✊"], threat: [message.guild.emojis.get('231283304958001154'), message.guild.emojis.get('232183775549849600'), message.guild.emojis.get('273610959094808576'), message.guild.emojis.get('231273731132096513'), "😡", "😠", "🔥", "😏", "👎"], brag: [message.guild.emojis.get('231283305272705024'), "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
+
+//var emoteReacts = {default: [":fist:"], threat: ["231283304958001154", "232183775549849600", "273610959094808576", "231273731132096513", ":rage:", ":angry:", ":fire:", ":smirk:", ":thumbsdown:", ":skull_crossbones:", ":crossed_swords:"], brag: ["231283305272705024", ":sunglasses:", ":thumbsup:", ":first_place:", ":ok_hand:", ":metal:", ":crown:"], precious: [":gem:", ":moneybag:", ":dollar:", ":heavy_dollar_sign:"]};
 
 
 // Other stuff
@@ -67,13 +69,9 @@ function reactFromArray (message, array)
 	var emote = getArrayRandom(array).value
 	if  (emote != null)
 	{
-		message.channel.sendMessage("[attempting to react with "+emote+"]")
-		/*
-		if  (emote.startsWith(":"))
-			message.react(emote);
-		else
-			message.react(message.guild.emojis.get(emote));
-		*/
+		//message.channel.sendMessage("[attempting to react with "+emote+"]")
+
+		message.react(emote);
 	}
 }
 
