@@ -68,10 +68,12 @@ function reactFromArray (message, array)
 	if  (emote != null)
 	{
 		message.channel.sendMessage("[attempting to react with "+emote+"]")
+		/*
 		if  (emote.startsWith(":"))
 			message.react(emote);
 		else
 			message.react(message.guild.emojis.get(emote));
+		*/
 	}
 }
 
