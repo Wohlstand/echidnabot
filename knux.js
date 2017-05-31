@@ -14,7 +14,7 @@ var loginId	 = mconfig.loginId;
 var modRoleId   = mconfig.modRoleId;
 
 // Not-so-important config vars
-var emoteReacts = {default: ["✊"], threat: ["greendemo:231283304958001154", "gravytea:232183775549849600", "tongue:252400986352517120", "wacko:252403181743505408", "😡", "� ", "🔥", "😏", "👎"], brag: ["somedork:231283305272705024", "foxfacesniper:263390166163521536", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
+var emoteReacts = {default: [":fist:"], threat: ["231283304958001154", "231283304958001154", "273610959094808576", "231273731132096513", ":rage:", ":angry:", ":fire:", ":smirk:", ":thumbsdown:", ":skull_crossbones:", ":crossed_swords:"], brag: ["231283305272705024", ":sunglasses:", ":thumbsup:", ":first_place:", ":ok_hand:", ":metal:", ":crown:"], precious: [":gem:", ":moneybag:", ":dollar:", ":heavy_dollar_sign:"]};
 
 
 // Other stuff
@@ -66,7 +66,12 @@ function reactFromArray (message, array)
 
 	var emote = getArrayRandom(array).value
 	if  (emote != null)
-		message.react(emote);
+	{
+		if  (emote.startsWith(":"))
+			message.react(emote);
+		else
+			message.react(message.guild.emojis.get(emote));
+	}
 }
 
 
