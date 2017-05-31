@@ -67,6 +67,7 @@ function reactFromArray (message, array)
 	var emote = getArrayRandom(array).value
 	if  (emote != null)
 	{
+		message.channel.sendMessage("[attempting to react with "+emote+"]")
 		if  (emote.startsWith(":"))
 			message.react(emote);
 		else
