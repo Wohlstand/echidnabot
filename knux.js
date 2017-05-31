@@ -247,6 +247,44 @@ cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
 	ttsMessage(msg.channel, setStr)
 }
 
+cmdFuncts.toggleChannel = function (msg, cmdStr, argStr, props)
+{
+	var setStr = argStr;
+	if  (setStr == "beep-boop")
+		ttsMessage(msg.channel, getResponse("decline"));
+	else
+	{
+		if  (channelsAllowed[setStr] == true)
+		{
+			ttsMessage(msg.channel, "[Posting in #"+setStr+" disabled]");
+			channelsAllowed[setStr] = false;
+		}
+		else
+		{
+			ttsMessage(msg.channel, "[Posting in #"+setStr+" enabled]");
+			channelsAllowed[setStr] = true;
+			var myChannel = bot.channels.find('name', setStr);
+			if  (myChannel != null)
+				ttsMessage(myChannel, getResponse("enter"));
+		}
+	}
+}
+
+cmdFuncts.toggleDelCmd = function (msg, cmdStr, argStr, props)
+{
+	if  (deleteAll == false)
+	{
+		deleteAll = true;
+		ttsMessage(msg.channel, "[Deleting all commands enabled]")
+	}
+	else
+	{
+		deleteAll = false;
+		ttsMessage(msg.channel, "[Deleting all commands disabled]")
+	}
+}
+
+
 cmdFuncts.setAvatar = function (msg, cmdStr, argStr, props)
 {
 	var newAvatar = getArrayRandom(props.phrases);
