@@ -68,7 +68,7 @@ function reactFromArray (message, array)
 	var emote = getArrayRandom(array).value
 	if  (emote != null)
 	{
-		message.channel.sendMessage("[attempting to react with "+emote+"]")
+		console.log("[attempting to react with "+emote+"]")
 
 		/*
 		if  (emote.startsWith(":"))
@@ -79,7 +79,7 @@ function reactFromArray (message, array)
 
 	}
 	else
-		message.channel.sendMessage("[couldn't get a valid emoji string]")
+		console.log("[couldn't get a valid emoji string]")
 }
 
 
