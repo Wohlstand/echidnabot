@@ -477,7 +477,7 @@ bot.on("message", msg => {
 					}
 					else
 					{
-						cmdFuncts.sendResponse(msg, "decline", "", props);
+						cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
 					}
 				}
 				/*
