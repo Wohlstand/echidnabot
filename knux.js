@@ -331,7 +331,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 			{
 				newEmbed["fields"] = [{
 				                       name: "Command info: "+argStr,
-				                       value: "**Authorization group:** "+authStr+"\n\n"+newProps.info
+				                       value: "\nAuthorization group: "+authStr+"\n"+newProps.info
 				                      }]
 				sendHelp = true
 				deny = false
