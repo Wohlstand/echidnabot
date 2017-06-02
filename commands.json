@@ -276,7 +276,7 @@
 		"info"     : "Basically both gitpull and shutdown because the owners got tired of doing both.",
 		"function" : "updateAndRestart",
 		"auth"     : "owner"
-	}
+	},
 
 	"learn" :
 	{

@@ -229,7 +229,7 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 
 			bot.setTimeout(function(){
 					process.exit(1);
-				}, 10);
+				}, 20);
 		}
 		else
 		{
