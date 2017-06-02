@@ -9,9 +9,13 @@ var exec = require('child_process').execFile;
 // Important config vars
 var mconfig = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-var ownerId	 = mconfig.ownerId;
-var loginId	 = mconfig.loginId;
-var modRoleId   = mconfig.modRoleId;
+var ownerId       = mconfig.ownerId;
+var loginId       = mconfig.loginId;
+var modRoleId     = mconfig.modRoleId;
+var authorizeData = mconfig.authIds;
+
+if  (authorizeData == null)
+	authorizeData = {}
 
 // Not-so-important config vars
 //var emoteReacts = {default: ["✊"], threat: [message.guild.emojis.get('231283304958001154'), message.guild.emojis.get('232183775549849600'), message.guild.emojis.get('273610959094808576'), message.guild.emojis.get('231273731132096513'), "😡", "😠", "🔥", "😏", "👎"], brag: [message.guild.emojis.get('231283305272705024'), "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
@@ -392,7 +396,7 @@ bot.on("message", msg => {
 				console.log("[unknown] said: "+msg.cleanContent);
 
 			// Authority check
-			var authorized = ( (ownerId.indexOf(msg.author.id) != -1) || msg.member.roles.has(modRoleId))
+			var authorized = ((ownerId.indexOf(msg.author.id) != -1) || msg.member.roles.has(modRoleId))
 			var authordata = userdata[msg.author.id.toString()]
 			if  (authordata != null)
 			{
@@ -403,7 +407,7 @@ bot.on("message", msg => {
 
 
 			// Temporarily brute-forcing old important commands
-			if (msg.cleanContent.startsWith("/knux shutdown"))
+			if (msg.cleanContent.startsWith("/knux oldshutdown"))
 			{
 				if (authorized)
 				{
@@ -419,7 +423,7 @@ bot.on("message", msg => {
 					ttsMessage(msg.channel, getResponse("decline"));
 			}
 
-			else if (msg.cleanContent.startsWith("/knux gitpull"))
+			else if (msg.cleanContent.startsWith("/knux oldgitpull"))
 			{
 				if (authorized)
 				{
@@ -458,9 +462,20 @@ bot.on("message", msg => {
 				if (commands[cmdStr] != null)
 				{
 					var props = commands[cmdStr]
-					var modOnly = (props["mod"] != null)
+					var authLevel = props["auth"]
+					var matchesAuthLevel = false
 					var functPtr = cmdFuncts["sendResponse"]
 					var functStr = ""
+
+					if  (authLevel != null)
+					{
+						var authTable = authorizeData[authLevel]
+						if (authTable == null)
+							authTable = modRoleId
+						
+						if (authTable.indexOf(msg.author.id) != -1)
+							matchesAuthLevel = true
+					}
 
 					if  (props["function"] != null)
 					{
@@ -468,7 +483,7 @@ bot.on("message", msg => {
 						functPtr = cmdFuncts[functStr]
 					}
 
-					if  (!modOnly  ||  authorized)
+					if  (matchesAuthLevel  ||  authorized)
 					{
 						if  (functPtr != null)
 							functPtr(msg, cmdStr, argStr, props)

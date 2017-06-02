@@ -4,7 +4,7 @@
 		"category" : "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
 		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
 		"info"     : "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
-		"mod"      : "if this field has any value, the command can only be called by an owner or server moderator",
+		"auth"     : "if this field has any value, the command can only be called by an owner or server moderator",
 		"phrases"  :
 		[
 			"a table of possible responses",
@@ -434,7 +434,7 @@
 	"say" :
 	{
 		"category" : "mod-only",
-		"mod"      : "true",
+		"auth"     : "say",
 		"info"     : "Forces me to say stuff.  Use common sense with this command.",
 		"function" : "forceSay"
 	},
@@ -442,7 +442,7 @@
 	"gitpull" :
 	{
 		"category" : "mod-only",
-		"mod"      : "true",
+		"auth"     : "owner",
 		"info"     : "Forces me to update my local files from the github repo.",
 		"function" : "gitPull"
 	},
@@ -450,7 +450,7 @@
 	"regex" :
 	{
 		"category" : "mod-only",
-		"mod"      : "true",
+		"auth"     : "owner",
 		"info"     : "Check the regex string for a specific category",
 		"function" : "getRegex"
 	},
@@ -458,7 +458,7 @@
 	"channel" :
 	{
 		"category" : "mod-only",
-		"mod"      : "true",
+		"auth"     : "owner",
 		"info"     : "Toggles whether I can post in a given channel.  You must specify a valid channel name (for example, `/knux channel general`).",
 		"function" : "toggleChannel"
 	},
@@ -466,7 +466,7 @@
 	"shutdown" :
 	{
 		"category" : "mod-only",
-		"mod"      : "true",
+		"auth"     : "owner",
 		"info"     : "Shuts me down.",
 		"function" : "shutDown"
 	}

@@ -1,6 +1,11 @@
 {
-    "ownerId" : "<either a single user ID or an array of them>",
+    "ownerId"   : "<either a single user ID or an array of them>",
     "loginId" : "<your bot token>",
-    "modRoleId" : "<the ID of the server's moderator role>"
+    "modRoleId" : "<the ID of the server's moderator role>",
+    "authIds"   : 
+    {
+        "say"   : "<either a single user ID or an array of them>",
+        "etc"   : "<either a single user ID or an array of them>"
+    }
 }
 
