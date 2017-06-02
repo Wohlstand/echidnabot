@@ -234,7 +234,7 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 			ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
 			exec('git', ["merge", "--abort"], function(err, data){});
 		}
-	}
+	});
 }
 
 
