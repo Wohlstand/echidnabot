@@ -175,7 +175,7 @@ cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 	var array = props["phrases"];
 	if  (array == null)
 	{
-		randString = "[Error: Could not find response category: `"+category+"`]";
+		randString = "[Error: Could not find response category: `"+cmdStr+"`]";
 	}
 	else
 		randString = getArrayRandom(props.phrases);
@@ -476,7 +476,9 @@ bot.on("message", msg => {
 							ttsMessage(msg.channel, "[Command is broken.  Function not found: " + functStr + "]")
 					}
 					else
+					{
 						cmdFuncts.sendResponse(msg, "decline", "", props);
+					}
 				}
 				/*
 				if (msg.cleanContent.startsWith("/knux and"))
