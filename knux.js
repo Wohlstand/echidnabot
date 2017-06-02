@@ -210,7 +210,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 
 	bot.setTimeout(function(){
 			process.exit(1);
-		}, 100);
+		}, 20);
 }
 
 
@@ -227,9 +227,7 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 			ttsMessage(msg.channel, getResponse("exit"));
 			console.log("Shutting down");
 
-			bot.setTimeout(function(){
-					process.exit(1);
-				}, 20);
+			bot.setTimeout(function() {process.exit(1);}, 20);
 		}
 		else
 		{
