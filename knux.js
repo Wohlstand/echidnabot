@@ -327,7 +327,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 			if  (authStr == null)
 				authStr = "everyone"
 
-			if  (newProps.category != null)
+			if  (newProps.info != null)
 			{
 				newEmbed["fields"] = [{
 				                       name: "Command info: "+argStr,

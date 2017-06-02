@@ -222,7 +222,7 @@
 
 	"jam" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "check out my mixtape bro",
 		"phrases"  :
 		[
@@ -259,7 +259,7 @@
 
 	"knux" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Discover the true meaning of life.",
 		"phrases"  :
 		[
@@ -272,7 +272,7 @@
 
 	"learn" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Refreshes my responses and commands from the host's local JSON data.",
 		"function" : "updateRegex",
 		"phrases"  :
@@ -288,7 +288,7 @@
 
 	"error" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Triggers an error.",
 		"function" : "forceError",
 		"phrases"  :
@@ -302,42 +302,42 @@
 
 	"react" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Gives me the okay to vandalize your post with gestures of varying politeness.",
 		"function" : "reactionSpam"
 	},
 
 	"setgame" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Changes my 'Playing _' message.",
 		"function" : "setGame"
 	},
 
 	"reveal" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Reveals the name of the last person to use my say command.",
 		"function" : "revealSay"
 	},
 
 	"tts" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Toggles whether my posts can be read by Discord's text to speech.",
 		"function" : "toggleTTS"
 	},
 
 	"delcmd" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Toggles whether I delete every message with a valid command.",
 		"function" : "toggleDelCmd"
 	},
 
 	"avatar" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Time for a makeover.",
 		"function" : "setAvatar",
 		"phrases"  :
@@ -372,7 +372,7 @@
 
 	"memory" :
 	{
-		"category" : "other",
+		"category" : "general",
 		"info"     : "Causes me to revisit some fond memories",
 		"phrases"  :
 		[
@@ -433,7 +433,7 @@
 
 	"say" :
 	{
-		"category" : "mod-only",
+		"category" : "whitelist",
 		"auth"     : "say",
 		"info"     : "Forces me to say stuff.  Use common sense with this command.",
 		"function" : "forceSay"
