@@ -213,6 +213,33 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 		}, 100);
 }
 
+
+cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
+{
+	console.log("Pulling a git");
+	exec('git', ["pull", "origin", "master"], function(err, data)
+	{
+		if(err == null)
+		{
+			ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+
+			bot.user.setStatus("invisible")
+			ttsMessage(msg.channel, getResponse("exit"));
+			console.log("Shutting down");
+
+			bot.setTimeout(function(){
+					process.exit(1);
+				}, 10);
+		}
+		else
+		{
+			ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+			exec('git', ["merge", "--abort"], function(err, data){});
+		}
+	}
+}
+
+
 cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
 {
 	for (i = 0; i < 5; i++)
