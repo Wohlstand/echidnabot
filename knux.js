@@ -525,6 +525,9 @@ bot.on("message", msg => {
 						cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
 					}
 				}
+				else
+					cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
+
 				/*
 				if (msg.cleanContent.startsWith("/knux and"))
 					ttsMessage(msg.channel, "& Knuckles")
