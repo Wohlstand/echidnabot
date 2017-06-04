@@ -492,12 +492,13 @@ bot.on("message", msg => {
 				{
 					var props = commands[cmdStr]
 					var authLevel = props["auth"]
-					var matchesAuthLevel = false
+					var matchesAuthLevel = true
 					var functPtr = cmdFuncts["sendResponse"]
 					var functStr = ""
 
 					if  (authLevel != null)
 					{
+						matchesAuthLevel = false
 						var authTable = authorizeData[authLevel]
 						if (authTable == null)
 							authTable = modRoleId
