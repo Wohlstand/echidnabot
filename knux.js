@@ -923,12 +923,13 @@ bot.on("message", msg => {
 					var tone = "neutral";  // neutral, insult, challenge, question, praise, request
 
 					// Either reply with an emoji reaction or response message
+					/*
 					if (Math.random() > 0.5  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
 						reactFromArray(msg, emoteCategory);
 					}
-					else
+					else*/
 						sendMsg(msg.channel, getResponse(highestRandString));
 				}
 
