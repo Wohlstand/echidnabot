@@ -19,7 +19,10 @@ if  (authorizeData == null)
 
 // Not-so-important config vars
 //var emoteReacts = {default: ["✊"], threat: [message.guild.emojis.get('231283304958001154'), message.guild.emojis.get('232183775549849600'), message.guild.emojis.get('273610959094808576'), message.guild.emojis.get('231273731132096513'), "😡", "😠", "🔥", "😏", "👎"], brag: [message.guild.emojis.get('231283305272705024'), "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
-var emoteReacts = {default: [":fist:"], threat: ["231283304958001154", "232183775549849600", "273610959094808576", "231273731132096513", ":rage:", ":angry:", ":fire:", ":smirk:", ":thumbsdown:", ":skull_crossbones:", ":crossed_swords:"], brag: ["231283305272705024", ":sunglasses:", ":thumbsup:", ":first_place:", ":ok_hand:", ":metal:", ":crown:"], precious: [":gem:", ":moneybag:", ":dollar:", ":heavy_dollar_sign:"]};
+
+var emoteReacts = {default: ["✊"], threat: ["somedork:231283304958001154", "gravytea:232183775549849600", "thonkang:273610959094808576", "suspicious:231273731132096513", "😡", "😠", "🔥", "😏", "👎", "☠", "⚔"], brag: ["somedork:231283305272705024", "😎", "💪", "👍", "🥇", "👌", "🤘"], precious: ["💎", "💰", "💲", "💵"]};
+
+//var emoteReacts = {default: [":fist:", ":fist:"], threat: ["somedork:231283304958001154", "gravytea:232183775549849600", "thonkang:273610959094808576", "suspicious:231273731132096513", ":rage:", ":angry:", ":fire:", ":smirk:", ":thumbsdown:", ":skull_crossbones:", ":crossed_swords:"], brag: ["somedork:231283305272705024", ":sunglasses:", ":thumbsup:", ":first_place:", ":ok_hand:", ":metal:", ":crown:"], precious: [":gem:", ":moneybag:", ":dollar:", ":heavy_dollar_sign:"]};
 
 
 // Other stuff
@@ -27,8 +30,8 @@ var commands    = JSON.parse(fs.readFileSync('commands.json', 'utf8'));
 delete commands["_example"]
 
 var responses   = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
-var keywords	= JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
-var userdata	= JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
+var keywords    = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
+var userdata    = JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
 
 var prevAuthor = null;
 
@@ -55,24 +58,34 @@ updateRegex()
 function getArrayRandom(array)
 {
 	if  (array == null)
+	{
+		//console.log ("Cannot get a random element from a null array")
 		return {index:null, value:null}
+	}
 	else
 	{
 		var id = Math.floor(Math.random() * (array.length));
+		//console.log("position: "+id.toString())
 		var val = array[id];
 		return {index:id, value:val}
 	}
 }
 
+
 function reactFromArray (message, array)
 {
 	if  (array == null)
+	{
 		array = emoteReacts.default
+		//console.log("No valid array provided, attempting to use default emote array")
+	}
+	//console.log("Array values: "+array.toString())
 
 	var emote = getArrayRandom(array).value
 	if  (emote != null)
 	{
-		console.log("[attempting to react with "+emote+"]")
+		//console.log("Attempting to react with "+emote.toString())
+		message.react(emote);
 
 		/*
 		if  (emote.startsWith(":"))
@@ -83,7 +96,7 @@ function reactFromArray (message, array)
 
 	}
 	else
-		console.log("[couldn't get a valid emoji string]")
+		console.log("Couldn't get a valid emoji string")
 }
 
 
@@ -128,17 +141,12 @@ function sendMsg(channel, msg)
     setTimeout(function()
 	{
       channel.send(msg, {tts:(ttsActive==true)})
-    },600)
-  },msg.length*30)
+    },300)
+  },msg.length*15)
 }
 
 
 // ---------- NEW COMMAND SYSTEM FUNCTIONS ----------------
-function getArrayRandom (array)
-{
-	return array[Math.floor(Math.random() * (array.length))];
-}
-
 function sendError (channel, str)
 {
 	
@@ -186,10 +194,25 @@ cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 		randString = "[Error: Could not find response category: `"+cmdStr+"`]";
 	}
 	else
-		randString = getArrayRandom(props.phrases);
+		randString = getArrayRandom(props.phrases).value;
 
 	sendMsg (msg.channel, randString);
 }
+
+cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
+{
+	if  (ttsActive == false)
+	{
+		ttsActive = true;
+		sendMsg(msg.channel, "[Text to speech enabled]");
+	}
+	else
+	{
+		ttsActive = false;
+		sendMsg(msg.channel, "[Text to speech disabled]");
+	}
+}
+
 
 cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 {
@@ -209,7 +232,7 @@ cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
-	sendMsg(msg.channel, getResponse("exit"));
+	msg.channel.send(getArrayRandom(props.phrases).value, {tts:(ttsActive==true)})
 	console.log("Shutting down");
 
 	bot.setTimeout(function(){
@@ -244,14 +267,16 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
 {
-	for (i = 0; i < 5; i++)
+	var numReacts = 3+Math.floor(Math.random()*5)
+	for (i = 0; i < numReacts; i++)
 	{
 		var emoteStr = "";
-		var emoteCategory = emoteReacts.threat;
+		var emoteCategory = "threat";
 		if (Math.random() > 0.5)
-			emoteCategory = emoteReacts.brag;
+			emoteCategory = "brag";
 
-		reactFromArray(msg, emoteCategory);
+		console.log ("emote category: "+emoteCategory)
+		reactFromArray(msg, emoteReacts[emoteCategory]);
 	}
 }
 
@@ -333,7 +358,7 @@ cmdFuncts.toggleDelCmd = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.setAvatar = function (msg, cmdStr, argStr, props)
 {
-	var newAvatar = getArrayRandom(props.phrases);
+	var newAvatar = getArrayRandom(props.phrases).value;
 	bot.user.setAvatar(newAvatar);
 	sendMsg(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
 }
@@ -917,19 +942,20 @@ bot.on("message", msg => {
 				// If at or about the bot...
 				if (aboutMe)
 				{
-					console.log("Ooh, this message is about me!");
+					console.log("I think I'll respond to this message.");
 
 					// Initialize sentiment analysis vars
 					var tone = "neutral";  // neutral, insult, challenge, question, praise, request
 
 					// Either reply with an emoji reaction or response message
-					/*
+					
 					if (Math.random() > 0.5  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
+						console.log ("emote category: "+highestRandString)
 						reactFromArray(msg, emoteCategory);
 					}
-					else*/
+					else
 						sendMsg(msg.channel, getResponse(highestRandString));
 				}
 
@@ -941,6 +967,7 @@ bot.on("message", msg => {
 					if (Math.random() > 0.8  &&  highestRandString != "threat"  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
+						console.log("emote category: " + highestRandString);
 						reactFromArray(msg, emoteCategory);
 					}
 

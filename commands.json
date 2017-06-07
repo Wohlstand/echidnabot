@@ -479,6 +479,10 @@
 		"category" : "mod-only",
 		"auth"     : "owner",
 		"info"     : "Shuts me down.",
-		"function" : "shutDown"
+		"function" : "shutDown",
+		"phrases"  :
+		[
+			"Something's calling me more and more..."
+		]
 	}
 }
