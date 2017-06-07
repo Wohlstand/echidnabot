@@ -601,7 +601,7 @@ bot.on("message", msg => {
 							userdata[userKey].submissions = []
 						userdata[userKey].submissions.push(setStr)
 						updateJson(userdata, 'userdata')
-						msg.channel.sendMsg("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
+						msg.channel.sendMessage("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
 					}
 				}
 
@@ -610,12 +610,12 @@ bot.on("message", msg => {
 					if  (ttsActive == false)
 					{
 						ttsActive = true;
-						msg.channel.sendMsg("/tts [Text to speech enabled]");
+						msg.channel.sendMessage("/tts [Text to speech enabled]");
 					}
 					else
 					{
 						ttsActive = false;
-						msg.channel.sendMsg("[Text to speech disabled]");
+						msg.channel.sendMessage("[Text to speech disabled]");
 					}
 				}
 
@@ -968,7 +968,7 @@ bot.on("message", msg => {
 	}
 	catch(err) {
 		sendMsg(msg.channel, getResponse("error"));
-		msg.channel.sendMsg("```"+err+"```");
+		msg.channel.sendMessage("```"+err+"```");
 		console.log(err);
 	}
 });
@@ -979,8 +979,8 @@ bot.on('ready', () => {
 	var myChannel = bot.channels.find('name', 'beep-boop');
 	var myChannelB = bot.channels.find('name', 'dank');
 	var introString = getResponse("enter");
-	myChannel.sendMsg(introString);
-	//myChannelB.sendMsg(introString);
+	myChannel.sendMessage(introString);
+	//myChannelB.sendMessage(introString);
 
 	buildHelpCategories ()
 
