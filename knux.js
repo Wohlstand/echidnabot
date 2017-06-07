@@ -119,13 +119,17 @@ function updateRegex()
 	}
 }
 
-
-function ttsMessage (channel, message)
+function sendMsg(channel, msg)
 {
-	if  (ttsActive)
-		channel.sendMessage(message, {tts:true})
-	else
-		channel.sendMessage(message)
+  channel.startTyping()
+  setTimeout(function()
+  {
+    channel.stopTyping()
+    setTimeout(function()
+	{
+      channel.send(msg, {tts:(ttsActive==true)})
+    },600)
+  },msg.length*30)
 }
 
 
@@ -184,7 +188,7 @@ cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
 	else
 		randString = getArrayRandom(props.phrases);
 
-	ttsMessage (msg.channel, randString);
+	sendMsg (msg.channel, randString);
 }
 
 cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
@@ -193,10 +197,10 @@ cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 	exec('git', ["pull", "origin", "master"], function(err, data)
 	{
 		if(err == null)
-			ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+			sendMsg(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
 		else
 		{
-			ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+			sendMsg(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
 			exec('git', ["merge", "--abort"], function(err, data){});
 		}
 	});
@@ -205,7 +209,7 @@ cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
-	ttsMessage(msg.channel, getResponse("exit"));
+	sendMsg(msg.channel, getResponse("exit"));
 	console.log("Shutting down");
 
 	bot.setTimeout(function(){
@@ -221,17 +225,17 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 	{
 		if(err == null)
 		{
-			ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+			sendMsg(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
 
 			bot.user.setStatus("invisible")
-			ttsMessage(msg.channel, getResponse("exit"));
+			sendMsg(msg.channel, getResponse("exit"));
 			console.log("Shutting down");
 
 			bot.setTimeout(function() {process.exit(1);}, 1000);
 		}
 		else
 		{
-			ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+			sendMsg(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
 			exec('git', ["merge", "--abort"], function(err, data){});
 		}
 	});
@@ -264,10 +268,10 @@ cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
 		var authorMember = sayMember[0];
 		var authorStr = authorUser.username + " (A.K.A. " + authorMember.displayName + ")";
 		var contentStr = sayMessage[0];
-		ttsMessage(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
+		sendMsg(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
 	}
 	else
-		ttsMessage(msg.channel, "```[No say commands since I last logged in.]```");
+		sendMsg(msg.channel, "```[No say commands since I last logged in.]```");
 }
 
 cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
@@ -286,28 +290,28 @@ cmdFuncts.forceSay = function (msg, cmdStr, argStr, props)
 	sayMessage.splice(0, 0, setStr);
 	msg.delete(0);
 
-	ttsMessage(msg.channel, setStr)
+	sendMsg(msg.channel, setStr)
 }
 
 cmdFuncts.toggleChannel = function (msg, cmdStr, argStr, props)
 {
 	var setStr = argStr;
 	if  (setStr == "beep-boop")
-		ttsMessage(msg.channel, getResponse("decline"));
+		sendMsg(msg.channel, getResponse("decline"));
 	else
 	{
 		if  (channelsAllowed[setStr] == true)
 		{
-			ttsMessage(msg.channel, "[Posting in #"+setStr+" disabled]");
+			sendMsg(msg.channel, "[Posting in #"+setStr+" disabled]");
 			channelsAllowed[setStr] = false;
 		}
 		else
 		{
-			ttsMessage(msg.channel, "[Posting in #"+setStr+" enabled]");
+			sendMsg(msg.channel, "[Posting in #"+setStr+" enabled]");
 			channelsAllowed[setStr] = true;
 			var myChannel = bot.channels.find('name', setStr);
 			if  (myChannel != null)
-				ttsMessage(myChannel, getResponse("enter"));
+				sendMsg(myChannel, getResponse("enter"));
 		}
 	}
 }
@@ -317,12 +321,12 @@ cmdFuncts.toggleDelCmd = function (msg, cmdStr, argStr, props)
 	if  (deleteAll == false)
 	{
 		deleteAll = true;
-		ttsMessage(msg.channel, "[Deleting all commands enabled]")
+		sendMsg(msg.channel, "[Deleting all commands enabled]")
 	}
 	else
 	{
 		deleteAll = false;
-		ttsMessage(msg.channel, "[Deleting all commands disabled]")
+		sendMsg(msg.channel, "[Deleting all commands disabled]")
 	}
 }
 
@@ -331,7 +335,7 @@ cmdFuncts.setAvatar = function (msg, cmdStr, argStr, props)
 {
 	var newAvatar = getArrayRandom(props.phrases);
 	bot.user.setAvatar(newAvatar);
-	ttsMessage(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
+	sendMsg(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
 }
 
 cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
@@ -441,7 +445,7 @@ bot.on("message", msg => {
 				if (authorized)
 				{
 					bot.user.setStatus("invisible")
-					ttsMessage(msg.channel, getResponse("exit"));
+					sendMsg(msg.channel, getResponse("exit"));
 					console.log("Shutting down");
 
 					bot.setTimeout(function(){
@@ -449,7 +453,7 @@ bot.on("message", msg => {
 					}, 100);
 				}
 				else
-					ttsMessage(msg.channel, getResponse("decline"));
+					sendMsg(msg.channel, getResponse("decline"));
 			}
 
 			else if (msg.cleanContent.startsWith("/knux oldgitpull"))
@@ -460,16 +464,16 @@ bot.on("message", msg => {
 					exec('git', ["pull", "origin", "master"], function(err, data)
 					{
 						if(err == null)
-							ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+							sendMsg(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
 						else
 						{
-							ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+							sendMsg(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
 							exec('git', ["merge", "--abort"], function(err, data){});
 						}
 					});
 				}
 				else
-					ttsMessage(msg.channel, getResponse("decline"));
+					sendMsg(msg.channel, getResponse("decline"));
 			}
 
 
@@ -518,7 +522,7 @@ bot.on("message", msg => {
 						if  (functPtr != null)
 							functPtr(msg, cmdStr, argStr, props)
 						else if (functStr != "")
-							ttsMessage(msg.channel, "[Command is broken.  Function not found: " + functStr + "]")
+							sendMsg(msg.channel, "[Command is broken.  Function not found: " + functStr + "]")
 					}
 					else
 					{
@@ -530,19 +534,19 @@ bot.on("message", msg => {
 
 				/*
 				if (msg.cleanContent.startsWith("/knux and"))
-					ttsMessage(msg.channel, "& Knuckles")
+					sendMsg(msg.channel, "& Knuckles")
 
 				if (msg.cleanContent.startsWith("/knux delcmd"))
 				{
 					if  (deleteAll == false)
 					{
 						deleteAll = true;
-						ttsMessage(msg.channel, "[Deleting all commands enabled]")
+						sendMsg(msg.channel, "[Deleting all commands enabled]")
 					}
 					else
 					{
 						deleteAll = false;
-						ttsMessage(msg.channel, "[Deleting all commands disabled]")
+						sendMsg(msg.channel, "[Deleting all commands disabled]")
 					}
 				}
 
@@ -563,7 +567,7 @@ bot.on("message", msg => {
 							var mUsername = m.user.username
 							if  (mUsername == nameStr)
 							{
-								ttsMessage(msg.channel, "["+mUsername+" (A.K.A. "+m.displayName+") is now authorized to use mod commands]")
+								sendMsg(msg.channel, "["+mUsername+" (A.K.A. "+m.displayName+") is now authorized to use mod commands]")
 								targetUser = mUser
 								break;
 							}
@@ -579,7 +583,7 @@ bot.on("message", msg => {
 						}
 						else
 						{
-							ttsMessage(msg.channel, "[User not found, please specify a valid username for a member of this server]")
+							sendMsg(msg.channel, "[User not found, please specify a valid username for a member of this server]")
 						}
 					}
 				}
@@ -597,7 +601,7 @@ bot.on("message", msg => {
 							userdata[userKey].submissions = []
 						userdata[userKey].submissions.push(setStr)
 						updateJson(userdata, 'userdata')
-						msg.channel.sendMessage("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
+						msg.channel.sendMsg("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
 					}
 				}
 
@@ -606,12 +610,12 @@ bot.on("message", msg => {
 					if  (ttsActive == false)
 					{
 						ttsActive = true;
-						msg.channel.sendMessage("/tts [Text to speech enabled]");
+						msg.channel.sendMsg("/tts [Text to speech enabled]");
 					}
 					else
 					{
 						ttsActive = false;
-						msg.channel.sendMessage("[Text to speech disabled]");
+						msg.channel.sendMsg("[Text to speech disabled]");
 					}
 				}
 
@@ -620,7 +624,7 @@ bot.on("message", msg => {
 					if (authorized)
 					{
 						var setStr = msg.cleanContent.substring(12);
-						ttsMessage(msg.channel, "Regular expression for "+setStr+": ```"+keywordRegex[setStr].toString()+"```")
+						sendMsg(msg.channel, "Regular expression for "+setStr+": ```"+keywordRegex[setStr].toString()+"```")
 					}
 				}
 
@@ -660,13 +664,13 @@ bot.on("message", msg => {
 					sayMessage.splice(0, 0, setStr);
 					msg.delete(0);
 
-					ttsMessage(thisChannel, setStr)
+					sendMsg(thisChannel, setStr)
 				}
 
 				else if (msg.cleanContent.startsWith("/knux ping"))
 				{
 					var setStr = "Pong! `\n"+(Date.now() - msg.createdTimestamp + 37300).toString()+" ms`";
-					ttsMessage(msg.channel, setStr)
+					sendMsg(msg.channel, setStr)
 				}
 
 				else if (msg.cleanContent.startsWith("/knux reveal"))
@@ -677,10 +681,10 @@ bot.on("message", msg => {
 						var authorMember = sayMember[0];
 						var authorStr = authorUser.username + " (A.K.A. " + authorMember.displayName + ")";
 						var contentStr = sayMessage[0];
-						ttsMessage(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
+						sendMsg(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
 					}
 					else
-						ttsMessage(msg.channel, "```[No say commands since I last logged in.]```");
+						sendMsg(msg.channel, "```[No say commands since I last logged in.]```");
 				}
 
 				else if (msg.cleanContent.startsWith("/knux learn"))
@@ -688,14 +692,14 @@ bot.on("message", msg => {
 					responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
 					keywords = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
 					updateRegex();
-					ttsMessage(msg.channel, getResponse("learning"));
+					sendMsg(msg.channel, getResponse("learning"));
 				}
 
 				else if (msg.cleanContent.startsWith("/knux avatar"))
 				{
 					var newAvatar = getResponse("avatar");
 					bot.user.setAvatar(newAvatar);
-					ttsMessage(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
+					sendMsg(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
 				}
 
 				else if (msg.cleanContent.startsWith("/knux error"))
@@ -704,7 +708,7 @@ bot.on("message", msg => {
 						butt;
 					else
 					{
-						ttsMessage(msg.channel, getResponse("decline"));
+						sendMsg(msg.channel, getResponse("decline"));
 					}
 				}
 
@@ -714,19 +718,19 @@ bot.on("message", msg => {
 					{
 						if  (channelsAllowed.general == true)
 						{
-							ttsMessage(msg.channel, "[Posting in #general disabled]");
+							sendMsg(msg.channel, "[Posting in #general disabled]");
 							channelsAllowed.general = false;
 						}
 						else
 						{
-							ttsMessage(msg.channel, "[Posting in #general enabled]");
+							sendMsg(msg.channel, "[Posting in #general enabled]");
 							channelsAllowed.general = true;
 							var myChannel = bot.channels.find('name', 'general');
-							ttsMessage(msg.channel, getResponse("enter"));
+							sendMsg(msg.channel, getResponse("enter"));
 						}
 					}
 					else
-						ttsMessage(msg.channel, getResponse("decline"));
+						sendMsg(msg.channel, getResponse("decline"));
 				}
 
 				else if (msg.cleanContent.startsWith("/knux channel"))
@@ -735,26 +739,26 @@ bot.on("message", msg => {
 					{
 						var setStr = msg.cleanContent.substring(14);
 						if  (setStr == "beep-boop")
-							ttsMessage(msg.channel, getResponse("decline"));
+							sendMsg(msg.channel, getResponse("decline"));
 						else
 						{
 							if  (channelsAllowed[setStr] == true)
 							{
-								ttsMessage(msg.channel, "[Posting in #"+setStr+" disabled]");
+								sendMsg(msg.channel, "[Posting in #"+setStr+" disabled]");
 								channelsAllowed[setStr] = false;
 							}
 							else
 							{
-								ttsMessage(msg.channel, "[Posting in #"+setStr+" enabled]");
+								sendMsg(msg.channel, "[Posting in #"+setStr+" enabled]");
 								channelsAllowed[setStr] = true;
 								var myChannel = bot.channels.find('name', setStr);
 								if  (myChannel != null)
-									ttsMessage(myChannel, getResponse("enter"));
+									sendMsg(myChannel, getResponse("enter"));
 							}
 						}
 					}
 					else
-						ttsMessage(msg.channel, getResponse("decline"));
+						sendMsg(msg.channel, getResponse("decline"));
 				}
 
 				else if (msg.cleanContent.startsWith("/knux help") || msg.cleanContent.startsWith("/knux info") || msg.cleanContent.startsWith("/knux cmd") || msg.cleanContent.startsWith("/knux command"))
@@ -784,7 +788,7 @@ bot.on("message", msg => {
 						if  (responses["helpcmd"][setStr] != null)
 							callCmdHelp(msg, setStr)
 						else
-							ttsMessage(msg.channel, getResponse("help missing"))
+							sendMsg(msg.channel, getResponse("help missing"))
 					}
 				}
 
@@ -793,7 +797,7 @@ bot.on("message", msg => {
 					if (authorized)
 					{
 						bot.user.setStatus("invisible")
-						ttsMessage(msg.channel, getResponse("exit"));
+						sendMsg(msg.channel, getResponse("exit"));
 						console.log("Shutting down");
 
 						bot.setTimeout(function(){
@@ -801,7 +805,7 @@ bot.on("message", msg => {
 						}, 100);
 					}
 					else
-						ttsMessage(msg.channel, getResponse("decline"));
+						sendMsg(msg.channel, getResponse("decline"));
 				}
 
 				else if (msg.cleanContent.startsWith("/knux gitpull"))
@@ -812,26 +816,26 @@ bot.on("message", msg => {
 						exec('git', ["pull", "origin", "master"], function(err, data)
 						{
 							if(err == null)
-								ttsMessage(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
+								sendMsg(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
 							else
 							{
-								ttsMessage(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
+								sendMsg(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
 								exec('git', ["merge", "--abort"], function(err, data){});
 							}
 						});
 					}
 					else
-						ttsMessage(msg.channel, getResponse("decline"));
+						sendMsg(msg.channel, getResponse("decline"));
 				}
 
 				else
 				{
 					var categoryStr = msg.cleanContent.substring(6)
 					if (responses[categoryStr] != null  &&  categoryStr != "exit")
-						ttsMessage(msg.channel, getResponse(categoryStr));
+						sendMsg(msg.channel, getResponse(categoryStr));
 					else
 					{
-					ttsMessage(msg.channel, getResponse("decline"));
+					sendMsg(msg.channel, getResponse("decline"));
 						console.log("Tried to call a category that doesn't exist");
 					}
 				}
@@ -925,7 +929,7 @@ bot.on("message", msg => {
 						reactFromArray(msg, emoteCategory);
 					}
 					else
-						ttsMessage(msg.channel, getResponse(highestRandString));
+						sendMsg(msg.channel, getResponse(highestRandString));
 				}
 
 
@@ -948,7 +952,7 @@ bot.on("message", msg => {
 						if  (timeSinceLastAnd > 1000*20)
 						{
 							lastAndTime = bot.uptime
-							ttsMessage(msg.channel, "& Knuckles");
+							sendMsg(msg.channel, "& Knuckles");
 							andCount = Math.floor((Math.random() * 35) + 15);
 						}
 						else
@@ -962,8 +966,8 @@ bot.on("message", msg => {
 
 	}
 	catch(err) {
-		ttsMessage(msg.channel, getResponse("error"));
-		msg.channel.sendMessage("```"+err+"```");
+		sendMsg(msg.channel, getResponse("error"));
+		msg.channel.sendMsg("```"+err+"```");
 		console.log(err);
 	}
 });
@@ -974,8 +978,8 @@ bot.on('ready', () => {
 	var myChannel = bot.channels.find('name', 'beep-boop');
 	var myChannelB = bot.channels.find('name', 'dank');
 	var introString = getResponse("enter");
-	myChannel.sendMessage(introString);
-	//myChannelB.sendMessage(introString);
+	myChannel.sendMsg(introString);
+	//myChannelB.sendMsg(introString);
 
 	buildHelpCategories ()
 
