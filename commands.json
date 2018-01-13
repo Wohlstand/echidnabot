@@ -4,7 +4,7 @@
 		"category" : "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
 		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
 		"info"     : "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
-		"auth"     : "if this field has any value, the command can only be called by an owner or server moderator",
+		"auth"     : "if this field is defined at all, only owner, server mods, and whitelisted users can use the command;  specify a group name defined in config.json's authIds to whitelist those members",
 		"phrases"  :
 		[
 			"a table of possible responses",
@@ -83,10 +83,18 @@
 			"PRECIOUS PLACEHOLDER; I'll have more responses here eventually"
 		]
 	},
+	
+	"theway" :
+	{
+		"phrases" :
+		[
+			"[I know the way: https://www.globalgiving.org/search/?size=10&sortField=total_raised_usd&selectedCountries=00uganda ]"
+		],
+	},
 
 	"brag" :
 	{
-		"phrases"  :
+		"phrases" :
 		[
 			"Tougher than leather.",
 			"Won't be frightened, I'll stand up to all the pain and turmoil",
@@ -219,6 +227,29 @@
 	},
 
 
+	"sing" :
+	{
+		"category" : "general",
+		"info"     : "check out my mixtape bro",
+		"phrases"  :
+		[
+			"https://www.youtube.com/watch?v=iu7SxzFbp-I",
+			"https://www.youtube.com/watch?v=3jhcIddnZKA",
+			"https://www.youtube.com/watch?v=Nz9Cz_Lp8F4",
+			"https://www.youtube.com/watch?v=hRXhVtNAhxY",
+			"https://www.youtube.com/watch?v=OK7112hoZuY",
+			"https://www.youtube.com/watch?v=ryaMjENjUbY",
+			"https://www.youtube.com/watch?v=MAl9zSKG-t4",
+			"https://www.youtube.com/watch?v=KtrVgCYjZ2w",
+			"https://www.youtube.com/watch?v=T6kaxf59jjE",
+			"https://www.youtube.com/watch?v=g-2muGSulUs",
+			"https://www.youtube.com/watch?v=asfUN91hxAc",
+			"https://www.youtube.com/watch?v=EJvD5_W3StI",
+			"https://www.youtube.com/watch?v=e5rRS5JJY4c",
+			"https://www.youtube.com/watch?v=v4be4YHtDh4",
+			"https://www.youtube.com/watch?v=nRh9FEoeiSo"
+		]
+	},
 
 	"jam" :
 	{
@@ -268,6 +299,14 @@
 			"https://www.youtube.com/watch?v=y8Nze9mlTFE",
 			"https://www.youtube.com/watch?v=5GEmLnaFC38"
 		]
+	},
+
+	"emoji" :
+	{
+		"category" : "mod-only",
+		"info"     : "Configure server-specific emojis for reactions and stuff.\n  emoji [groupname]: Lists all the emoji in the given group\n  emoji add [groupname] [emoji]: adds the specified emoji to the given group\n  emoji remove [groupname] [number]: removes the emoji from the given group at the specified index",
+		"function" : "emojiCommands",
+		"auth"     : "owner"
 	},
 
 	"update" :

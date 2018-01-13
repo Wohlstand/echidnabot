@@ -32,6 +32,7 @@ delete commands["_example"]
 var responses   = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
 var keywords    = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
 var userdata    = JSON.parse(fs.readFileSync('userdata.json', 'utf8'));
+var serverdata  = JSON.parse(fs.readFileSync('serverdata.json', 'utf8'));
 
 var prevAuthor = null;
 
@@ -228,6 +229,39 @@ cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 		}
 	});
 }
+
+/*
+cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
+{
+	var setStr = argStr;
+	if  (setStr == "beep-boop")
+		sendMsg(msg.channel, getResponse("decline"));
+	else
+	{
+		if  (channelsAllowed[setStr] == true)
+		{
+			sendMsg(msg.channel, "[Posting in #"+setStr+" disabled]");
+			channelsAllowed[setStr] = false;
+		}
+		else
+		{
+			sendMsg(msg.channel, "[Posting in #"+setStr+" enabled]");
+			channelsAllowed[setStr] = true;
+			var myChannel = bot.channels.find('name', setStr);
+			if  (myChannel != null)
+				sendMsg(myChannel, getResponse("enter"));
+		}
+	}
+	bot.user.setStatus("invisible")
+	msg.channel.send(getArrayRandom(props.phrases).value, {tts:(ttsActive==true)})
+	console.log("Shutting down");
+
+	bot.setTimeout(function(){
+			process.exit(1);
+		}, 1000);
+}
+*/
+
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
