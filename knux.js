@@ -150,7 +150,7 @@ function sendMsg(channel, msg)
 // ---------- NEW COMMAND SYSTEM FUNCTIONS ----------------
 function sendError (channel, str)
 {
-	
+
 }
 
 
@@ -316,7 +316,7 @@ cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.setGame = function (msg, cmdStr, argStr, props)
 {
-	bot.user.setGame(argStr);
+	bot.user.setActivity(argStr);
 }
 
 cmdFuncts.revealSay = function (msg, cmdStr, argStr, props)
@@ -565,7 +565,7 @@ bot.on("message", msg => {
 						var authTable = authorizeData[authLevel]
 						if (authTable == null)
 							authTable = modRoleId
-						
+
 						if (authTable.indexOf(msg.author.id) != -1)
 							matchesAuthLevel = true
 					}
@@ -660,7 +660,7 @@ bot.on("message", msg => {
 							userdata[userKey].submissions = []
 						userdata[userKey].submissions.push(setStr)
 						updateJson(userdata, 'userdata')
-						msg.channel.sendMessage("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
+						msg.channel.send("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
 					}
 				}
 
@@ -669,12 +669,12 @@ bot.on("message", msg => {
 					if  (ttsActive == false)
 					{
 						ttsActive = true;
-						msg.channel.sendMessage("/tts [Text to speech enabled]");
+						msg.channel.send("/tts [Text to speech enabled]");
 					}
 					else
 					{
 						ttsActive = false;
-						msg.channel.sendMessage("[Text to speech disabled]");
+						msg.channel.send("[Text to speech disabled]");
 					}
 				}
 
@@ -690,7 +690,7 @@ bot.on("message", msg => {
 				else if (msg.cleanContent.startsWith("/knux setgame"))
 				{
 					var setStr = msg.cleanContent.substring(14);
-					bot.user.setGame(setStr);
+					bot.user.setActivity(setStr);
 				}
 
 				else if (msg.cleanContent.startsWith("/knux react"))
@@ -982,7 +982,7 @@ bot.on("message", msg => {
 					var tone = "neutral";  // neutral, insult, challenge, question, praise, request
 
 					// Either reply with an emoji reaction or response message
-					
+
 					if (Math.random() > 0.5  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
@@ -1029,19 +1029,19 @@ bot.on("message", msg => {
 	}
 	catch(err) {
 		sendMsg(msg.channel, getResponse("error"));
-		msg.channel.sendMessage("```"+err+"```");
+		msg.channel.send("```"+err+"```");
 		console.log(err);
 	}
 });
 
 bot.on('ready', () => {
 	bot.user.setStatus("online")
-	bot.user.setGame("protecting the Master Emerald");
+	bot.user.setActivity("protecting the Master Emerald");
 	var myChannel = bot.channels.find('name', 'beep-boop');
 	var myChannelB = bot.channels.find('name', 'dank');
 	var introString = getResponse("enter");
-	myChannel.sendMessage(introString);
-	//myChannelB.sendMessage(introString);
+	myChannel.send(introString);
+	//myChannelB.send(introString);
 
 	buildHelpCategories ()
 
