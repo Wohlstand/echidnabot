@@ -298,7 +298,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		emojiNameList.push(newStr);
 		debugString += newStr + ","
 	}
-	debugString += "; " + emojiNameList.count.toString() + " total"
+	debugString += "; " + emojiNameList.length.toString() + " total"
 	console.log(debugString);
 
 	var matchedMessageCount = 0
