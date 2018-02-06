@@ -289,13 +289,16 @@ cmdFuncts.getEmojiInfo = function (msg, cmdStr, argStr, props)
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
 	var emojiList = argStr.split();
+	var emojiNameList = new Array(0);
 
-	var debugString = "GETTING EMOJI NAMES: "
+	var debugString = "GETTING EMOJI NAMES FROM STRING ~~" + argStr + "~~: "
 	for (var emojiStr in emojiList)
 	{
-		emojiStr = emojiStr.replace(/\/:/g, "");
-		debugString += emojiStr + ","
+		var newStr = emojiStr.replace(/\/:/g, "");
+		emojiNameList.push(newStr));
+		debugString += newStr + ","
 	}
+	debugString += "; " + emojiNameList.length.ToString() + " total"
 	console.log(debugString);
 
 	var matchedMessageCount = 0
@@ -305,13 +308,13 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		var matchCounter = 0
 		for (var reaction in message.reactions)
 		{
-			console.log("REACTION: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.ToString());
-			if  (emojiList.includes(reaction.emoji.name))
+			console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.ToString());
+			if  (emojiNameList.includes(reaction.emoji.name))
 			{
 				matchCounter++;
 			}
 		}
-		if  (matchCounter == emojiList.length)
+		if  (matchCounter == emojiNameList.length)
 		{
 			message.reactions.deleteAll();
 			matchedMessageCount++
