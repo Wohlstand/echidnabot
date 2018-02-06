@@ -288,7 +288,7 @@ cmdFuncts.getEmojiInfo = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
-	var emojiList = argStr.split();
+	var emojiList = argStr.split(" ");
 	var emojiNameList = new Array(0);
 
 	var debugString = "GETTING EMOJI NAMES FROM STRING ~~" + argStr + "~~: "
