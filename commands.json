@@ -309,6 +309,14 @@
 		"auth"     : "owner"
 	},
 
+	"cleanup" :
+	{
+		"category" : "mod-only",
+		"info"     : "Removes all reactions from any messages in the channel that match all of the specified emoji.",
+		"function" : "cleanupReactions",
+		"auth"     : "owner"
+	},
+
 	"update" :
 	{
 		"category" : "mod-only",

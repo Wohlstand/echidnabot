@@ -275,6 +275,33 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 }
 
 
+cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
+{
+	var emojiList = argStr.split();
+
+	var vandalizedCount = 0
+
+	for (var message in msg.channel.messages)
+	{
+		var matchCounter = 0
+		for (var reaction in message.reactions)
+		{
+			if  (emojiList.includes(reaction.emoji.id.ToString()))
+			{
+				matchCounter++;
+			}
+		}
+		if  (matchCounter == emojiList.length)
+		{
+			message.reactions.deleteAll();
+			vandalizedCount++
+		}
+	}
+
+	sendMsg(msg.channel, "[" + vandalizedCount.toString() + " messages were flagged as vandalized.  Double-check to make sure I successfully cleaned them up.]");
+}
+
+
 cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 {
 	console.log("Pulling a git");
