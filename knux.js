@@ -275,28 +275,17 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 }
 
 
-cmdFuncts.getEmojiInfo = function (msg, cmdStr, argStr, props)
-{
-	var emojiStrings = argStr.split();
-	sendMsg(msg.channel, "[Given string: "+argStr+".]");
-	for (var str in emojiStrings)
-	{
-		str = "\\"+str
-	}
-	sendMsg(msg.channel, "[Given string: "+argStr+".]");
-}
-
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
 	var emojiList = argStr.split(" ");
 	var emojiNameList = new Array(0);
 
-	var debugString = "GETTING EMOJI NAMES FROM STRING ~~" + argStr + "~~: "
+	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
 	for (var emojiStr in emojiList)
 	{
-		debugString += emojiStr + " --> "
-		var newStr = emojiStr.replace(/\/:/g, "");
-		emojiNameList.push(newStr);
+		//debugString += emojiStr + " --> "
+		//var newStr = emojiStr.replace(/\/:/g, "");
+		emojiNameList.push(emojiStr);
 		debugString += newStr + ","
 	}
 	debugString += "; " + emojiNameList.length.toString() + " total"
