@@ -296,7 +296,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	msg.channel.fetchMessages()
 		.then(allMessages => {
-			sendMsg(msg.channel, `[${messages.size} messages total.]`);
+			sendMsg(msg.channel, `[${allMessages.size} messages total.]`);
 
 			for (var message in allMessages)
 			{
