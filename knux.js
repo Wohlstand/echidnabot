@@ -294,25 +294,32 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	var matchedMessageCount = 0
 
-	for (var message in msg.channel.fetchMessages())
-	{
-		var matchCounter = 0
-		for (var reaction in message.reactions)
-		{
-			console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
-			if  (emojiNameList.includes(reaction.emoji.name))
-			{
-				matchCounter++;
-			}
-		}
-		if  (matchCounter == emojiNameList.length)
-		{
-			message.reactions.deleteAll();
-			matchedMessageCount++
-		}
-	}
+	channel.fetchMessages()
+		.then(allMessages => {
 
-	sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches.  Double-check to make sure I successfully cleaned them up.]");
+			for (var message in allMessages)
+			{
+				var matchCounter = 0
+				for (var reaction in message.reactions)
+				{
+					console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
+					if  (emojiNameList.includes(reaction.emoji.name))
+					{
+						matchCounter++;
+					}
+				}
+				if  (matchCounter == emojiNameList.length)
+				{
+					message.reactions.deleteAll();
+					matchedMessageCount++
+				}
+			}
+			sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches.  Double-check to make sure I successfully cleaned them up.]");
+
+		})
+		.catch(err => {
+			console.error(err);
+		});
 }
 
 
