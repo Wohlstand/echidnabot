@@ -301,10 +301,8 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	msg.channel.fetchMessages({before:msgId, limit:100})
 		.then(messages => {
-			var messagesArr = messages.array();
-			for (i=0; i < messageArr.length; i++)
+			for (var message in messages)
 			{
-				var message = messageArr[i];
 				console.log ("MESSAGE: "+message.content)
 				messageCounter++;
 				var matchCounter = 0
