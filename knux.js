@@ -97,7 +97,7 @@ function reactFromArray (message, array)
 
 	}
 	else
-		console.log("\nCouldn't get a valid emoji string")
+		console.log("Couldn't get a valid emoji string")
 }
 
 
@@ -129,7 +129,7 @@ function updateRegex()
 	for (var k in keywords)
 	{
 		keywordRegex[k] = new RegExp(keywords[k], 'img');
-		//console.log ("\nUpdated regex " + k + ": "+keywordRegex[k].toString())
+		//console.log ("Updated regex " + k + ": "+keywordRegex[k].toString())
 	}
 }
 
@@ -159,7 +159,7 @@ var helpCategories = {}
 
 function buildHelpCategories ()
 {
-	console.log("\nSTART CREATING COMMAND LISTS FOR HELP");
+	console.log("START CREATING COMMAND LISTS FOR HELP");
 	helpCategories = {}
 	for (var item in commands)
 	{
@@ -171,17 +171,17 @@ function buildHelpCategories ()
 				if  (helpCategories[cmdProps.category] == null)
 				{
 					helpCategories[cmdProps.category] = []
-					console.log("\nADDING CATEGORY " + cmdProps.category);
+					console.log("ADDING CATEGORY " + cmdProps.category);
 				}
 
 				helpCategories[cmdProps.category].push(item)
-				console.log("\nADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
+				console.log("ADDING COMMAND " + item + " TO CATEGORY " + cmdProps.category);
 			}
 		}
 		else
-			console.log("\nUNABLE TO GET PROPERTIES FOR " + item);
+			console.log("UNABLE TO GET PROPERTIES FOR " + item);
 	}
-	console.log("\nDONE CREATING COMMAND LISTS");
+	console.log("DONE CREATING COMMAND LISTS");
 }
 
 
@@ -217,7 +217,7 @@ cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.gitPull = function (msg, cmdStr, argStr, props)
 {
-	console.log("\nPulling a git");
+	console.log("Pulling a git");
 	exec('git', ["pull", "origin", "master"], function(err, data)
 	{
 		if(err == null)
@@ -267,7 +267,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
 	bot.user.setStatus("invisible")
 	msg.channel.send(getArrayRandom(props.phrases).value, {tts:(ttsActive==true)})
-	console.log("\nShutting down");
+	console.log("Shutting down");
 
 	bot.setTimeout(function(){
 			process.exit(1);
@@ -280,7 +280,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	var emojiList = argStr.split(" ");
 	var emojiNameList = new Array(0);
 
-	var debugString = "\nGETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
+	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
 	for (i = 0;  i < emojiList.length;  i++)
 	{
 		var emojiStr = emojiList[i];
@@ -299,11 +299,11 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 			for (var message in allMessages)
 			{
-				console.log("\n CHECKING MESSAGE: "+message.cleanContent)
+				console.log(message.cleanContent)
 				var matchCounter = 0
 				for (var reaction in message.reactions)
 				{
-					console.log("\nREACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
+					console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
 					if  (emojiNameList.includes(reaction.emoji.name))
 					{
 						matchCounter++;
@@ -319,14 +319,14 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 		})
 		.catch(err => {
-			console.error("\n\n"+err);
+			console.error(err);
 		});
 }
 
 
 cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 {
-	console.log("\nPulling a git");
+	console.log("Pulling a git");
 	exec('git', ["pull", "origin", "master"], function(err, data)
 	{
 		if(err == null)
@@ -335,7 +335,7 @@ cmdFuncts.updateAndRestart = function (msg, cmdStr, argStr, props)
 
 			bot.user.setStatus("invisible")
 			sendMsg(msg.channel, getResponse("exit"));
-			console.log("\nShutting down");
+			console.log("Shutting down");
 
 			bot.setTimeout(function() {process.exit(1);}, 1000);
 		}
@@ -358,7 +358,7 @@ cmdFuncts.reactionSpam = function (msg, cmdStr, argStr, props)
 		if (Math.random() > 0.5)
 			emoteCategory = "brag";
 
-		console.log ("\nemote category: "+emoteCategory)
+		console.log ("emote category: "+emoteCategory)
 		reactFromArray(msg, emoteReacts[emoteCategory]);
 	}
 }
@@ -517,7 +517,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
-	console.log ("\nREACTION ADDED: "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
+	console.log ("REACTION: "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
 });
 
 
@@ -532,9 +532,9 @@ bot.on("message", msg => {
 
 			// Log the message
 			if  (msg.member != null)
-				console.log("\n"+msg.member.displayName+" said: "+msg.cleanContent);
+				console.log(msg.member.displayName+" said: "+msg.cleanContent);
 			else
-				console.log("\n[unknown] said: "+msg.cleanContent);
+				console.log("[unknown] said: "+msg.cleanContent);
 
 			// Authority check
 			var authorized = ((ownerId.indexOf(msg.author.id) != -1) || msg.member.roles.has(modRoleId))
@@ -554,7 +554,7 @@ bot.on("message", msg => {
 				{
 					bot.user.setStatus("invisible")
 					sendMsg(msg.channel, getResponse("exit"));
-					console.log("\nShutting down");
+					console.log("Shutting down");
 
 					bot.setTimeout(function(){
 						process.exit(1);
@@ -568,7 +568,7 @@ bot.on("message", msg => {
 			{
 				if (authorized)
 				{
-					console.log("\nPulling a git");
+					console.log("Pulling a git");
 					exec('git', ["pull", "origin", "master"], function(err, data)
 					{
 						if(err == null)
@@ -975,7 +975,7 @@ bot.on("message", msg => {
 					if  (matches != null)
 					{
 						detectedTypes[k] = matches.length;
-						console.log ("\nMatched category "+k+": "+detectedTypes[k].toString())
+						console.log ("Matched category "+k+": "+detectedTypes[k].toString())
 					}
 				}
 
@@ -994,7 +994,7 @@ bot.on("message", msg => {
 				var highestNum = 1;
 				var highestTied = new Array(0);
 				var highestRandString = ""
-				var logString = "\nTop sentiments: "
+				var logString = "Top sentiments: "
 				for (var k in detectedTypes)
 				{
 					var val = detectedTypes[k];
@@ -1025,7 +1025,7 @@ bot.on("message", msg => {
 				// If at or about the bot...
 				if (aboutMe)
 				{
-					console.log("\nI think I'll respond to this message.");
+					console.log("I think I'll respond to this message.");
 
 					// Initialize sentiment analysis vars
 					var tone = "neutral";  // neutral, insult, challenge, question, praise, request
@@ -1035,7 +1035,7 @@ bot.on("message", msg => {
 					if (Math.random() > 0.5  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
-						console.log ("\nemote category: "+highestRandString)
+						console.log ("emote category: "+highestRandString)
 						reactFromArray(msg, emoteCategory);
 					}
 					else
@@ -1050,13 +1050,13 @@ bot.on("message", msg => {
 					if (Math.random() > 0.8  &&  highestRandString != "threat"  &&  emoteReacts[highestRandString] != null)
 					{
 						var emoteCategory = emoteReacts[highestRandString];
-						console.log("\nemote category: " + highestRandString);
+						console.log("emote category: " + highestRandString);
 						reactFromArray(msg, emoteCategory);
 					}
 
 					// Occasionally respond with "& Knuckles" anyway
 					andCount -= 1;
-					console.log("\nAnd count: " + andCount.toString());
+					console.log("And count: " + andCount.toString());
 					if  (andCount <= 0)
 					{
 						var timeSinceLastAnd = bot.uptime - lastAndTime;
@@ -1067,19 +1067,19 @@ bot.on("message", msg => {
 							andCount = Math.floor((Math.random() * 35) + 15);
 						}
 						else
-							console.log("\nTime since last and: " + timeSinceLastAnd.toString());
+							console.log("Time since last and: " + timeSinceLastAnd.toString());
 					}
 				}
 			}
 		}
-		console.log("\n ");
+		console.log(" ");
 		prevAuthor = msg.author;
 
 	}
 	catch(err) {
 		sendMsg(msg.channel, getResponse("error"));
 		msg.channel.send("```"+err+"```");
-		console.log("\n\n"+err);
+		console.log(err);
 	}
 });
 
@@ -1094,8 +1094,8 @@ bot.on('ready', () => {
 
 	buildHelpCategories ()
 
-	console.log('\n\nREADY; '+introString);
-	console.log('\n');
+	console.log('READY; '+introString);
+	console.log(' ');
 });
 
 
