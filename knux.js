@@ -294,6 +294,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	debugString += "; " + emojiNameList.length.toString() + " total"
 	console.log(debugString);
 
+	var messageCounter = 0
 	var matchedMessageCount = 0
 	var matchedReactionsCount = 0
 
@@ -302,6 +303,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			let messagesArr = messages.array();
 			for (var message in messagesArr)
 			{
+				var messageCounter++;
 				var matchCounter = 0
 				for (var reaction in message.reactions)
 				{
@@ -318,7 +320,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 					matchedMessageCount++
 				}
 			}
-			sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches, " + matchedReactionsCount.toString() + " total reaction matches.]");
+			sendMsg(msg.channel, "[" + messageCounter.toString() +" messages scanned, "+ matchedMessageCount.toString() + " were flagged as matches, " + matchedReactionsCount.toString() + " total reaction matches.]");
 
 		})
 		.catch(err => {
