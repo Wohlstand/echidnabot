@@ -304,7 +304,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			let messagesArr = messages.array();
 			for (var message in messagesArr)
 			{
-				console.log ("MESSAGE: "+message.id)
+				console.log ("MESSAGE: "+message.content)
 				messageCounter++;
 				var matchCounter = 0
 				for (var reaction in message.reactions)
