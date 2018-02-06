@@ -303,7 +303,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			let messagesArr = messages.array();
 			for (var message in messagesArr)
 			{
-				var messageCounter++;
+				messageCounter++;
 				var matchCounter = 0
 				for (var reaction in message.reactions)
 				{
@@ -320,7 +320,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 					matchedMessageCount++
 				}
 			}
-			sendMsg(msg.channel, "[" + messageCounter.toString() +" messages scanned, "+ matchedMessageCount.toString() + " were flagged as matches, " + matchedReactionsCount.toString() + " total reaction matches.]");
+			sendMsg(msg.channel, "[" + messageCounter.toString() + " messages scanned, " + matchedMessageCount.toString() + " were flagged as matches, " + matchedReactionsCount.toString() + " total reaction matches.]");
 
 		})
 		.catch(err => {
