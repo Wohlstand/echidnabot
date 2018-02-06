@@ -283,7 +283,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
 	for (i = 0;  i < emojiList.length;  i++)
 	{
-		var emojiString = emojiList[i];
+		var emojiStr = emojiList[i];
 		debugString += emojiStr + " --> "
 		var newStr = emojiStr.replace(/\/:/g, "");
 		emojiNameList.push(emojiStr);
