@@ -298,7 +298,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		emojiNameList.push(newStr);
 		debugString += newStr + ","
 	}
-	debugString += "; " + emojiNameList.length.ToString() + " total"
+	debugString += "; " + emojiNameList.count.toString() + " total"
 	console.log(debugString);
 
 	var matchedMessageCount = 0
@@ -308,7 +308,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		var matchCounter = 0
 		for (var reaction in message.reactions)
 		{
-			console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.ToString());
+			console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
 			if  (emojiNameList.includes(reaction.emoji.name))
 			{
 				matchCounter++;
