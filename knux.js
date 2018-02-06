@@ -275,18 +275,33 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 }
 
 
+cmdFuncts.getEmojiInfo = function (msg, cmdStr, argStr, props)
+{
+	var emojiStrings = argStr.split();
+	sendMsg(msg.channel, "[Given string: "+argStr+".]");
+	for (var str in emojiStrings)
+	{
+		str = "\\"+str
+	}
+	sendMsg(msg.channel, "[Given string: "+argStr+".]");
+}
+
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
 	var emojiList = argStr.split();
+	for (var emojiStr in emojiList)
+	{
+		emojiStr = emojiStr.replace(/\/:/g, "");
+	}
 
-	var vandalizedCount = 0
+	var matchedMessageCount = 0
 
 	for (var message in msg.channel.messages)
 	{
 		var matchCounter = 0
 		for (var reaction in message.reactions)
 		{
-			if  (emojiList.includes(reaction.emoji.id.ToString()) || emojiList.includes(reaction.emoji.identifier.ToString()) || emojiList.includes(reaction.emoji.ToString()))
+			if  (emojiList.includes(reaction.emoji.name))
 			{
 				matchCounter++;
 			}
@@ -294,11 +309,11 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		if  (matchCounter == emojiList.length)
 		{
 			message.reactions.deleteAll();
-			vandalizedCount++
+			matchedMessageCount++
 		}
 	}
 
-	sendMsg(msg.channel, "[" + vandalizedCount.toString() + " messages were flagged as vandalized.  Double-check to make sure I successfully cleaned them up.]");
+	sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches.  Double-check to make sure I successfully cleaned them up.]");
 }
 
 
