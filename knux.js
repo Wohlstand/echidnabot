@@ -299,10 +299,8 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	msg.channel.fetchMessages()
 		.then(messages => {
 			let messagesArr = messages.array();
-			for (var message in messageArr)
+			for (var message in messagesArr)
 			{
-				console.log(message.cleanContent)
-				/*
 				var matchCounter = 0
 				for (var reaction in message.reactions)
 				{
@@ -316,9 +314,9 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 				{
 					message.reactions.deleteAll();
 					matchedMessageCount++
-				}*/
+				}
 			}
-			//sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches.  Double-check to make sure I successfully cleaned them up.]");
+			sendMsg(msg.channel, "[" + matchedMessageCount.toString() + " messages were flagged as matches.  Double-check to make sure I successfully cleaned them up.]");
 
 		})
 		.catch(err => {
