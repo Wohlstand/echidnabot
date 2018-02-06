@@ -280,7 +280,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
 	var emojiList = argStr.split(" ");
-	var msgId = emojiList[0]
+	var msgId = parseInt(emojiList[0])
 	var emojiNameList = new Array(0);
 
 	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
