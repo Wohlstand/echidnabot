@@ -286,7 +286,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		//debugString += emojiStr + " --> "
 		//var newStr = emojiStr.replace(/\/:/g, "");
 		emojiNameList.push(emojiStr);
-		debugString += newStr + ","
+		debugString += emojStr + ","
 	}
 	debugString += "; " + emojiNameList.length.toString() + " total"
 	console.log(debugString);
