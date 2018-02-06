@@ -294,7 +294,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	var matchedMessageCount = 0
 
-	channel.fetchMessages()
+	msg.channel.fetchMessages()
 		.then(allMessages => {
 
 			for (var message in allMessages)
