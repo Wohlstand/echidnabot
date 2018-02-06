@@ -280,7 +280,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
 	var emojiList = argStr.split(" ");
-	var msgId = parseInt(emojiList[0])
+	var msgId = emojiList[0];
 	var emojiNameList = new Array(0);
 
 	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
@@ -299,7 +299,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	var matchedMessageCount = 0
 	var matchedReactionsCount = 0
 
-	msg.channel.messages.fetch({before:msgId, limit:100})
+	msg.channel.fetchMessages({before:msgId, limit:100})
 		.then(messages => {
 			let messagesArr = messages.array();
 			for (var message in messagesArr)
