@@ -286,7 +286,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		var matchCounter = 0
 		for (var reaction in message.reactions)
 		{
-			if  (emojiList.includes(reaction.emoji.id.ToString()))
+			if  (emojiList.includes(reaction.emoji.id.ToString()) || emojiList.includes(reaction.emoji.identifier.ToString()) || emojiList.includes(reaction.emoji.ToString()))
 			{
 				matchCounter++;
 			}
