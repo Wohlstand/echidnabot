@@ -530,7 +530,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 }
 
 
-bot.on('raw', async (event) => {
+bot.on("raw", async event => {
 	if (event.t !== 'MESSAGE_REACTION_ADD') return;
 
 	const { d: data } = event;
