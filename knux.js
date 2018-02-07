@@ -278,7 +278,7 @@ cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
 {
 	msg.channel.fetchMessage(argStr)
-		.then(message => message.clearReacts());
+		.then(message => message.clearReactions());
 }
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
