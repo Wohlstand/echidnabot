@@ -533,8 +533,6 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
-	console.log ("REACTION: "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
-
 	if  (userRef !== bot.user)
 	{
 		// Get guild member of the person who reacted
@@ -561,25 +559,32 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 		}
 
 		// Check if authorization works
-		if (reactionRef.emoji.toString() == cleanupTrigger.toString()  &&  authorized)
+		console.log ("REACTION ADDED BY "+userRef.username+": "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
+
+		if (reactionRef.emoji.toString() == cleanupTrigger.toString())
 		{
-			// Start comparing emojis
-			/*
-			var message = reactionRef.message
-			var matchCounter = 0
-			for (var reaction in message.reactions)
+			console.log ("Matches cleanup trigger")
+			if (authorized)
 			{
-				if  (cleanupEmojis.includes(reaction.emoji.name))
+				console.log ("Cleanup triggered by authorized user")
+				// Start comparing emojis
+				/*
+				var message = reactionRef.message
+				var matchCounter = 0
+				for (var reaction in message.reactions)
 				{
-					matchCounter++;
+					if  (cleanupEmojis.includes(reaction.emoji.name))
+					{
+						matchCounter++;
+					}
 				}
-			}
-			if  (matchCounter == cleanupEmojis.length)
-			{
+				if  (matchCounter == cleanupEmojis.length)
+				{
+					message.reactions.deleteAll();
+				}
+				*/
 				message.reactions.deleteAll();
 			}
-			*/
-			message.reactions.deleteAll();
 		}
 	}
 });
