@@ -561,7 +561,7 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 		}
 
 		// Check if authorization works
-		if (reactionRef.emoji.name == cleanupTrigger  &&  authorized)
+		if (reactionRef.emoji.toString() == cleanupTrigger.toString()  &&  authorized)
 		{
 			// Start comparing emojis
 			/*
