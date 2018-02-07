@@ -316,7 +316,7 @@ function clearReactsUpTo (msg,argList)
 		debugString += argList[i] + ","
 	}
 
-	debugString += "; " + emojiNameList.length.toString() + " total"
+	debugString += "; " + argList.length.toString() + " total"
 	console.log(debugString);
 
 	var messageCounter = 0
@@ -336,14 +336,14 @@ function clearReactsUpTo (msg,argList)
 				{
 					var reaction = reactionArray[i2]
 					console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
-					if  (emojiNameList.includes(reaction.emoji.name))
+					if  (argList.includes(reaction.emoji.name))
 					{
 						console.log("REACTION MATCH");
 						matchCounter++;
 						matchedReactionsCount++;
 					}
 				}
-				if  (matchCounter == emojiNameList.length)
+				if  (matchCounter == argList.length)
 				{
 					console.log("ALL MATCHED");
 					message.clearReactions();
