@@ -529,7 +529,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 		msg.channel.send({embed: newEmbed});
 }
 
-
+/*
 bot.on("raw", async event => {
 	if (event.t !== 'MESSAGE_REACTION_ADD') return;
 
@@ -546,6 +546,7 @@ bot.on("raw", async event => {
 
 	bot.emit('messageReactionAdd', reaction, user);
 });
+*/
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
 	if  (userRef !== bot.user)
