@@ -369,6 +369,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		case "idlist":
 			for (i=0;  i < argList.length;  i++)
 			{
+				var id = argList[i];
 				console.log("ATTEMPTING TO CLEAR MESSAGE "+id)
 				clearReactionsInMessage(msg,id);
 			}
