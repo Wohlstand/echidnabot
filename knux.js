@@ -586,7 +586,11 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 					message.reactions.deleteAll();
 				}
 				*/
-				message.reactions.deleteAll();
+				for (var reaction in message.reactions)
+				{
+					reaction.remove();
+				}
+				//message.reactions.deleteAll();
 			}
 		}
 	}
