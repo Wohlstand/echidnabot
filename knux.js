@@ -377,7 +377,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			break;
 
 		case "upto":
-			clearReactsUpto(msg,argList)
+			clearReactsUpTo(msg,argList)
 			break;
 	}
 
