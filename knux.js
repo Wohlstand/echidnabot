@@ -325,6 +325,7 @@ function clearReactsUpTo (msg,argList)
 
 	msg.channel.fetchMessages({before:msgId, limit:100})
 		.then((messages) => {
+			var messageArr = messages.array()
 			for (i=0; i < messageArr.length; i++)
 			{
 				var message = messageArr[i];
