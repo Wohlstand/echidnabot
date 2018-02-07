@@ -275,7 +275,7 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 }
 
 
-var cleanupTrigger = ""
+var cleanupTrigger = "🇶"
 var cleanupEmojis = new Array(0)
 
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
