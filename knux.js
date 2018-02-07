@@ -530,10 +530,10 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 }
 
 
-bot.on('raw', event => {
-	if (event.t !== 'MESSAGE_REACTION_ADD') return;
+bot.on('raw', myEvent => {
+	if (myEvent.t !== 'MESSAGE_REACTION_ADD') return;
 
-	const { d: data } = event;
+	const { d: data } = myEvent;
 	const channel = bot.channels.get(data.channel_id);
 
 	if (channel.messages.has(data.message_id)) return;
@@ -546,6 +546,7 @@ bot.on('raw', event => {
 
 	bot.emit('messageReactionAdd', reaction, user);
 });
+
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
 	if  (userRef !== bot.user)
