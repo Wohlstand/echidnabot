@@ -40,7 +40,7 @@ var lastAndTime = -5000
 var andCount = Math.floor((Math.random() * 3) + 3);
 
 var canPostInGeneral = false
-var channelsAllowed = {["beep-boop"]:false, ["dank"]:true}
+var channelsAllowed = {["beep-boop"]:false, ["dank-and-temp-beep-boop"]:true}
 var deleteAll = false
 
 var ttsActive = false
@@ -275,6 +275,11 @@ cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 		.then(message => sendMsg (msg.channel, "[" + argStr + ": " + message.cleanContent+"]"));
 }
 
+cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
+{
+	msg.channel.fetchMessage(argStr)
+		.then(message => message.clearReacts());
+}
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {

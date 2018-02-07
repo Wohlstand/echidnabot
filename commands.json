@@ -325,6 +325,14 @@
 		"auth"     : "owner"
 	},
 
+	"cleanupSingle" :
+	{
+		"category" : "mod-only",
+		"info"     : "Remove reactions from a single message.",
+		"function" : "clearReactsOne",
+		"auth"     : "owner"
+	},
+
 	"tcleanup" :
 	{
 		"category" : "mod-only",
