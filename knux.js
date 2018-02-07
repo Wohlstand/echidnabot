@@ -619,8 +619,6 @@ bot.on("message", msg => {
 		// Don't process own messages the same way as others'
 		if  (msg.author !== bot.user)
 		{
-			// Don't respond to messages outside of #beep-boop
-			if (channelsAllowed[msg.channel.name] != true) return;
 
 			// Log the message
 			if  (msg.member != null)
@@ -1049,6 +1047,9 @@ bot.on("message", msg => {
 
 			else
 			{
+				// Don't respond to messages outside of permitted channels
+				if (channelsAllowed[msg.channel.name] != true) return;
+
 				// Parse message
 				var aboutMe = false;
 				var messageStr = msg.cleanContent.toLowerCase();
