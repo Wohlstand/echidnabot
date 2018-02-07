@@ -558,8 +558,11 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 				authorized = true
 		}
 
-		// Check if authorization works
-		console.log ("REACTION ADDED BY "+userRef.username+": "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
+		var usernameStr = userRef.username
+		if (authorized)
+			usernameStr = "AUTHORIZED USER "+userRef.username
+
+		console.log ("REACTION ADDED BY "+usernameStr+": "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
 
 		if (reactionRef.emoji.toString() == cleanupTrigger)
 		{
