@@ -547,7 +547,6 @@ bot.on('raw', async event => {
 	bot.emit('messageReactionAdd', reaction, user);
 });
 
-
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
 	if  (userRef !== bot.user)
 	{
