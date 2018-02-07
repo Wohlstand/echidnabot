@@ -262,6 +262,13 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
 }
 */
 
+function clearReactionsInMessage(id)
+{
+	msg.channel.fetchMessage(id)
+		.then(message => message.clearReactions());
+}
+
+
 cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 {
 	msg.channel.fetchMessage(argStr)
@@ -357,8 +364,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		case "idlist":
 			for (var id in argList)
 			{
-				var message = msg.channel.messages.get(id);
-				message.clearReactions();
+				clearReactionsInMessage(id);
 			}
 			break;
 
