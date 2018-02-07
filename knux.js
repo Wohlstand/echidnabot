@@ -274,7 +274,7 @@ cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 	msg.channel.fetchMessage(argStr)
 		.then(message => sendMsg (msg.channel, "[" + argStr + ": " + message.cleanContent+"]"));
 }
-
+ 
 cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
 {
 	msg.channel.fetchMessage(argStr)
