@@ -586,11 +586,7 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 					message.reactions.deleteAll();
 				}
 				*/
-				for (var reaction in message.reactions)
-				{
-					console.log("removing "+reaction.emoji.toString())
-					reaction.remove();
-				}
+				message.clearReactions();
 				//message.reactions.deleteAll();
 			}
 		}
