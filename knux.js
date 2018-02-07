@@ -304,17 +304,16 @@ cmdFuncts.setCleanupTrigger = function (msg, cmdStr, argStr, props)
 }
 
 
-function clearReactsUpTo (argList)
+function clearReactsUpTo (msg,argList)
 {
-	var emojiNameList = new Array(0);
+	var msgId = argList[0]
+	argList.shift()
 	var debugString = "EMOJI NAME LIST: "
 
-	for (i = 1;  i < emojiList.length;  i++)
+	for (i = 0;  i < argList.length;  i++)
 	{
-		var emojiStr = argList[i];
-		var newStr = emojiStr.replace(/\/:/g, "");
-		emojiNameList.push(emojiStr);
-		debugString += emojiStr + ","
+		argList[i] = argList[i].replace(/\/:/g, "");
+		debugString += argList[i] + ","
 	}
 
 	debugString += "; " + emojiNameList.length.toString() + " total"
@@ -332,8 +331,10 @@ function clearReactsUpTo (argList)
 				console.log ("MESSAGE: "+message.content)
 				messageCounter++;
 				var matchCounter = 0
-				for (var reaction in message.reactions)
+				var reactionArray = message.reactions.array();
+				for (i2=0; i2<reactionArray.length; i2++)
 				{
+					var reaction = reactionArray[i2]
 					console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
 					if  (emojiNameList.includes(reaction.emoji.name))
 					{
@@ -376,7 +377,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			break;
 
 		case "upto":
-			clearReactsUpto(argList)
+			clearReactsUpto(msg,argList)
 			break;
 	}
 
