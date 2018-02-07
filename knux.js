@@ -262,6 +262,9 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
 }
 */
 
+
+var lastReactClearedId = serverdata.lastReactClearedId
+
 function clearReactionsInMessage(msg,id)
 {
 	msg.channel.fetchMessage(id)
@@ -348,6 +351,12 @@ function clearReactsUpTo (msg,argList)
 				{
 					console.log("ALL MATCHED");
 					message.clearReactions();
+					lastReactClearedId = message.id
+					if  (i%10 == 0  ||  i == messageArr.length-1)
+					{
+						serverdata.lastReactClearedId = lastReactClearedId
+						updateJson(serverdata,'serverdata')
+					}
 					matchedMessageCount++
 				}
 			}
@@ -378,6 +387,11 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 			break;
 
 		case "upto":
+			clearReactsUpTo(msg,argList)
+			break;
+
+		case "resume":
+			argList.unshift(serverdata.lastReactClearedId)
 			clearReactsUpTo(msg,argList)
 			break;
 	}
