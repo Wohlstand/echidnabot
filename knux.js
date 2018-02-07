@@ -50,6 +50,8 @@ var sayMember = new Array(0);
 var sayMessage = new Array(0);
 
 
+butts
+
 
 // Set up regexp stuff
 var keywordRegex = {_thing:true}
