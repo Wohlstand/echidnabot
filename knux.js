@@ -40,7 +40,7 @@ var lastAndTime = -5000
 var andCount = Math.floor((Math.random() * 3) + 3);
 
 var canPostInGeneral = false
-var channelsAllowed = {["beep-boop"]:true, ["dank"]:true}
+var channelsAllowed = {["beep-boop"]:false, ["dank"]:true}
 var deleteAll = false
 
 var ttsActive = false
