@@ -278,24 +278,27 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 var cleanupTrigger = "🇶"
 var cleanupEmojis = new Array(0)
 
+cmdFuncts.setCleanupTrigger = function (msg, cmdStr, argStr, props)
+{
+	var cleanupTrigger = argStr;
+	sendMsg(msg.channel, "[Authorized users may now add " + cleanupTrigger + " to a message to remove all of that message's reactions.]");
+
+}
+
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
-	/*
 	var emojiList = argStr.split(" ");
-	var cleanupTrigger = emojiList[0];
-	cleanupEmojis = new Array(0);
+	var msgId = emojiList[0];
+	var emojiNameList = new Array(0);
 
 	for (i = 1;  i < emojiList.length;  i++)
 	{
 		var emojiStr = emojiList[i];
 		var newStr = emojiStr.replace(/\/:/g, "");
-		cleanupEmojis.push(emojiStr);
+		emojiNameList.push(emojiStr);
 		debugString += emojiStr + ","
 	}
-	*/
-	var cleanupTrigger = argStr;
-	sendMsg(msg.channel, "[Authorized users may now add " + cleanupTrigger + " to a message to remove all of that message's reactions.]");
-	/*
+
 	debugString += "; " + emojiNameList.length.toString() + " total"
 	console.log(debugString);
 
@@ -305,13 +308,8 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	msg.channel.fetchMessages({before:msgId, limit:100})
 		.then(messages => {
-			var messagesArr = messages.array();
-			for (var message in messagesArr)
+			for (var message in messages)
 			{
-				// stuff
-			}
-		})
-		.catch(err => console.error(err));
 				console.log ("MESSAGE: "+message.content)
 				messageCounter++;
 				var matchCounter = 0
@@ -320,13 +318,15 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 					console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
 					if  (emojiNameList.includes(reaction.emoji.name))
 					{
+						console.log("REACTION MATCH");
 						matchCounter++;
 						matchedReactionsCount++;
 					}
 				}
 				if  (matchCounter == emojiNameList.length)
 				{
-					message.reactions.deleteAll();
+					console.log("ALL MATCHED");
+					message.clearReactions();
 					matchedMessageCount++
 				}
 			}
@@ -336,7 +336,6 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		.catch(err => {
 			console.error(err);
 		});
-	*/
 }
 
 
@@ -531,6 +530,22 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 }
 
 
+bot.on('raw', event => {
+	if (event.t !== 'MESSAGE_REACTION_ADD') return;
+
+	const { d: data } = event;
+	const channel = bot.channels.get(data.channel_id);
+
+	if (channel.messages.has(data.message_id)) return;
+
+	const user = bot.users.get(data.user_id);
+	const message = await channel.fetchMessage(data.message_id);
+
+	const emojiKey = (data.emoji.id) ? `${data.emoji.name}:${data.emoji.id}` : data.emoji.name;
+	const reaction = message.reactions.get(emojiKey);
+
+	bot.emit('messageReactionAdd', reaction, user);
+});
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
 	if  (userRef !== bot.user)

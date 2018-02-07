@@ -312,8 +312,16 @@
 	"cleanup" :
 	{
 		"category" : "mod-only",
-		"info"     : "Removes all reactions from any messages in the channel that match all of the specified emoji.",
+		"info"     : "Bulk reaction removal.",
 		"function" : "cleanupReactions",
+		"auth"     : "owner"
+	},
+
+	"tcleanup" :
+	{
+		"category" : "mod-only",
+		"info"     : "Sets the trigger emoji for cleaning up reactions from a post.",
+		"function" : "setCleanupTrigger",
 		"auth"     : "owner"
 	},
 
