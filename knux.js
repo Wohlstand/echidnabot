@@ -540,6 +540,7 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 		// Get guild member of the person who reacted
 		var gMembers = reactionRef.message.guild.members
 		var member
+		var message = reactionRef.message
 		for (var m in gMembers)
 		{
 			var mUser = m.user
@@ -551,14 +552,14 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 		}
 
 		// Check for authorization
-		var authorized = ((ownerId.indexOf(userRef.id) != -1) || msg.member.roles.has(modRoleId))
-		var authordata = userdata[msg.author.id.toString()]
+		var authorized = ((ownerId.indexOf(userRef.id) != -1) || member.roles.has(modRoleId))
+		var authordata = userdata[userRef.id.toString()]
 		if  (authordata != null)
 		{
 			if  (authordata["authorized"] == true)
 				authorized = true
 		}
-		
+
 		// Check if authorization works
 		if (reactionRef.emoji.name == cleanupTrigger  &&  authorized)
 		{
