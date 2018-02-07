@@ -275,23 +275,27 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 }
 
 
-
+var cleanupTrigger = ""
+var cleanupEmojis = new Array(0)
 
 cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 {
+	/*
 	var emojiList = argStr.split(" ");
-	var msgId = emojiList[0];
-	var emojiNameList = new Array(0);
+	var cleanupTrigger = emojiList[0];
+	cleanupEmojis = new Array(0);
 
-	var debugString = "GETTING EMOJI NAMES FROM STRING ##" + argStr + "##: "
 	for (i = 1;  i < emojiList.length;  i++)
 	{
 		var emojiStr = emojiList[i];
-		debugString += emojiStr + " --> "
 		var newStr = emojiStr.replace(/\/:/g, "");
-		emojiNameList.push(emojiStr);
+		cleanupEmojis.push(emojiStr);
 		debugString += emojiStr + ","
 	}
+	*/
+	var cleanupTrigger = argStr.replace(/\/:/g, "");
+	sendMsg(msg.channel, "[Authorized users may now add " + cleanupTrigger + " to a message to remove all of that message's reactions.]");
+	/*
 	debugString += "; " + emojiNameList.length.toString() + " total"
 	console.log(debugString);
 
@@ -301,8 +305,13 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 
 	msg.channel.fetchMessages({before:msgId, limit:100})
 		.then(messages => {
-			for (var message in messages)
+			var messagesArr = messages.array();
+			for (var message in messagesArr)
 			{
+				// stuff
+			}
+		})
+		.catch(err => console.error(err));
 				console.log ("MESSAGE: "+message.content)
 				messageCounter++;
 				var matchCounter = 0
@@ -327,6 +336,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		.catch(err => {
 			console.error(err);
 		});
+	*/
 }
 
 
@@ -524,6 +534,53 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
 
 bot.on("messageReactionAdd", (reactionRef, userRef) => {
 	console.log ("REACTION: "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
+
+	if  (userRef !== bot.user)
+	{
+		// Get guild member of the person who reacted
+		var gMembers = reactionRef.message.guild.members
+		var member
+		for (var m in gMembers)
+		{
+			var mUser = m.user
+			if  (mUser == userRef)
+			{
+				member = m
+				break;
+			}
+		}
+
+		// Check for authorization
+		var authorized = ((ownerId.indexOf(userRef.id) != -1) || msg.member.roles.has(modRoleId))
+		var authordata = userdata[msg.author.id.toString()]
+		if  (authordata != null)
+		{
+			if  (authordata["authorized"] == true)
+				authorized = true
+		}
+		
+		// Check if authorization works
+		if (reactionRef.emoji.name == cleanupTrigger  &&  authorized)
+		{
+			// Start comparing emojis
+			/*
+			var message = reactionRef.message
+			var matchCounter = 0
+			for (var reaction in message.reactions)
+			{
+				if  (cleanupEmojis.includes(reaction.emoji.name))
+				{
+					matchCounter++;
+				}
+			}
+			if  (matchCounter == cleanupEmojis.length)
+			{
+				message.reactions.deleteAll();
+			}
+			*/
+			message.reactions.deleteAll();
+		}
+	}
 });
 
 
