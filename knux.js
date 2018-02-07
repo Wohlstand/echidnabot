@@ -293,7 +293,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		debugString += emojiStr + ","
 	}
 	*/
-	var cleanupTrigger = argStr.replace(/\/:/g, "");
+	var cleanupTrigger = argStr;
 	sendMsg(msg.channel, "[Authorized users may now add " + cleanupTrigger + " to a message to remove all of that message's reactions.]");
 	/*
 	debugString += "; " + emojiNameList.length.toString() + " total"
@@ -561,7 +561,7 @@ bot.on("messageReactionAdd", (reactionRef, userRef) => {
 		// Check if authorization works
 		console.log ("REACTION ADDED BY "+userRef.username+": "+reactionRef.emoji.toString()+", "+reactionRef.emoji.id+", "+reactionRef.emoji.identifier+", "+reactionRef.emoji.name)
 
-		if (reactionRef.emoji.toString() == cleanupTrigger.toString())
+		if (reactionRef.emoji.toString() == cleanupTrigger)
 		{
 			console.log ("Matches cleanup trigger")
 			if (authorized)
