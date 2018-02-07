@@ -264,7 +264,7 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.quote = function (msg, cmdStr, argStr, props)
 {
-	var message = msg.channel.messages.get(argStr)
+	var message = msg.channel.fetchMessage(argStr)
 	sendMsg (msg.channel, "[" + message.member.displayName + " said: " + message.cleanContent+"]");
 }
 
