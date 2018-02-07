@@ -262,6 +262,12 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
 }
 */
 
+cmdFuncts.quote = function (msg, cmdStr, argStr, props)
+{
+	var message = msg.channel.messages.get(argStr)
+	sendMsg (msg.channel, "[" + message.member.displayName + " said: " + message.cleanContent+"]");
+}
+
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
@@ -285,16 +291,15 @@ cmdFuncts.setCleanupTrigger = function (msg, cmdStr, argStr, props)
 
 }
 
-cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
+
+function clearReactsUpTo (argList)
 {
-	var emojiList = argStr.split(" ");
-	var msgId = emojiList[0];
 	var emojiNameList = new Array(0);
 	var debugString = "EMOJI NAME LIST: "
 
 	for (i = 1;  i < emojiList.length;  i++)
 	{
-		var emojiStr = emojiList[i];
+		var emojiStr = argList[i];
 		var newStr = emojiStr.replace(/\/:/g, "");
 		emojiNameList.push(emojiStr);
 		debugString += emojiStr + ","
@@ -308,8 +313,7 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 	var matchedReactionsCount = 0
 
 	msg.channel.fetchMessages({before:msgId, limit:100})
-		.then(messages => {
-			var messageArr = messages.array()
+		.then((messages) => {
 			for (i=0; i < messageArr.length; i++)
 			{
 				var message = messageArr[i];
@@ -339,6 +343,30 @@ cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
 		.catch(err => {
 			console.error(err);
 		});
+}
+
+
+cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
+{
+	var argList = argStr.split(" ");
+	var mainArg = argList[0];
+	argList.shift();
+
+	switch (mainArg)
+	{
+		case "idlist":
+			for (var id in argList)
+			{
+				var message = msg.channel.messages.get(id);
+				message.clearReactions();
+			}
+			break;
+
+		case "upto":
+			clearReactsUpto(argList)
+			break;
+	}
+
 }
 
 

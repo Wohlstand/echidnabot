@@ -309,6 +309,14 @@
 		"auth"     : "owner"
 	},
 
+	"quote" :
+	{
+		"category" : "mod-only",
+		"info"     : "Quote a post (to verify knux knows it exists)",
+		"function" : "quote",
+		"auth"     : "owner"
+	},
+
 	"cleanup" :
 	{
 		"category" : "mod-only",
