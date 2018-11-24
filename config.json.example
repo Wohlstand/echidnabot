@@ -2,7 +2,9 @@
     "ownerId"   : "<either a single user ID or an array of them>",
     "loginId" : "<your bot token>",
     "modRoleId" : "<the ID of the server's moderator role>",
-    "authIds"   : 
+    "startingGuild"   : "<the guild where the channel that Minnie first posts in whenever she's run>",
+    "startingChannel" : "<the channel that Minnie first posts in whenever she's run>",
+    "authIds"   :
     {
         "say"   : "<either a single user ID or an array of them>",
         "etc"   : "<either a single user ID or an array of them>"
