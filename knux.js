@@ -1379,8 +1379,10 @@ bot.on("message", msg =>
     }
     catch (err)
     {
-        sendMsg(msg.channel, getResponse("error"));
-        msg.channel.send("```" + err + "```");
+		// why did I ever think it was a good idea to have errors posted as messages in the same channel again
+		
+        //sendMsg(msg.channel, getResponse("error"));
+        //msg.channel.send("```" + err + "```");
         console.log(err);
     }
 });
