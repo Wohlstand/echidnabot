@@ -1426,17 +1426,18 @@ bot.on('ready', () =>
 
     updateServerData(myChannel.guild);
 
+    buildHelpCategories();
+
     if(!greetingSent)
     {
         let introString = getResponse("enter");
         if (introString != null && myChannel != null)
             myChannel.send(introString);
         greetingSent = true;
+        console.log('READY; ' + introString);
     }
-
-    buildHelpCategories();
-
-    console.log('READY; ' + introString);
+    else
+        console.log('READY;');
     console.log(' ');
 });
 
