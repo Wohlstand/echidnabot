@@ -416,14 +416,25 @@ cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
 
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
-    bot.user.setStatus("invisible");
-    msg.channel.send(getArrayRandom(props.phrases).value, {tts: (ttsActive === true)});
+    bot.user.setStatus("invisible")
+        .catch(msgSendError);
+    let k = getArrayRandom(props.phrases);
+    if(k)
+    {
+        msg.channel.send(k.value, {
+            tts: (ttsActive === true)
+        }).catch(msgSendError);
+    }
     console.log("Shutting down");
 
     bot.setTimeout(function ()
     {
-        process.exit(1);
-    }, 1000);
+        bot.destroy().catch(msgSendError);
+        setTimeout(function ()
+        {
+            process.exit(1);
+        }, 2000);
+    }, 3000);
 };
 
 
@@ -1379,7 +1390,7 @@ bot.on("message", msg =>
     }
     catch (err)
     {
-		// why did I ever think it was a good idea to have errors posted as messages in the same channel again
+        // why did I ever think it was a good idea to have errors posted as messages in the same channel again
 
         //sendMsg(msg.channel, getResponse("error"));
         //msg.channel.send("```" + err + "```");
