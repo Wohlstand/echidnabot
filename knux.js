@@ -1380,12 +1380,15 @@ bot.on("message", msg =>
     catch (err)
     {
 		// why did I ever think it was a good idea to have errors posted as messages in the same channel again
-		
+
         //sendMsg(msg.channel, getResponse("error"));
         //msg.channel.send("```" + err + "```");
         console.log(err);
     }
 });
+
+
+let greetingSent = false;
 
 bot.on('ready', () =>
 {
@@ -1411,7 +1414,7 @@ bot.on('ready', () =>
     let myChannel = myGuild.channels.get(startingChannelId);
     if(!myChannel)
     {
-        console.log("I don't know this channel! IT'S NOSENSE!");
+        console.log("I don't know this channel! IT'S NONSENSE!");
         return;
     }
 
@@ -1423,9 +1426,13 @@ bot.on('ready', () =>
 
     updateServerData(myChannel.guild);
 
-    let introString = getResponse("enter");
-    if (introString != null && myChannel != null)
-        myChannel.send(introString);
+    if(!greetingSent)
+    {
+        let introString = getResponse("enter");
+        if (introString != null && myChannel != null)
+            myChannel.send(introString);
+        greetingSent = true;
+    }
 
     buildHelpCategories();
 
