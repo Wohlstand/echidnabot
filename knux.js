@@ -832,9 +832,8 @@ bot.on("message", msg =>
     try
     {
         // Don't process own messages the same way as others'
-        if (msg.author !== bot.user)
+        if (msg.author !== bot.user && !msg.webhookID)
         {
-
             // Log the message
             if (msg.member != null)
                 console.log(msg.member.displayName + " said: " + msg.cleanContent);
