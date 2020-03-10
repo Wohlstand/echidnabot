@@ -88,7 +88,7 @@ function setChannelAllowed(channel, isAllowed)
 
 function getChannelByName(guild, channelName)
 {
-    return guild.channels.find(x => x.name === channelName);
+    return guild.channels.cache.find(x => x.name === channelName);
 }
 
 let msgFailedAttempts = 0;
@@ -1412,7 +1412,7 @@ bot.on('ready', () =>
 
     bot.user.setStatus("online").catch(msgSendError);
     bot.user.setActivity("protecting the Master Emerald").catch(msgSendError);
-    let myGuild = bot.guilds.get(startingGuildId);
+    let myGuild = bot.guilds.resolve(startingGuildId);
     if(!myGuild)
     {
         let perms = 130112;
@@ -1421,7 +1421,7 @@ bot.on('ready', () =>
         return;
     }
 
-    let myChannel = myGuild.channels.get(startingChannelId);
+    let myChannel = myGuild.channels.resolve(startingChannelId);
     if(!myChannel)
     {
         console.log("I don't know this channel! IT'S NONSENSE!");
