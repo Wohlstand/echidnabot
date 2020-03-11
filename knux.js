@@ -29,8 +29,8 @@ if (authorizeData == null)
 
 let emoteReacts = {
     default: ["✊"],
-    threat: ["somedork:231283304958001154", "gravytea:232183775549849600", "thonkang:273610959094808576", "suspicious:231273731132096513", "😡", "😠", "🔥", "😏", "👎", "☠", "⚔"],
-    brag: ["somedork:231283305272705024", "😎", "💪", "👍", "🥇", "👌", "🤘"],
+    threat: [/*"somedork:231283304958001154", "gravytea:232183775549849600", "thonkang:273610959094808576", "suspicious:231273731132096513",*/ "😡", "😠", "🔥", "😏", "👎", "☠", "⚔"],
+    brag: [/*"somedork:231283305272705024",*/ "😎", "💪", "👍", "🥇", "👌", "🤘"],
     precious: ["💎", "💰", "💲", "💵"]
 };
 
@@ -205,7 +205,7 @@ function updateServerData(guild)
     }
 
     // Channel data
-    guild.channels.forEach(channel =>
+    guild.channels.cache.forEach(channel =>
     {
         console.log("UPDATING SERVER'S CHANNEL DATA: " + channel.id.toString() + "(" + channel.name + ")");
 
@@ -1331,7 +1331,7 @@ bot.on("message", msg =>
 
 
                 // Check if the message is directed at or about the bot
-                aboutMe = (msg.isMentioned(bot.user) === true || detectedTypes.bot > 0 || (prevAuthor === bot.user && detectedTypes.indirect > 0));
+                aboutMe = (msg.mentions.has(bot.user) === true || detectedTypes.bot > 0 || (prevAuthor === bot.user && detectedTypes.indirect > 0));
 
                 // If at or about the bot...
                 if (aboutMe)
