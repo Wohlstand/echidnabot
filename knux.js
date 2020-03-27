@@ -782,7 +782,7 @@ bot.on("messageReactionAdd", (reactionRef, userRef) =>
         }
 
         // Check for authorization
-        let authorized = ((ownerId.indexOf(userRef.id) !== -1) || member.roles.has(modRoleId));
+        let authorized = ((ownerId.indexOf(userRef.id) !== -1) || member.roles.cache.has(modRoleId));
         let authordata = userdata[userRef.id.toString()];
         if (authordata != null)
         {
@@ -841,7 +841,7 @@ bot.on("message", msg =>
                 console.log("[unknown] said: " + msg.cleanContent);
 
             // Authority check
-            let authorized = ((ownerId.indexOf(msg.author.id) !== -1) || msg.member.roles.has(modRoleId));
+            let authorized = ((ownerId.indexOf(msg.author.id) !== -1) || msg.member.roles.cache.has(modRoleId));
             let authordata = userdata[msg.author.id.toString()];
             if (authordata != null)
             {
