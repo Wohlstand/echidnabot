@@ -52,7 +52,9 @@
 			"This is Knuckles, who fears none.",
 			"Everybody flow with me, this is your boy Knuckles.",
 			"It's your main man Knuckles.",
-			"Hey guys! Long time no see."
+			"Hey guys! Long time no see.",
+			"What up, I'm listening to my GameBoy. It's got the bomb tunes on it.",
+			"SHIFT. ROCK. YEAH."
 		]
 	},
 
@@ -79,11 +81,48 @@
 	{
 		"phrases"  :
 		[
-			"PRECIOUS PLACEHOLDER; I'll have more responses here eventually",
-			"PRECIOUS PLACEHOLDER; I'll have more responses here eventually"
+			"He stole my Chaos Emeralds... ",
+			"Something has happened to the Master Emerald!",
+			"Give me back the Master Emerald!",
+			"I can sense the Emeralds are here somewhere!",
+			"I sense the Master Emerald. It can't be far from here.",
+			"Look, it's the Emerald!",
+			"Stop fooling around, and give me back MY Emeralds!",
+			"I hit the BIG one!",
+			"Everything's twinkling and bright... I hate it.",
+			"BINGO!",
+			"This must be where Eggman keeps all his money...",
+			"Hey, that's my Emerald!"
 		]
 	},
-	
+
+	"ohno" :
+	{
+		"phrases"  :
+		[
+			"_oh no_"
+		]
+	},
+
+	"haunted" :
+	{
+		"phrases" :
+		[
+			"This place sure feels haunted...",
+			"What the... a ghost?",
+			"A ghost tried to approach me and got leery.",
+			"The divine wings, straddler of stars, lose their plumes to the dark and fall to the ground. The plumes become as stars, returning to this land.",
+			"We, the children of Babylon, seal one star here, and another within the great scar, formed in heaven’s fall, until the time of the divine wings' rising.",
+			"The great scar, lying in the east among earth stained red by the dawn’s light...",
+			"Maybe... that's the ghost of Shadow we saw earlier.",
+			"I don't like this place, there's no living plants...",
+			"Let's use those ghosts... _as steps._",
+			"Be sure not to hit any ghosts!",
+			"Ghosts must really like me for some reason.",
+			"The servers are the seven Chaos. Chaos is power; power is enriched by the heart. The controller is the one that unifies the Chaos."
+		]
+	},
+
 	"theway" :
 	{
 		"phrases" :
@@ -117,7 +156,9 @@
 			"A ghost tried to approach me and got leery.",
 			"It's real deal when it comes to my name, kid!",
 			"I stay knuckled up, I'm in a deep cut.",
-			"They don't call me Knuckles for nothing, I can't lose."
+			"They don't call me Knuckles for nothing, I can't lose.",
+			"No-one can match the power of my fists!",
+			"It gets dangerous past here, be on your guard."
 		]
 	},
 
@@ -147,7 +188,29 @@
 			"This is Knuckles, and you've reached the Death Chamber.",
 			"You ready to go in space?",
 			"Don't let it hit'cha, move move.",
-			"Time for a Knuckles sandwich!"
+			"Time for a Knuckles sandwich!",
+			"Time to make a house-call!",
+			"Hah! Changing shape won't scare me!",
+			"Fine! Give it your best shot!",
+			"Yeah yeah, that still doesn't faze me, you hear?",
+			"All right! Put 'em up!",
+			"You can't stop me from restoring the Master Emerald!",
+			"Now THAT'S a stunt!",
+			"Mess with the best, fall like the rest!",
+			"We gonna rumble?",
+			"So then... a battle to the bitter end.",
+			"Hmph. Ready for the junk pile.",
+			"Not a very bright move for a genius.",
+			"We're not going _there_, are we?",
+			"There's no way out this time. Give yourself up!",
+			"Let's see what you got!",
+			"Feeling lucky?",
+			"Don't waste your lines, okay?",
+			"I've got my eye on you so don't even think about it!",
+			"Well, look at you, rookie! Having fun in the water?",
+			"Finally, an interesting match-up!",
+			"Finally, something worthy of a challenge!",
+			"I'll crush this comet with my fists if I have to."
 		]
 	},
 
@@ -222,7 +285,8 @@
 			"Echido'na, that's what I'm representing!",
 			"The great Emerald's power allows me to feel.",
 			"Sometimes I wanna just chill and land, but I'm the protector of the Emerald and gems.",
-			"Ain't a criminal, crime don't pay."
+			"Ain't a criminal, crime don't pay.",
+			"I turn Sonic and Tails into fireballs to shoot at enemies."
 		]
 	},
 
@@ -257,34 +321,37 @@
 		"info"     : "check out my mixtape bro",
 		"phrases"  :
 		[
-			"https://www.youtube.com/watch?v=_T89V6XJ0as",
-			"https://www.youtube.com/watch?v=gbb5Ry-v87E",
-			"https://www.youtube.com/watch?v=qTWtNMd8mZs",
+			"[Knuckles The Echidna - Sonic 3] https://www.youtube.com/watch?v=_T89V6XJ0as",
+			"[Angel Island Zone, Act 1 - Sonic 3 & Knuckles] https://www.youtube.com/watch?v=vneaT9L-aY4",
+			"[Angel Island Zone, Act 2 - Sonic 3 & Knuckles] https://www.youtube.com/watch?v=VXOvO57R35w",
 
-			"https://www.youtube.com/watch?v=9WzE_9LZhAY",
+			"[Knuckles the Echidna - Sonic & Knuckles] https://www.youtube.com/watch?v=9WzE_9LZhAY",
 
-			"https://www.youtube.com/watch?v=HOKqPl2b9Hk",
+			"[Oriental Legend - Knuckles Chaotix] https://www.youtube.com/watch?v=2EueAXjNmCQ",
 
-			"https://www.youtube.com/watch?v=daX0t1uI1bs",
+			"[Meet Knuckles - Sonic the Hedgehog: Triple Trouble] https://www.youtube.com/watch?v=4Yxucekv1hI",
 
-			"https://www.youtube.com/watch?v=Sj5jIhnwXjo",
-			"https://www.youtube.com/watch?v=hSoq5hJJ4iU",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
-			"https://www.youtube.com/watch?v=MJPBNst6CzM",
+			"[Knuckles the Echidna - Sonic Pocket Adventure] https://www.youtube.com/watch?v=PwAErC0qTCc",
+			"[Knuckles Boss - Sonic Pocket Adventure] https://www.youtube.com/watch?v=LHsVKkOqXnM",
 
-			"https://www.youtube.com/watch?v=HY-eyigVrWY",
+			"[Angel Island Zone, Act 1 - Sonic Advance] https://www.youtube.com/watch?v=8nNkcAHOpOk",
+			"[Angel Island Zone, Act 2 - Sonic Advance] https://www.youtube.com/watch?v=dKrwqdYE9pA",
+			"[Mecha Knuckles - Sonic Advance] https://www.youtube.com/watch?v=MJPBNst6CzM",
 
-			"https://www.youtube.com/watch?v=reak7KGv8Ek",
+			"[Knuckles Boss - Sonic Advance 2] https://www.youtube.com/watch?v=gRdm47ezBJQ",
 
-			"https://www.youtube.com/watch?v=GM8h2Xyis9M",
+			"[Chaos Ruins - Sonic Battle] https://www.youtube.com/watch?v=reak7KGv8Ek",
 
-			"https://www.youtube.com/watch?v=tOuZxq68Wp4",
-			"https://www.youtube.com/watch?v=wx4DfHW0WtM",
-			"https://www.youtube.com/watch?v=DF726gXNNmE",
-			"https://www.youtube.com/watch?v=SZXGzki_qww",
-			"https://www.youtube.com/watch?v=WKsb0j7xUHI",
-			"https://www.youtube.com/watch?v=1Aon3CJZyGk"
+			"[UNKNOWN FROM M.E. - Sonic Adventure] https://www.youtube.com/watch?v=GM8h2Xyis9M",
+
+			"[Unknown From M. E. - Sonic Adventure 2] https://www.youtube.com/watch?v=tOuZxq68Wp4",
+			"[Wild Canyon - Sonic Adventure 2] https://www.youtube.com/watch?v=wx4DfHW0WtM",
+			"[Pumpkin Hill - Sonic Adventure 2] https://www.youtube.com/watch?v=DF726gXNNmE",
+			"[Aquatic Mines - Sonic Adventure 2] https://www.youtube.com/watch?v=SZXGzki_qww",
+			"[Death Chamber - Sonic Adventure 2] https://www.youtube.com/watch?v=WKsb0j7xUHI",
+			"[Meteor Herd - Sonic Adventure 2] https://www.youtube.com/watch?v=1Aon3CJZyGk",
+			
+			"[Knuckles & Knuckles Ending - Sonic Mania] https://www.youtube.com/watch?v=Idi0XmmrnrU"
 		]
 	},
 
@@ -296,8 +363,12 @@
 		[
 			"https://www.youtube.com/watch?v=rw6TAPNqQAE",
 			"https://www.youtube.com/watch?v=tXDNBBh2QSo",
-			"https://www.youtube.com/watch?v=y8Nze9mlTFE",
-			"https://www.youtube.com/watch?v=5GEmLnaFC38"
+			"https://www.youtube.com/watch?v=qUuZpTDiTzU",
+			"https://www.youtube.com/watch?v=iuiZSxtodFM",
+			"https://www.youtube.com/watch?v=id18PuGrSaY",
+			"https://www.youtube.com/watch?v=ERjGaFpbvbE",
+			"https://cdn.discordapp.com/attachments/266261648988307456/524631657110568970/image0.png",
+			"https://twitter.com/TommoTheCabbit/status/1074848537563840512?s=09"
 		]
 	},
 
@@ -455,20 +526,20 @@
 		"info"     : "Causes me to revisit some fond memories",
 		"phrases"  :
 		[
-			"https://i.imgur.com/OKRMuxf.png",
+			"https://i.imgur.com/OKRMuxf.png [lost memory]",
 			"https://i.imgur.com/tIL7iNz.png",
 			"https://i.imgur.com/bMOxef6.png",
 			"https://i.imgur.com/9YTknFG.png",
 			"https://i.imgur.com/LKLQZSm.png",
 			"https://i.imgur.com/5RBW13m.png",
-			"https://i.imgur.com/1ioJUfq.png",
-			"https://i.imgur.com/JKrRDyB.png",
+			"https://i.imgur.com/1ioJUfq.png [lost memory]",
+			"https://i.imgur.com/JKrRDyB.png [lost memory]",
 			"https://i.imgur.com/nmCiQ5E.png",
 			"https://i.imgur.com/jOqjdpC.png",
 			"https://i.imgur.com/Isu4dhW.png",
 			"https://i.imgur.com/qqLEeSX.png",
-			"https://i.imgur.com/pxmoJxz.png",
-			"https://i.imgur.com/7GZG3yb.png",
+			"https://i.imgur.com/pxmoJxz.png [lost memory]",
+			"https://i.imgur.com/7GZG3yb.png [lost memory]",
 			"https://i.imgur.com/M2KFK6O.png",
 			"https://i.imgur.com/UdmI3fz.png",
 			"https://i.imgur.com/D1JzUq8.png",

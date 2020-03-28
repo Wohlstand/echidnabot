@@ -1441,7 +1441,7 @@ bot.on('ready', () =>
     if(!greetingSent)
     {
         let introString = getResponse("enter");
-        if (introString != null && myChannel != null)
+        if (introString != null && myChannel != null && isChannelAllowed(startingChannelId))
             myChannel.send(introString);
         greetingSent = true;
         console.log('READY; ' + introString);
