@@ -87,7 +87,7 @@ updateRegex();
 
 function isChannelAllowed(channel)
 {
-    let chId = channel.id.toString();
+    let chId = channel.id;
     if(chId in channelsAllowed)
         return channelsAllowed[chId] === true;
     else
@@ -888,7 +888,7 @@ bot.on("message", msg =>
 
 
             // Don't respond to commands or other posts from other bots if not allowed
-            if (message.author.bot && !talkToBots)
+            if (msg.author.bot && !talkToBots)
                 return;
 
 
