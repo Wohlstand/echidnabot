@@ -887,11 +887,6 @@ bot.on("message", msg =>
 
 
 
-            // Don't respond to commands or other posts from other bots if not allowed
-            if (message.author.bot && !talkToBots)
-                return;
-
-
             // COMMANDS (bypass channel permissions)
 
             // Brute-force old important commands as backup
@@ -997,6 +992,10 @@ bot.on("message", msg =>
             }
 
 
+
+            // Don't respond to regular messages from other bots if not allowed
+            if (message.author.bot && !talkToBots)
+                return;
 
             // Responses to regular messages (only in permitted channels)
             else
