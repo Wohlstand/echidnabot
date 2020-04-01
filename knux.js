@@ -74,6 +74,7 @@ let andCount = Math.floor((Math.random() * 3) + 3);
 let channelsAllowed = {[mconfig.startingChannel] : true};
 let deleteAll = false;
 
+let talkToBots = false;
 let ttsActive = false;
 
 let sayUser = new Array(0);
@@ -359,6 +360,20 @@ cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
     {
         ttsActive = false;
         sendMsg(msg.channel, "[Text to speech disabled]");
+    }
+};
+
+cmdFuncts.toggleBotTalk = function (msg, cmdStr, argStr, props)
+{
+    if (talkToBots === false)
+    {
+        talkToBots = true;
+        sendMsg(msg.channel, "[Talking to other bots enabled]");
+    }
+    else
+    {
+        talkToBots = false;
+        sendMsg(msg.channel, "[Talking to other bots disabled]");
     }
 };
 
@@ -860,6 +875,7 @@ bot.on("message", msg =>
             else
                 console.log("[unknown] said: " + msg.cleanContent);
 
+
             // Authority check
             let authorized = ((ownerId.indexOf(msg.author.id) !== -1) || msg.member.roles.cache.has(modRoleId));
             let authordata = userdata[msg.author.id.toString()];
@@ -870,7 +886,15 @@ bot.on("message", msg =>
             }
 
 
-            // Temporarily brute-forcing old important commands
+
+            // Don't respond to commands or other posts from other bots if not allowed
+            if (message.author.bot && !talkToBots)
+                return;
+
+
+            // COMMANDS (bypass channel permissions)
+
+            // Brute-force old important commands as backup
             if (msg.cleanContent.startsWith("/knux oldshutdown"))
             {
                 if (authorized)
@@ -909,7 +933,6 @@ bot.on("message", msg =>
                 else
                     sendMsg(msg.channel, getResponse("decline"));
             }
-
 
 
             // New direct commands
@@ -974,9 +997,10 @@ bot.on("message", msg =>
             }
 
 
+
+            // Responses to regular messages (only in permitted channels)
             else
             {
-                // Don't respond to messages outside of permitted channels
                 if (isChannelAllowed(msg.channel) !== true)
                     return;
 

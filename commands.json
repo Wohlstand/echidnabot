@@ -443,6 +443,13 @@
 		"function" : "revealSay"
 	},
 
+	"bottalk" :
+	{
+		"category" : "general",
+		"info" : "Toggles whether I'll respond to other bots.",
+		"function" : "toggleBotTalk"
+	},
+
 	"tts" :
 	{
 		"category" : "general",
