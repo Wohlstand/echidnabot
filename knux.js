@@ -996,7 +996,7 @@ bot.on("message", msg =>
 
 
             // Don't respond to regular messages from other bots if not allowed
-            if (message.author.bot && !talkToBots)
+            if (msg.author.bot && !talkToBots)
                 return;
 
             // Responses to regular messages (only in permitted channels)
