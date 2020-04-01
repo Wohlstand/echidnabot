@@ -38,11 +38,25 @@ let emoteReacts = {
 
 
 // Other stuff
-let commands = JSON.parse(fs.readFileSync('commands.json', 'utf8'));
-delete commands["_example"];
+function loadPerServerJson(filename)
+{
+    let baseJsonData = JSON.parse(fs.readFileSync(filename + ".json", "utf8"));
+    let combinedJsonData = baseJsonData;
+    if (fs.existsSync("server"+".json"))
+    {
+        let serverJsonData = JSON.parse(fs.readFileSync("server" + filename + ".json", "utf8"));
+        combinedJsonData = {...baseJsonData, ...serverJsonData};
+    }
 
-let responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
-let keywords = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
+    if (combinedJsonData._example != null)
+        delete combinedJsonData._example;
+
+    return combinedJsonData;
+}
+
+let commands = loadPerServerJson("commands");
+let responses = loadPerServerJson("responses");
+let keywords = loadPerServerJson("keywords");
 
 if(!fs.existsSync("userdata.json"))
     fs.writeFileSync("userdata.json", "{}", "utf8");
@@ -163,16 +177,21 @@ function getResponse(category)
 {
     let randString = "";
     let array = responses[category];
+    let postString = "";
+
     if (array == null)
     {
-        array = responses["error"];
-
-        randString = array[Math.floor(Math.random() * (array.length))] + "```Could not find response category: '" + category + "'```";
+        if (commands[category] != null && commands[category].phrases != null)
+            array = commands[category].phrases;
+        else
+        {
+            array = responses["error"];
+            postString = "```Could not find response category: '" + category + "'```";
+        }
     }
-    else
-        randString = array[Math.floor(Math.random() * (array.length))];
+    randString = array[Math.floor(Math.random() * (array.length))];
 
-    return randString;
+    return randString + postString;
 }
 
 
@@ -277,12 +296,6 @@ function sendMsg(channel, msg)
 
 
 // ---------- NEW COMMAND SYSTEM FUNCTIONS ----------------
-function sendError(channel, str)
-{
-
-}
-
-
 let helpCategories = {};
 
 function buildHelpCategories()
@@ -314,19 +327,26 @@ function buildHelpCategories()
 
 
 let cmdFuncts = {};
-cmdFuncts.sendResponse = function (msg, cmdStr, argStr, props)
+cmdFuncts.sendPhrase = function (msg, cmdStr, argStr, props)
 {
     let randString = "";
     let array = props["phrases"];
     if (array == null)
     {
-        randString = "[Error: Could not find response category: `" + cmdStr + "`]";
+        randString = "[Error: Could not find phrases for command: `" + cmdStr + "`]";
     }
     else
         randString = getArrayRandom(props.phrases).value;
 
     sendMsg(msg.channel, randString);
 };
+
+/*
+function cmdFuncts.forceError(channel, str)
+{
+    sendMsg(beep, boop)
+}
+*/
 
 cmdFuncts.toggleTTS = function (msg, cmdStr, argStr, props)
 {
@@ -706,7 +726,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
         }
 
         if (deny)
-            cmdFuncts.sendResponse(msg, "nocmd", "", commands["nocmd"])
+            cmdFuncts.sendPhrase(msg, "nocmd", "", commands["nocmd"])
     }
 
     // Show the general help post
@@ -728,7 +748,7 @@ cmdFuncts.callHelp = function (msg, cmdStr, argStr, props)
                 let cmdStr = helpCategories[item][item2];
                 let functName = commands[cmdStr]["function"];
                 if (functName == null)
-                    functName = "sendResponse";
+                    functName = "sendPhrase";
 
                 if (cmdFuncts[functName] == null)
                     listStr = listStr + "~~`" + cmdStr + "`~~";
@@ -911,7 +931,7 @@ bot.on("message", msg =>
                     let props = commands[cmdStr];
                     let authLevel = props["auth"];
                     let matchesAuthLevel = true;
-                    let functPtr = cmdFuncts["sendResponse"];
+                    let functPtr = cmdFuncts["sendPhrase"];
                     let functStr = "";
 
                     updateUserData(msg.author);
@@ -942,320 +962,12 @@ bot.on("message", msg =>
                     }
                     else
                     {
-                        cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
+                        cmdFuncts.sendPhrase(msg, "decline", "", commands["decline"]);
                     }
                 }
                 else
-                    cmdFuncts.sendResponse(msg, "decline", "", commands["decline"]);
+                    cmdFuncts.sendPhrase(msg, "decline", "", commands["decline"]);
 
-                /*
-                if (msg.cleanContent.startsWith("/knux and"))
-                    sendMsg(msg.channel, "& Knuckles")
-
-                if (msg.cleanContent.startsWith("/knux delcmd"))
-                {
-                    if  (deleteAll == false)
-                    {
-                        deleteAll = true;
-                        sendMsg(msg.channel, "[Deleting all commands enabled]")
-                    }
-                    else
-                    {
-                        deleteAll = false;
-                        sendMsg(msg.channel, "[Deleting all commands disabled]")
-                    }
-                }
-
-                if (msg.cleanContent.startsWith("/knux authorize"))
-                {
-                    if (authorized)
-                    {
-                        // Get username substring
-                        let nameStr = msg.cleanContent.substring(16);
-
-                        // Check if a valid user was specified
-                        let targetUser = null
-
-                        let gMembers = msg.guild.members
-                        for (let m in gMembers)
-                        {
-                            let mUser = m.user
-                            let mUsername = m.user.username
-                            if  (mUsername == nameStr)
-                            {
-                                sendMsg(msg.channel, "["+mUsername+" (A.K.A. "+m.displayName+") is now authorized to use mod commands]")
-                                targetUser = mUser
-                                break;
-                            }
-                        }
-
-                        if  (targetUser != null)
-                        {
-                            let userKey = targetUser.id.toString()
-                            if  (userdata[userKey] == null)
-                                userdata[userKey] = {}
-                            userdata[userKey].authorized = true
-                            updateJson(userdata, 'userdata')
-                        }
-                        else
-                        {
-                            sendMsg(msg.channel, "[User not found, please specify a valid username for a member of this server]")
-                        }
-                    }
-                }
-
-                if (msg.cleanContent.startsWith("/knux submit"))
-                {
-                    let setStr = msg.cleanContent.substring(13);
-
-                    if  (setStr != null)
-                    {
-                        let userKey = msg.author.id.toString()
-                        if  (userdata[userKey] == null)
-                            userdata[userKey] = {}
-                        if  (userdata[userKey].submissions == null)
-                            userdata[userKey].submissions = []
-                        userdata[userKey].submissions.push(setStr)
-                        updateJson(userdata, 'userdata')
-                        msg.channel.send("[`"+setStr+"` added to "+msg.author.username+"'s list of submissions for my host to review.]");
-                    }
-                }
-
-                if (msg.cleanContent.startsWith("/knux tts"))
-                {
-                    if  (ttsActive == false)
-                    {
-                        ttsActive = true;
-                        msg.channel.send("/tts [Text to speech enabled]");
-                    }
-                    else
-                    {
-                        ttsActive = false;
-                        msg.channel.send("[Text to speech disabled]");
-                    }
-                }
-
-                else if (msg.cleanContent.startsWith("/knux regex"))
-                {
-                    if (authorized)
-                    {
-                        let setStr = msg.cleanContent.substring(12);
-                        sendMsg(msg.channel, "Regular expression for "+setStr+": ```"+keywordRegex[setStr].toString()+"```")
-                    }
-                }
-
-                else if (msg.cleanContent.startsWith("/knux setgame"))
-                {
-                    let setStr = msg.cleanContent.substring(14);
-                    bot.user.setActivity(setStr);
-                }
-
-                else if (msg.cleanContent.startsWith("/knux react"))
-                {
-                    for (i = 0; i < 5; i++)
-                    {
-                        let emoteStr = "";
-                        let emoteCategory = emoteReacts.threat;
-                        if (Math.random() > 0.5)
-                            emoteCategory = emoteReacts.brag;
-                        reactFromArray(msg, emoteCategory);
-                    }
-                }
-
-
-                else if (msg.cleanContent.startsWith("/knux say"))
-                {
-                    // Get substring to say
-                    let setStr = msg.cleanContent.substring(10);
-
-                    // Replace phrase tags with the corresponding phrase
-                    setStr = setStr.replace(/\^[^\^]*\^/gi, function myFunction(x){
-                            let noCarrots = x.substring(1,x.length-1);
-                            return getResponse(noCarrots);
-                        });
-
-                    let thisChannel = msg.channel;
-                    sayMember.splice(0, 0, msg.member);
-                    sayUser.splice(0, 0, msg.member.user);
-                    sayMessage.splice(0, 0, setStr);
-                    msg.delete(0);
-
-                    sendMsg(thisChannel, setStr)
-                }
-
-                else if (msg.cleanContent.startsWith("/knux ping"))
-                {
-                    let setStr = "Pong! `\n"+(Date.now() - msg.createdTimestamp + 37300).toString()+" ms`";
-                    sendMsg(msg.channel, setStr)
-                }
-
-                else if (msg.cleanContent.startsWith("/knux reveal"))
-                {
-                    if  (sayMember.length > 0)
-                    {
-                        let authorUser = sayUser[0];
-                        let authorMember = sayMember[0];
-                        let authorStr = authorUser.username + " (A.K.A. " + authorMember.displayName + ")";
-                        let contentStr = sayMessage[0];
-                        sendMsg(msg.channel, "```["+authorStr+" made me say:\n"+contentStr+"]```");
-                    }
-                    else
-                        sendMsg(msg.channel, "```[No say commands since I last logged in.]```");
-                }
-
-                else if (msg.cleanContent.startsWith("/knux learn"))
-                {
-                    responses = JSON.parse(fs.readFileSync('responses.json', 'utf8'));
-                    keywords = JSON.parse(fs.readFileSync('keywords.json', 'utf8'));
-                    updateRegex();
-                    sendMsg(msg.channel, getResponse("learning"));
-                }
-
-                else if (msg.cleanContent.startsWith("/knux avatar"))
-                {
-                    let newAvatar = getResponse("avatar");
-                    bot.user.setAvatar(newAvatar);
-                    sendMsg(msg.channel, "`[Avatar changed to `<"+newAvatar+">`]`");
-                }
-
-                else if (msg.cleanContent.startsWith("/knux error"))
-                {
-                    if (authorized)
-                        butt;
-                    else
-                    {
-                        sendMsg(msg.channel, getResponse("decline"));
-                    }
-                }
-
-                else if (msg.cleanContent.startsWith("/knux general"))
-                {
-                    if (authorized)
-                    {
-                        if  (channelsAllowed.general == true)
-                        {
-                            sendMsg(msg.channel, "[Posting in #general disabled]");
-                            channelsAllowed.general = false;
-                        }
-                        else
-                        {
-                            sendMsg(msg.channel, "[Posting in #general enabled]");
-                            channelsAllowed.general = true;
-                            let myChannel = bot.channels.find('name', 'general');
-                            sendMsg(msg.channel, getResponse("enter"));
-                        }
-                    }
-                    else
-                        sendMsg(msg.channel, getResponse("decline"));
-                }
-
-                else if (msg.cleanContent.startsWith("/knux channel"))
-                {
-                    if (authorized)
-                    {
-                        let setStr = msg.cleanContent.substring(14);
-                        if  (setStr == "beep-boop")
-                            sendMsg(msg.channel, getResponse("decline"));
-                        else
-                        {
-                            if  (channelsAllowed[setStr] == true)
-                            {
-                                sendMsg(msg.channel, "[Posting in #"+setStr+" disabled]");
-                                channelsAllowed[setStr] = false;
-                            }
-                            else
-                            {
-                                sendMsg(msg.channel, "[Posting in #"+setStr+" enabled]");
-                                channelsAllowed[setStr] = true;
-                                let myChannel = bot.channels.find('name', setStr);
-                                if  (myChannel != null)
-                                    sendMsg(myChannel, getResponse("enter"));
-                            }
-                        }
-                    }
-                    else
-                        sendMsg(msg.channel, getResponse("decline"));
-                }
-
-                else if (msg.cleanContent.startsWith("/knux help") || msg.cleanContent.startsWith("/knux info") || msg.cleanContent.startsWith("/knux cmd") || msg.cleanContent.startsWith("/knux command"))
-                {
-                    let setStr = ""
-                    let cleanMsg = msg.cleanContent
-                    if       (cleanMsg.startsWith("/knux help ")  ||  cleanMsg.startsWith("/knux info "))
-                    {
-                        if  (cleanMsg.length > 10)
-                            setStr = cleanMsg.substring(11);
-                    }
-                    else if  (cleanMsg.startsWith("/knux cmd "))
-                    {
-                        if  (cleanMsg.length > 9)
-                            setStr = cleanMsg.substring(10);
-                    }
-                    else if  (cleanMsg.startsWith("/knux command "))
-                    {
-                        if  (cleanMsg.length > 13)
-                            setStr = cleanMsg.substring(14);
-                    }
-
-                    if  (setStr == null  ||  setStr == "")
-                        callHelp(msg)
-                    else
-                    {
-                        if  (responses["helpcmd"][setStr] != null)
-                            callCmdHelp(msg, setStr)
-                        else
-                            sendMsg(msg.channel, getResponse("help missing"))
-                    }
-                }
-
-                else if (msg.cleanContent.startsWith("/knux shutdown"))
-                {
-                    if (authorized)
-                    {
-                        bot.user.setStatus("invisible")
-                        sendMsg(msg.channel, getResponse("exit"));
-                        console.log("Shutting down");
-
-                        bot.setTimeout(function(){
-                            process.exit(1);
-                        }, 100);
-                    }
-                    else
-                        sendMsg(msg.channel, getResponse("decline"));
-                }
-
-                else if (msg.cleanContent.startsWith("/knux gitpull"))
-                {
-                    if (authorized)
-                    {
-                        console.log("Pulling a git");
-                        exec('git', ["pull", "origin", "master"], function(err, data)
-                        {
-                            if(err == null)
-                                sendMsg(msg.channel, "git pull origin master\n```\n" + data.toString() + "\n```\n");
-                            else
-                            {
-                                sendMsg(msg.channel, "ERROR of git pull origin master```\n" + err + "\n\n" + data.toString() + "\n```\n");
-                                exec('git', ["merge", "--abort"], function(err, data){});
-                            }
-                        });
-                    }
-                    else
-                        sendMsg(msg.channel, getResponse("decline"));
-                }
-
-                else
-                {
-                    let categoryStr = msg.cleanContent.substring(6)
-                    if (responses[categoryStr] != null  &&  categoryStr != "exit")
-                        sendMsg(msg.channel, getResponse(categoryStr));
-                    else
-                    {
-                    sendMsg(msg.channel, getResponse("decline"));
-                        console.log("Tried to call a category that doesn't exist");
-                    }
-                }
-                */
 
                 if (deleteAll === true && msg != null)
                     msg.delete(0);

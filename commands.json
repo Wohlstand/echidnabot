@@ -2,14 +2,14 @@
 	"_example" :
 	{
 		"category" : "this is used to sort the commands in the help post;  if not specified, the command will not be listed",
-		"function" : "the name of the function to call;  defaults to sendResponse if not specified.  All functions pass in the message, command and additional text as arguments.",
+		"function" : "the name of the function to call;  defaults to sendPhrase if not specified.  All functions pass in the message, command and additional text as arguments.",
 		"info"     : "the text displayed when someone inputs /knux help [this command];  if this isn't specified, the bot will deny its existence",
 		"auth"     : "if this field is defined at all, only owner, server mods, and whitelisted users can use the command;  specify a group name defined in config.json's authIds to whitelist those members",
 		"phrases"  :
 		[
 			"a table of possible responses",
-			"sendResponse will just choose one of these randomly and post it",
-			"other functions can make use of these as well."
+			"sendPhrase will just choose one of these randomly and post it",
+			"other functions can make use of these in different ways."
 		]
 	},
 
@@ -43,6 +43,8 @@
 
 	"enter" :
 	{
+		"category" : "special phrases",
+		"info" : "Makes me post one of the phrases I use when logging in.",
 		"phrases"  :
 		[
 			"Here I come, rougher than the rest of them!",
@@ -60,20 +62,11 @@
 
 	"exit" :
 	{
+		"category" : "special phrases",
+		"info" : "Makes me post one of the phrases I use when logging out.",
 		"phrases"  :
 		[
 			"Something's callin' me more and more..."
-		]
-	},
-
-	"fart" :
-	{
-		"phrases"  :
-		[
-			"/foxy fart",
-			"[toot]",
-			"[Maybe later...]",
-			"/luna butts"
 		]
 	},
 
@@ -96,33 +89,6 @@
 		]
 	},
 
-	"ohno" :
-	{
-		"phrases"  :
-		[
-			"_oh no_"
-		]
-	},
-
-	"haunted" :
-	{
-		"phrases" :
-		[
-			"This place sure feels haunted...",
-			"What the... a ghost?",
-			"A ghost tried to approach me and got leery.",
-			"The divine wings, straddler of stars, lose their plumes to the dark and fall to the ground. The plumes become as stars, returning to this land.",
-			"We, the children of Babylon, seal one star here, and another within the great scar, formed in heaven’s fall, until the time of the divine wings' rising.",
-			"The great scar, lying in the east among earth stained red by the dawn’s light...",
-			"Maybe... that's the ghost of Shadow we saw earlier.",
-			"I don't like this place, there's no living plants...",
-			"Let's use those ghosts... _as steps._",
-			"Be sure not to hit any ghosts!",
-			"Ghosts must really like me for some reason.",
-			"The servers are the seven Chaos. Chaos is power; power is enriched by the heart. The controller is the one that unifies the Chaos."
-		]
-	},
-
 	"theway" :
 	{
 		"phrases" :
@@ -133,6 +99,8 @@
 
 	"brag" :
 	{
+		"category" : "keyword",
+		"info" : "Makes me post one of my responses to this keyword group.",
 		"phrases" :
 		[
 			"Tougher than leather.",
@@ -164,6 +132,8 @@
 
 	"threat" : 
 	{
+		"category" : "keyword",
+		"info" : "Makes me post one of my responses to this keyword.",
 		"phrases"  :
 		[
 			"I'll give you the coldest shoulder...",
@@ -214,55 +184,10 @@
 		]
 	},
 
-	"accept" :
-	{
-		"phrases"  :
-		[
-			"I will be the one to set your heart free true.",
-			"This alliance has a purpose."
-		]
-	},
-
-	"nocmd" :
-	{
-		"phrases"  :
-		[
-			"[Couldn't find any info for that command.]",
-			"[Sorry, but I think that command doesn't exist.]",
-			"[Don't ask me how to do the impossible.]",
-			"[I'm an echidna, Jim, not a miracle worker.]",
-			"[no imaginary verbs pls kthx]",
-			"[Try asking in a language I can understand.]",
-			"[Dunno what that is.  Did you make a typo?]",
-			"[I can't help if I don't know what you're asking.]",
-			"[Could you repeat that?]"
-		]
-	},
-
-	"decline" :
-	{
-		"phrases"  :
-		[
-			"I'd rather flex my muscles.",
-			"I'd rather flex my muscles.",
-			"I'd rather flex my muscles.",
-			"No way!",
-			"No time for games...",
-			"No time for games...",
-			"I'd rather flex my muscles."
-		]
-	},
-
-	"and" :
-	{
-		"phrases"  :
-		[
-			"& Knuckles"
-		]
-	},
-
 	"about" :
 	{
+		"category" : "keyword",
+		"info" : "Makes me post one of my responses to this keyword group.",
 		"phrases"  :
 		[
 			"Tougher than leather.",
@@ -287,6 +212,53 @@
 			"Sometimes I wanna just chill and land, but I'm the protector of the Emerald and gems.",
 			"Ain't a criminal, crime don't pay.",
 			"I turn Sonic and Tails into fireballs to shoot at enemies."
+		]
+	},
+
+	"accept" :
+	{
+		"phrases"  :
+		[
+			"I will be the one to set your heart free true.",
+			"This alliance has a purpose."
+		]
+	},
+
+	"decline" :
+	{
+		"phrases"  :
+		[
+			"I'd rather flex my muscles.",
+			"I'd rather flex my muscles.",
+			"I'd rather flex my muscles.",
+			"No way!",
+			"No time for games...",
+			"No time for games...",
+			"I'd rather flex my muscles."
+		]
+	},
+
+	"nocmd" :
+	{
+		"phrases"  :
+		[
+			"[Couldn't find any info for that command.]",
+			"[Sorry, but I think that command doesn't exist.]",
+			"[Don't ask me how to do the impossible.]",
+			"[I'm an echidna, Jim, not a miracle worker.]",
+			"[no imaginary verbs pls kthx]",
+			"[Try asking in a language I can understand.]",
+			"[Dunno what that is.  Did you make a typo?]",
+			"[I can't help if I don't know what you're asking.]",
+			"[Could you repeat that?]"
+		]
+	},
+
+	"and" :
+	{
+		"phrases"  :
+		[
+			"& Knuckles"
 		]
 	},
 
@@ -519,71 +491,6 @@
 			"http://i.imgur.com/Abnz6Rd.png"
 		]
 	},
-
-	"memory" :
-	{
-		"category" : "general",
-		"info"     : "Causes me to revisit some fond memories",
-		"phrases"  :
-		[
-			"https://i.imgur.com/OKRMuxf.png [lost memory]",
-			"https://i.imgur.com/tIL7iNz.png",
-			"https://i.imgur.com/bMOxef6.png",
-			"https://i.imgur.com/9YTknFG.png",
-			"https://i.imgur.com/LKLQZSm.png",
-			"https://i.imgur.com/5RBW13m.png",
-			"https://i.imgur.com/1ioJUfq.png [lost memory]",
-			"https://i.imgur.com/JKrRDyB.png [lost memory]",
-			"https://i.imgur.com/nmCiQ5E.png",
-			"https://i.imgur.com/jOqjdpC.png",
-			"https://i.imgur.com/Isu4dhW.png",
-			"https://i.imgur.com/qqLEeSX.png",
-			"https://i.imgur.com/pxmoJxz.png [lost memory]",
-			"https://i.imgur.com/7GZG3yb.png [lost memory]",
-			"https://i.imgur.com/M2KFK6O.png",
-			"https://i.imgur.com/UdmI3fz.png",
-			"https://i.imgur.com/D1JzUq8.png",
-			"https://i.imgur.com/YBjijOv.png",
-			"https://i.imgur.com/yFw0se1.png",
-			"https://i.imgur.com/imZpeQc.png",
-			"https://i.imgur.com/CcfHS64.png",
-			"https://i.imgur.com/1CMyKFT.png",
-			"https://i.imgur.com/xMHN2xz.png",
-			"https://i.imgur.com/m0UDnLS.png",
-			"https://i.imgur.com/fSHQoxP.png",
-			"https://i.imgur.com/dgpHEnM.png",
-			"https://i.imgur.com/8FaYxeb.png",
-			"https://i.imgur.com/pYUhJH2.png",
-			"https://i.imgur.com/YT8qjIa.png",
-			"https://i.imgur.com/HhEP9Lr.png",
-			"https://i.imgur.com/RgLAjfa.png",
-			"https://i.imgur.com/VPlHSnQ.png",
-			"https://i.imgur.com/UPcaFPH.png",
-			"https://i.imgur.com/id3biEI.png",
-			"https://i.imgur.com/9vJX2fI.png",
-			"https://i.imgur.com/4Futoac.png",
-			"https://i.imgur.com/PnR8FBp.png",
-			"https://i.imgur.com/DngbDqZ.png",
-			"https://i.imgur.com/89dPWru.png",
-			"https://i.imgur.com/jWAOVFW.png",
-			"https://i.imgur.com/UPQG55i.png",
-			"https://i.imgur.com/P1sl1t9.png",
-			"https://i.imgur.com/LJYusbI.png",
-			"https://i.imgur.com/F4CnZQY.png",
-			"https://i.imgur.com/4e8KgHd.png",
-			"https://i.imgur.com/6A0s1Wx.png",
-			"https://i.imgur.com/tnN2kWZ.png",
-			"https://i.imgur.com/zRXSlkJ.png",
-			"https://i.imgur.com/RlqnWwx.png",
-			"https://i.imgur.com/nqwqe83.png",
-			"https://i.imgur.com/ZFvQyji.png",
-			"https://i.imgur.com/IC89PJ3.png",
-			"https://i.imgur.com/NuF8Ckh.png",
-			"https://i.imgur.com/pQfjK0V.png",
-			"https://cdn.discordapp.com/attachments/216229325484064768/343755737756860416/unknown.png"
-		]
-	},
-
 
 	"say" :
 	{
