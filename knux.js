@@ -42,9 +42,10 @@ function loadPerServerJson(filename)
 {
     let baseJsonData = JSON.parse(fs.readFileSync(filename + ".json", "utf8"));
     let combinedJsonData = baseJsonData;
-    if (fs.existsSync("server"+".json"))
+    let serverFilename = "server" + filename + ".json";
+    if (fs.existsSync(serverFilename))
     {
-        let serverJsonData = JSON.parse(fs.readFileSync("server" + filename + ".json", "utf8"));
+        let serverJsonData = JSON.parse(fs.readFileSync(serverFilename, "utf8"));
         combinedJsonData = {...baseJsonData, ...serverJsonData};
     }
 
