@@ -352,38 +352,6 @@
 		"auth"     : "owner"
 	},
 
-	"quote" :
-	{
-		"category" : "mod-only",
-		"info"     : "Quote a post (to verify knux knows it exists)",
-		"function" : "quote",
-		"auth"     : "owner"
-	},
-
-	"cleanup" :
-	{
-		"category" : "mod-only",
-		"info"     : "Bulk reaction removal.",
-		"function" : "cleanupReactions",
-		"auth"     : "owner"
-	},
-
-	"cleanupSingle" :
-	{
-		"category" : "mod-only",
-		"info"     : "Remove reactions from a single message.",
-		"function" : "clearReactsOne",
-		"auth"     : "owner"
-	},
-
-	"tcleanup" :
-	{
-		"category" : "mod-only",
-		"info"     : "Sets the trigger emoji for cleaning up reactions from a post.",
-		"function" : "setCleanupTrigger",
-		"auth"     : "owner"
-	},
-
 	"update" :
 	{
 		"category" : "mod-only",

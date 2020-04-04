@@ -429,27 +429,6 @@ cmdFuncts.emojiCommands = function (msg, cmdStr, argStr, props)
 */
 
 
-let lastReactClearedId = serverdata.lastReactClearedId
-
-function clearReactionsInMessage(msg, id)
-{
-    msg.channel.fetchMessage(id)
-        .then(message => message.clearReactions());
-}
-
-
-cmdFuncts.quote = function (msg, cmdStr, argStr, props)
-{
-    msg.channel.fetchMessage(argStr)
-        .then(message => sendMsg(msg.channel, "[" + argStr + ": " + message.cleanContent + "]"));
-};
-
-cmdFuncts.clearReactsOne = function (msg, cmdStr, argStr, props)
-{
-    msg.channel.fetchMessage(argStr)
-        .then(message => message.clearReactions());
-};
-
 cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
 {
     bot.user.setStatus("invisible")
@@ -471,110 +450,6 @@ cmdFuncts.shutDown = function (msg, cmdStr, argStr, props)
             process.exit(1);
         }, 2000);
     }, 3000);
-};
-
-
-let cleanupTrigger = "🇶";
-let cleanupEmojis = new Array(0);
-
-cmdFuncts.setCleanupTrigger = function (msg, cmdStr, argStr, props)
-{
-    let cleanupTrigger = argStr.trim();
-    sendMsg(msg.channel, "[Authorized users may now add " + cleanupTrigger + " to a message to remove all of that message's reactions.]");
-};
-
-
-function clearReactsUpTo(msg, argList)
-{
-    let msgId = argList[0];
-    argList.shift();
-    let debugString = "EMOJI NAME LIST: ";
-
-    for (i = 0; i < argList.length; i++)
-    {
-        argList[i] = argList[i].replace(/\/:/g, "");
-        debugString += argList[i] + ","
-    }
-
-    debugString += "; " + argList.length.toString() + " total";
-    console.log(debugString);
-
-    let messageCounter = 0;
-    let matchedMessageCount = 0;
-    let matchedReactionsCount = 0;
-
-    msg.channel.fetchMessages({before: msgId, limit: 100})
-        .then((messages) =>
-        {
-            let messageArr = messages.array();
-            for (i = 0; i < messageArr.length; i++)
-            {
-                let message = messageArr[i];
-                console.log("MESSAGE: " + message.content);
-                messageCounter++;
-                let matchCounter = 0;
-                let reactionArray = message.reactions.array();
-                for (i2 = 0; i2 < reactionArray.length; i2++)
-                {
-                    let reaction = reactionArray[i2];
-                    console.log("REACTION FOUND: name=" + reaction.emoji.name + ", tostring=" + reaction.emoji.toString());
-                    if (argList.includes(reaction.emoji.name))
-                    {
-                        console.log("REACTION MATCH");
-                        matchCounter++;
-                        matchedReactionsCount++;
-                    }
-                }
-                if (matchCounter === argList.length)
-                {
-                    console.log("ALL MATCHED");
-                    message.clearReactions();
-                    lastReactClearedId = message.id;
-                    if (i % 10 === 0 || i === messageArr.length - 1)
-                    {
-                        serverdata.lastReactClearedId = lastReactClearedId;
-                        updateJson(serverdata, 'serverdata')
-                    }
-                    matchedMessageCount++
-                }
-            }
-            sendMsg(msg.channel, "[" + messageCounter.toString() + " messages scanned, " + matchedMessageCount.toString() + " were flagged as matches, " + matchedReactionsCount.toString() + " total reaction matches.]");
-
-        })
-        .catch(err =>
-        {
-            console.error(err);
-        });
-}
-
-
-cmdFuncts.cleanupReactions = function (msg, cmdStr, argStr, props)
-{
-    let argList = argStr.split(" ");
-    let mainArg = argList[0];
-    argList.shift();
-
-    switch (mainArg)
-    {
-        case "idlist":
-            for (i = 0; i < argList.length; i++)
-            {
-                let id = argList[i];
-                console.log("ATTEMPTING TO CLEAR MESSAGE " + id);
-                clearReactionsInMessage(msg, id);
-            }
-            break;
-
-        case "upto":
-            clearReactsUpTo(msg, argList);
-            break;
-
-        case "resume":
-            argList.unshift(serverdata.lastReactClearedId);
-            clearReactsUpTo(msg, argList);
-            break;
-    }
-
 };
 
 
@@ -831,33 +706,6 @@ bot.on("messageReactionAdd", (reactionRef, userRef) =>
             usernameStr = "AUTHORIZED USER " + userRef.username;
 
         console.log("REACTION ADDED BY " + usernameStr + ": " + reactionRef.emoji.toString() + ", " + reactionRef.emoji.id + ", " + reactionRef.emoji.identifier + ", " + reactionRef.emoji.name);
-
-        if (reactionRef.emoji.toString() === cleanupTrigger)
-        {
-            console.log("Matches cleanup trigger");
-            if (authorized)
-            {
-                console.log("Cleanup triggered by authorized user");
-                // Start comparing emojis
-                /*
-                let message = reactionRef.message
-                let matchCounter = 0
-                for (let reaction in message.reactions)
-                {
-                    if  (cleanupEmojis.includes(reaction.emoji.name))
-                    {
-                        matchCounter++;
-                    }
-                }
-                if  (matchCounter == cleanupEmojis.length)
-                {
-                    message.reactions.deleteAll();
-                }
-                */
-                message.clearReactions();
-                //message.reactions.deleteAll();
-            }
-        }
     }
 });
 
